@@ -1,0 +1,26 @@
+import os
+
+from django.conf.urls.defaults import *
+from django.conf import settings
+from django.contrib import admin
+
+
+admin.autodiscover()
+
+sitemaps = {}
+
+urlpatterns = patterns('',
+    (r'^admin/', include(admin.site.urls)),
+    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+
+    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+)
+
+if settings.ENV == 'dev':
+    # Files that should be served by Apache in prod
+    STATIC = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+    urlpatterns += patterns('',
+        (r'^favicon\.ico$', 'django.views.static.serve', {'document_root': STATIC, 'path': 'images/favicon.ico'}),
+        (r'^robots\.txt$', 'django.views.static.serve', {'document_root': STATIC, 'path': 'robots.txt'}),
+        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC}),
+    )

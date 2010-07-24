@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <h2>Artist: {{ artist.name }}</h2>
+  <p><strong>Website:</strong> {{ artist.website|urlize }}</p>
+  <p>{{ artist.description }}</p>
+  <p>
+    <strong>Products:</strong>
+    {% for product in artist.active_products.all %}
+      <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+      {% if not forloop.last %}/{% endif %}
+    {% endfor %}
+  </p>
+{% endblock %}

@@ -24,6 +24,9 @@ class Product(models.Model):
     def get_absolute_url(self):
         return ('products.views.product', (), {'product_slug': self.slug})
 
+    def active_artists(self):
+        return self.artists.filter(is_active=True)
+
 class ProductImage(models.Model):
     """An image for a product."""
     product = models.ForeignKey('Product')

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+  <title>{% block title %}Buy the Bay{% endblock %}</title>
+  <meta name="keywords" content="Heal the Bay, Los Angeles, LA, beach, coast, volunteer" />
+</head>
+<body>
+
+  <div id="hd">
+    <h1>Buy the Bay</h1>
+    <ul class="nav">
+      <li><a href="{% url views.index %}">Home</a></li>
+      <li><a href="#">News</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="{% url artists.views.index %}">Artists</a></li>
+      <li><a href="{% url products.views.index %}">Products</a></li>
+    </ul>
+    <hr />
+  </div>
+
+  <div id="bd">
+    {% block body %}{% endblock %}
+  </div>
+
+  <div id="ft">
+    <hr />
+    <ul class="nav">
+      <li><a href="#">View Card</a></li>
+      <li><a href="http://www.healthebay.org/">Visit Heal the Bay</a></li>
+      <li><a href="#">How Does This Work?</a></li>
+      <li><a href="#">Get Involved</a></li>
+      <li><a href="#">Donate</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+  </div>
+
+</body>
+</html>

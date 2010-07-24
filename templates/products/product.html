@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <h2>Collection: {{ product.name }}</h2>
+  <p>{{ product.description }}</p>
+  <p><strong>Price:</strong> ${{ product.price|floatformat:2 }}</p>
+  <p><strong>Offer Ends:</strong> {{ product.offer_end|timeuntil }}</p>
+  <p>
+    <strong>Artists:</strong>
+    {% for artist in product.active_artists.all %}
+      <a href="{{ artist.get_absolute_url }}">{{ artist.name }}</a>
+      {% if not forloop.last %}/{% endif %}
+    {% endfor %}
+  </p>
+{% endblock %}

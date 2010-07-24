@@ -22,3 +22,6 @@ class Artist(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('artists.views.artist', (), {'artist_slug': self.slug})
+
+    def active_products(self):
+        return self.product_set.filter(is_active=True)

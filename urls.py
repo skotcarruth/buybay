@@ -10,9 +10,11 @@ admin.autodiscover()
 sitemaps = {}
 
 urlpatterns = patterns('',
+    (r'^$', 'views.index'),
+    (r'^collection/', include('products.urls')),
+
     (r'^admin/', include(admin.site.urls)),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
 

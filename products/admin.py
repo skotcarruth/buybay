@@ -10,7 +10,7 @@ class ProductImageInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Product Info', {
-            'fields': ('name', 'slug', 'description',),
+            'fields': ('name', 'slug', 'description', 'artists',),
         }),
         ('Payment Info', {
             'fields': ('price', 'offer_end',),
@@ -20,11 +20,12 @@ class ProductAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
         })
     )
-    list_display = ('name', 'price', 'offer_end', 'is_active',)
-    list_filter = ('offer_end', 'is_active',)
     prepopulated_fields = {'slug': ('name',)}
     readonly_fields = ('created_ts', 'updated_ts',)
-    search_fields = ('name', 'description',)
+    filter_horizontal = ('artists',)
     inlines = [ProductImageInline]
+    list_display = ('name', 'price', 'offer_end', 'is_active', 'created_ts',)
+    list_filter = ('offer_end', 'is_active',)
+    search_fields = ('name', 'description',)
 
 admin.site.register(Product, ProductAdmin)

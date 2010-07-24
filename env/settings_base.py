@@ -98,4 +98,5 @@ INSTALLED_APPS = (
     'django.contrib.syndication',
     'south',
     'products',
+    'artists',
 )

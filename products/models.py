@@ -8,6 +8,7 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     offer_end = models.DateTimeField()
+    artists = models.ManyToManyField('artists.Artist')
 
     created_ts = models.DateTimeField(auto_now_add=True)
     updated_ts = models.DateTimeField(auto_now=True)
@@ -15,6 +16,13 @@ class Product(models.Model):
 
     class Meta:
         ordering = ['-created_ts']
+
+    def __unicode__(self):
+        return u'%s ($%.2f)' % (self.name, self.price)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('products.views.product', (), {'product_slug': self.slug})
 
 class ProductImage(models.Model):
     """An image for a product."""
@@ -28,3 +36,6 @@ class ProductImage(models.Model):
 
     class Meta:
         ordering = ['-created_ts']
+
+    def __unicode__(self):
+        return u'%s (Image %d)' % (self.product.name, self.order)

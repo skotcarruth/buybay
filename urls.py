@@ -12,9 +12,10 @@ sitemaps = {}
 urlpatterns = patterns('',
     (r'^$', 'views.index'),
     (r'^collection/', include('products.urls')),
+    (r'^artists/', include('artists.urls')),
 
-    (r'^admin/', include(admin.site.urls)),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    (r'^admin/', include(admin.site.urls)),
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
 

@@ -108,4 +108,5 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'products',
     'artists',
+    'features',
 )

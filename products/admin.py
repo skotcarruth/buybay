@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 
-from products.forms import AdminImageWidget
+from widgets import AdminImageWidget
 from products.models import Product, ProductImage
 
 

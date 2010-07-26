@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block body %}
+  <h2>Home Page</h2>
+  <ul>
+    {% for feature in features %}
+      <li>
+        <a href="{{ feature.get_destination_url }}">
+          <img src="{% thumbnail feature.image_before 60x40 crop upscale %}" />
+          <img src="{% thumbnail feature.image_after 60x40 crop upscale %}" />
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

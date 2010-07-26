@@ -38,7 +38,7 @@ class ProductImage(models.Model):
     is_active = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['-created_ts']
+        ordering = ['order', '-created_ts']
 
     def __unicode__(self):
-        return u'%s (Image %d)' % (self.product.name, self.order)
+        return u'Image %d: %s' % (self.order, self.product.name)

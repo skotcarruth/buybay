@@ -1,10 +1,13 @@
 from django.contrib import admin
+from django.db import models
 
+from products.forms import AdminImageWidget
 from products.models import Product, ProductImage
 
 
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
+    formfield_overrides = {models.ImageField: {'widget': AdminImageWidget}}
     extra = 0
 
 class ProductAdmin(admin.ModelAdmin):

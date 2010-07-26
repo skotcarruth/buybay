@@ -104,9 +104,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sitemaps',
     'django.contrib.syndication',
+    'django.contrib.markup',
     'south',
     'sorl.thumbnail',
     'products',
     'artists',
     'features',
+    'blog',
 )

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load markup thumbnail %}
+
+{% block body %}
+  <h2>News: {{ post.title }}</h2>
+  <p>Published: {{ post.pub_date|date:"j M Y \a\t P" }}</p>
+  <p>By {{ post.byline }}</p>
+  {{ post.body|textile }}
+  <p><img src="{% thumbnail post.image 200x100 crop upscale %}" /></p>
+  <p>Category: <a href="{% url blog.views.category category_slug=post.category.slug %}">{{ post.category.name }}</a></p>
+{% endblock %}

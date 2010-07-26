@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     (r'^$', 'views.index'),
     (r'^collection/', include('products.urls')),
     (r'^artists/', include('artists.urls')),
+    (r'^news/', include('blog.urls')),
 
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),

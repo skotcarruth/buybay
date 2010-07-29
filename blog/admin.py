@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.db import models
 
-from widgets import AdminImageWidget
-from blog.models import Category, Post
+from blog.models import Post, Tag
+from galleries.admin import GalleryMediaInline
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class TagAdmin(admin.ModelAdmin):
     fieldsets = (
-        ('Category Info', {
+        ('Tag Info', {
             'fields': ('name', 'slug',),
         }),
         ('Metadata', {
@@ -17,17 +17,17 @@ class CategoryAdmin(admin.ModelAdmin):
     )
     prepopulated_fields = {'slug': ('name',)}
     readonly_fields = ('created_ts', 'updated_ts',)
-    list_display = ('name', 'is_active',)
+    list_display = ('name', 'num_posts', 'is_active',)
     list_filter = ('is_active',)
     search_fields = ('name',)
 
 class PostAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Post Info', {
-            'fields': ('title', 'slug', 'byline', 'category', 'pub_date', 'status',),
+            'fields': ('title', 'slug', 'byline', 'pub_date', 'status', 'tags',),
         }),
         ('Post Body', {
-            'fields': ('body', 'image',),
+            'fields': ('tease', 'body',),
             'description': 'For the post body, you may use Textile to do '
                 'basic HTML formatting like italics and creating links. '
                 '(<a href="http://textile.thresholdstate.com/">Textile reference</a>)',
@@ -39,10 +39,11 @@ class PostAdmin(admin.ModelAdmin):
     )
     prepopulated_fields = {'slug': ('title',)}
     readonly_fields = ('created_ts', 'updated_ts',)
-    formfield_overrides = {models.ImageField: {'widget': AdminImageWidget}}
-    list_display = ('title', 'pub_date', 'category', 'status',)
-    list_filter = ('pub_date', 'category', 'status',)
+    filter_horizontal = ('tags',)
+    inlines = [GalleryMediaInline]
+    list_display = ('title', 'pub_date', 'status',)
+    list_filter = ('pub_date', 'status',)
     search_fields = ('title', 'byline', 'body',)
 
-admin.site.register(Category, CategoryAdmin)
+admin.site.register(Tag, TagAdmin)
 admin.site.register(Post, PostAdmin)

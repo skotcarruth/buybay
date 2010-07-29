@@ -19,7 +19,7 @@ class Feature(models.Model):
         ordering = ['order', '-created_ts']
 
     def __unicode__(self):
-        return u'Feature: %s' % self.product.name
+        return u'Feature: %s' % (self.product.name if self.product else u'[no product]')
 
     def get_destination_url(self):
         if self.link_override:

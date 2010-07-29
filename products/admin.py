@@ -1,14 +1,9 @@
 from django.contrib import admin
 from django.db import models
 
-from widgets import AdminImageWidget
-from products.models import Product, ProductImage
+from galleries.admin import GalleryMediaInline
+from products.models import Product
 
-
-class ProductImageInline(admin.TabularInline):
-    model = ProductImage
-    formfield_overrides = {models.ImageField: {'widget': AdminImageWidget}}
-    extra = 0
 
 class ProductAdmin(admin.ModelAdmin):
     fieldsets = (
@@ -26,7 +21,7 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     readonly_fields = ('created_ts', 'updated_ts',)
     filter_horizontal = ('artists',)
-    inlines = [ProductImageInline]
+    inlines = [GalleryMediaInline]
     list_display = ('name', 'price', 'offer_end', 'is_active', 'created_ts',)
     list_filter = ('offer_end', 'is_active',)
     search_fields = ('name', 'description',)

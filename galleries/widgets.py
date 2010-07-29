@@ -1,5 +1,3 @@
-import re
-
 from django import forms
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
@@ -11,7 +9,6 @@ class AdminImageWidget(forms.FileInput):
     Like the django.contrib.admin.widgets.AdminFileWidget, but with an image 
     preview.
     """
-    link_re = re.compile(r'<a target="_blank" href="([^"]*)">([^<]*)</a>')
     thumb_size = (60, 45)
     opts = {'crop': None, 'upscale': None}
 

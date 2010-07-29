@@ -4,7 +4,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
-from blog.models import Category, Post
+from blog.models import Post, Tag
 
 
 def index(request):
@@ -35,6 +35,6 @@ def post(request, year=None, month=None, day=None, slug=None):
         'post': post,
     }, context_instance=RequestContext(request))
 
-def category(request, category_slug=None):
+def tag(request, tag_slug=None):
     """Lists the blog entries in this category."""
     pass

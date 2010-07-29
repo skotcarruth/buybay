@@ -107,6 +107,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'south',
     'sorl.thumbnail',
+    'galleries',
     'products',
     'artists',
     'features',

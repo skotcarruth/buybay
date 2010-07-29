@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 
-from widgets import AdminImageWidget
+from galleries.widgets import AdminImageWidget
 from features.models import Feature
 
 

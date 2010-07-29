@@ -1,9 +1,12 @@
 from datetime import datetime
 
+from django.contrib.contenttypes import generic
 from django.db import models
 
+from galleries.models import GalleryMedia
 
-class Category(models.Model):
+
+class Tag(models.Model):
     """A category for blog posts."""
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
@@ -14,14 +17,17 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['name']
-        verbose_name_plural = u'categories'
 
     def __unicode__(self):
         return self.name
 
     @models.permalink
     def get_absolute_url(self):
-        return ('blog.views.category', (), {'category_slug': self.slug})
+        return ('blog.views.category', (), {'tag_slug': self.slug})
+
+    def num_posts(self):
+        return self.post_set.count()
+    num_posts.short_description = 'Posts'
 
 class Post(models.Model):
     DRAFT = 0
@@ -39,10 +45,13 @@ class Post(models.Model):
         help_text='The post will not be made visible until this date (and '
         'still won\'t be visible unless set to Live)')
     byline = models.CharField(max_length=100)
-    category = models.ForeignKey('Category')
     status = models.IntegerField(default=0, choices=STATUS_CHOICES)
-    image = models.ImageField(upload_to='uploads/blog_posts/', blank=True)
+    tags = models.ManyToManyField('Tag', blank=True)
+
+    tease = models.TextField(blank=True)
     body = models.TextField()
+
+    gallery_media = generic.GenericRelation(GalleryMedia)
 
     created_ts = models.DateTimeField(auto_now_add=True)
     updated_ts = models.DateTimeField(auto_now=True)

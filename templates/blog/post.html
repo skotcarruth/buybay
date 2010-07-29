@@ -1,11 +1,22 @@
-{% extends "base.html" %}
+{% extends "blog/base.html" %}
 {% load markup thumbnail %}
 
-{% block body %}
+{% block title %}{{ block.super }} | {{ post.title }}{% endblock %}
+
+{% block blog_body %}
   <h2>News: {{ post.title }}</h2>
   <p>Published: {{ post.pub_date|date:"j M Y \a\t P" }}</p>
   <p>By {{ post.byline }}</p>
   {{ post.body|textile }}
-  <p><img src="{% thumbnail post.image 200x100 crop upscale %}" /></p>
-  <p>Category: <a href="{% url blog.views.category category_slug=post.category.slug %}">{{ post.category.name }}</a></p>
+  <p>
+    {% for media in post.gallery_media.active.all %}
+      {{ media.get_media }}
+    {% endfor %}
+  </p>
+  <p>Tags:
+    {% for tag in post.tags.all %}
+      <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+      {% if not forloop.last %}/{% endif %}
+    {% endfor %}
+  </p>
 {% endblock %}

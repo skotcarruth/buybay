@@ -1,7 +1,12 @@
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ValidationError
 from django.db import models
 
+
+class GalleryMediaManager(models.Manager):
+    def active(self):
+        return self.filter(is_active=True)
 
 class GalleryMedia(models.Model):
     """An image for a product."""
@@ -17,12 +22,19 @@ class GalleryMedia(models.Model):
     updated_ts = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
 
+    objects = GalleryMediaManager()
+
     class Meta:
         ordering = ['order', '-created_ts']
         verbose_name_plural = u'gallery media'
 
     def __unicode__(self):
-        return u'Image %d: %s' % (self.order, self.product.name)
+        return u'Media %d: %s' % (self.order, self.content_object.__unicode__())
+
+    def clean(self):
+        # Verify that the model has either an image or video
+        if not self.image and not self.video:
+            raise ValidationError('Either an image or video is requried.')
 
     @property
     def media_type(self):

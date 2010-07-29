@@ -1,0 +1,24 @@
+{% extends "blog/base.html" %}
+{% load markup thumbnail %}
+
+{% block title %}{{ block.super }} | {{ tag.name }}{% endblock %}
+
+{% block blog_body %}
+  <h2>Tag: {{ tag.name }}</h2>
+  <ul>
+    {% for post in page.object_list %}
+      <li>
+        <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+        <p>Published: {{ post.pub_date|date:"j M Y \a\t P" }}</p>
+        <p>By {{ post.byline }}</p>
+        {% if post.tease %}
+          {{ post.tease|textile }}
+        {% else %}
+          {{ post.body|textile|truncatewords_html:50 }}
+        {% endif %}
+        {{ post.gallery_media.active.all.0.get_media }}
+      </li>
+    {% endfor %}
+  </ul>
+  {% include "_pagination.html" %}
+{% endblock %}

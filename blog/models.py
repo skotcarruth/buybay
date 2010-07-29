@@ -6,6 +6,10 @@ from django.db import models
 from galleries.models import GalleryMedia
 
 
+class TagManager(models.Manager):
+    def active(self):
+        return self.filter(is_active=True)
+
 class Tag(models.Model):
     """A category for blog posts."""
     name = models.CharField(max_length=100)
@@ -15,6 +19,8 @@ class Tag(models.Model):
     updated_ts = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
 
+    objects = TagManager()
+
     class Meta:
         ordering = ['name']
 
@@ -23,11 +29,15 @@ class Tag(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('blog.views.category', (), {'tag_slug': self.slug})
+        return ('blog.views.tag', (), {'tag_slug': self.slug})
 
     def num_posts(self):
         return self.post_set.count()
     num_posts.short_description = 'Posts'
+
+class PostManager(models.Manager):
+    def active(self):
+        return self.filter(status=Post.LIVE, pub_date__lte=datetime.now())
 
 class Post(models.Model):
     DRAFT = 0
@@ -55,6 +65,8 @@ class Post(models.Model):
 
     created_ts = models.DateTimeField(auto_now_add=True)
     updated_ts = models.DateTimeField(auto_now=True)
+
+    objects = PostManager()
 
     class Meta:
         ordering = ['-pub_date']

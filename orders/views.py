@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.forms.models import modelformset_factory
 from django.http import HttpResponseRedirect
@@ -23,6 +24,9 @@ def cart(request):
         formset = ProductInOrderFormSet(request.POST, queryset=order.productinorder_set.all())
         if formset.is_valid():
             formset.save()
+            messages.success(request, 'Updated your shopping cart quantities.')
+        else:
+            messages.error(request, 'Could not update your cart quantities. Please try again.')
     else:
         formset = ProductInOrderFormSet(queryset=order.productinorder_set.all())
 
@@ -47,9 +51,11 @@ def add(request, product_slug=None):
         # Add 1 to the quantity of that product
         product_in_order = product_in_order[0]
         product_in_order.quantity += 1
+        messages.success(request, 'Added another "%s" to your cart.' % product.name)
     else:
         # Add the product to the order
         product_in_order = ProductInOrder(order=order, product=product)
+        messages.success(request, 'Added "%s" to your cart.' % product.name)
     product_in_order.save()
 
     # Redirect to the shopping cart
@@ -64,6 +70,7 @@ def remove(request, product_slug=None):
     product_in_order = get_object_or_404(ProductInOrder,
         product=product, order=order)
     product_in_order.delete()
+    messages.success(request, 'Removed "%s" from your cart.' % product.name)
 
     # Redirect to the shopping cart
     return HttpResponseRedirect(reverse('orders.views.cart'))

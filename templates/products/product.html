@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% load humanize %}
 
 {% block title %}{{ block.super }} | Collection | {{ product.name }}{% endblock %}
 
 {% block body %}
   <h2>Collection: {{ product.name }}</h2>
   <p>{{ product.description }}</p>
-  <p><strong>Price:</strong> ${{ product.price|floatformat:2 }}</p>
+  <p><strong>Price:</strong> ${{ product.price|floatformat:2|intcomma }}</p>
   <p><strong>Offer Ends:</strong> {{ product.offer_end|timeuntil }}</p>
   <p>
     <strong>Artists:</strong>
@@ -14,4 +15,5 @@
       {% if not forloop.last %}/{% endif %}
     {% endfor %}
   </p>
+  <p><a href="{% url orders.views.add product_slug=product.slug %}">Add to Cart</a></p>
 {% endblock %}

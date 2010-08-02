@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     (r'^collection/', include('products.urls')),
     (r'^artists/', include('artists.urls')),
     (r'^news/', include('blog.urls')),
+    (r'^cart/', include('orders.urls')),
 
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),

@@ -77,6 +77,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
     'blog.context_processors.archive',
+    'orders.context_processors.current_order',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -106,6 +107,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.syndication',
     'django.contrib.markup',
+    'django.contrib.humanize',
     'south',
     'sorl.thumbnail',
     'galleries',
@@ -113,4 +115,8 @@ INSTALLED_APPS = (
     'artists',
     'features',
     'blog',
+    'orders',
 )
+
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 14 # 2 weeks
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False

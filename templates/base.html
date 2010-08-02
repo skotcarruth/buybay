@@ -21,6 +21,9 @@
   </div>
 
   <div id="bd">
+    {% block new_user %}
+      {% include "_new_user.html" %}
+    {% endblock %}
     {% block body %}{% endblock %}
   </div>
 

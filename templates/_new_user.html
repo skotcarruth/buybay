@@ -1,0 +1,7 @@
+{% load flat %}
+
+{% if request.session.new_user %}
+  <div id="new_user">
+    {% blurb "new_user" %}
+  </div>
+{% endif %}

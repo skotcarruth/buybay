@@ -15,5 +15,5 @@ DATABASES = {
 EMAIL_HOST = 'smtp.webfaction.com'
 EMAIL_HOST_USER = 'nweave_buybay'
 EMAIL_HOST_PASSWORD = '0e341dd7'
-DEFAULT_FROM_EMAIL = 'noreply@buythebay.org'
+DEFAULT_FROM_EMAIL = 'noreply@buythebay.jeffschenck.com'
 SERVER_EMAIL = DEFAULT_FROM_EMAIL

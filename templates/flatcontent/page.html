@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load markup thumbnail %}
+
+{% block title %}{{ block.super }} | {{ page.name }} {% endblock %}
+
+{% block body %}
+  <h2>{{ page.name }}</h2>
+
+  <p><img src="{% thumbnail page.image 300x200 crop upscale %}" /></p>
+  {{ page.content|textile }}
+{% endblock %}

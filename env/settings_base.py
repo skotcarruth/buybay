@@ -116,6 +116,7 @@ INSTALLED_APPS = (
     'features',
     'blog',
     'orders',
+    'flatcontent',
 )
 
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 14 # 2 weeks

@@ -19,6 +19,9 @@ urlpatterns = patterns('',
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+
+    # Flat pages exist right off the root url, so this goes last as a catchall
+    (r'^', include('flatcontent.urls')),
 )
 
 if settings.ENV == 'dev':

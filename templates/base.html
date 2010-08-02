@@ -12,7 +12,7 @@
     <ul class="nav">
       <li><a href="{% url views.index %}">Home</a></li>
       <li><a href="{% url blog.views.index %}">News</a></li>
-      <li><a href="#">About Us</a></li>
+      <li><a href="{% url flatcontent.views.page page_slug="about" %}">About Us</a></li>
       <li><a href="{% url artists.views.index %}">Artists</a></li>
       <li><a href="{% url products.views.index %}">Products</a></li>
       <li><a href="{% url orders.views.cart %}">Cart ({{ order.get_total_items }})</a></li>
@@ -27,13 +27,13 @@
   <div id="ft">
     <hr />
     <ul class="nav">
-      <li><a href="#">View Card</a></li>
-      <li><a href="http://www.healthebay.org/">Visit Heal the Bay</a></li>
-      <li><a href="#">How Does This Work?</a></li>
-      <li><a href="#">Get Involved</a></li>
-      <li><a href="#">Donate</a></li>
-      <li><a href="#">Privacy Policy</a></li>
-      <li><a href="#">Contact Us</a></li>
+      <li><a href="{% url orders.views.cart %}">View Cart</a></li>
+      <li><a href="{% url flatcontent.views.page page_slug="heal-the-bay" %}">Heal the Bay</a></li>
+      <li><a href="{% url flatcontent.views.page page_slug="how-does-work" %}">How Does This Work?</a></li>
+      <li><a href="{% url flatcontent.views.page page_slug="get-involved" %}">Get Involved</a></li>
+      <li><a href="{% url flatcontent.views.page page_slug="donate" %}">Donate</a></li>
+      <li><a href="{% url flatcontent.views.page page_slug="privacy-policy" %}">Privacy Policy</a></li>
+      <li><a href="{% url flatcontent.views.page page_slug="contact-us" %}">Contact Us</a></li>
     </ul>
   </div>
 

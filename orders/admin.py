@@ -12,12 +12,12 @@ class ProductInOrderInline(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Order Details', {
-            'fields': ('session', 'status', 'created_ts', 'updated_ts',),
+            'fields': ('id', 'status', 'created_ts',),
         }),
     )
-    readonly_fields = ('session', 'status', 'created_ts', 'updated_ts',)
+    readonly_fields = ('id', 'status', 'created_ts',)
     inlines = [ProductInOrderInline]
-    list_display = ('session', 'status', 'created_ts',)
+    list_display = ('id', 'status', 'get_total_items', 'get_total_price_display', 'created_ts',)
     list_filter = ('status', 'created_ts',)
 
 admin.site.register(Order, OrderAdmin)

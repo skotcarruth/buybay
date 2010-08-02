@@ -18,8 +18,7 @@ class Order(models.Model):
     products = models.ManyToManyField('products.Product', through='ProductInOrder')
     status = models.IntegerField(choices=STATUS_CHOICES, default=SHOPPING_CART)
 
-    created_ts = models.DateTimeField(auto_now_add=True)
-    updated_ts = models.DateTimeField(auto_now=True)
+    created_ts = models.DateTimeField('Created', auto_now_add=True)
 
     class Meta:
         ordering = ['-created_ts']
@@ -46,6 +45,15 @@ class Order(models.Model):
     def get_total_items(self):
         """Returns the number of products in the order."""
         return sum([p.quantity for p in self.productinorder_set.all()])
+    get_total_items.short_description = 'Items'
+
+    def get_total_price(self):
+        """Returns the total price of all the products in the order."""
+        return sum([p.quantity * p.product.price for p in self.productinorder_set.all()])
+
+    def get_total_price_display(self):
+        return '$%.2f' % self.get_total_price()
+    get_total_price_display.short_description = 'Total'
 
     @classmethod
     def get_or_create(cls, request, save=True):
@@ -72,7 +80,7 @@ class ProductInOrder(models.Model):
 
     class Meta:
         ordering = ['product']
-        verbose_name_plural = 'products in orders'
+        verbose_name_plural = 'Products In This Order'
         unique_together = ('order', 'product',)
 
     def __unicode__(self):

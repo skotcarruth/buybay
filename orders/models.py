@@ -14,7 +14,7 @@ class Order(models.Model):
         (PAYMENT_CONFIRMED, 'Payment Confirmed'),
     )
 
-    session = models.ForeignKey('sessions.Session')
+    session_id = models.CharField(max_length=40, blank=True, null=True)
     products = models.ManyToManyField('products.Product', through='ProductInOrder')
     status = models.IntegerField(choices=STATUS_CHOICES, default=SHOPPING_CART)
 

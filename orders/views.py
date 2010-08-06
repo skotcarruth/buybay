@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.forms.models import modelformset_factory
 from django.http import HttpResponseRedirect
@@ -6,6 +7,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
 from orders.models import Order, ProductInOrder
+from orders.paypal import paypal, PayPalUnavailable, PayPalErrorResponse
 from products.models import Product
 
 
@@ -74,3 +76,48 @@ def remove(request, product_slug=None):
 
     # Redirect to the shopping cart
     return HttpResponseRedirect(reverse('orders.views.cart'))
+
+def purchase(request):
+    """Sets up a PayPal express checkout transaction to purchase their cart."""
+    order = Order.get_or_create(request)
+    amount = order.get_total_price()
+    if amount <= 0:
+        messages.error(request, 'You have to add something to your cart before you check out.')
+        return HttpResponseRedirect(reverse('orders.views.cart'))
+
+    # Handle the PayPal interaction
+    domain = Site.objects.get_current().domain
+    return_url = 'http://%s%s' % (domain, reverse('orders.views.confirmation'))
+    cancel_url = 'http://%s%s' % (domain, reverse('orders.views.cart'))
+    next_url = cancel_url
+    try:
+        next_url = paypal.set_express_checkout(amount, return_url, cancel_url)
+    except PayPalUnavailable:
+        messages.error(request, 'Sorry, we were unable to reach PayPal at the moment. Please try again later.')
+    except PayPalErrorResponse as e:
+        messages.error(request, 'Sorry, there was an error with PayPal. Please contact us for more info.')
+        print e
+
+    # Redirect to the Paypal checkout (or back to the cart if errors)
+    return HttpResponseRedirect(next_url)
+
+def confirmation(request):
+    """Confirms a successful payment for the order."""
+    order = Order.get_or_create(request)
+    amount = order.get_total_price()
+    token = request.GET.get('token', None)
+    payer_id = request.GET.get('PayerID', None)
+    if not token or not payer_id:
+        messages.error(request, 'Sorry, we were unable to process your PayPal payment. Please try again later.')
+        return HttpResponseRedirect(reverse('orders.views.cart'))
+
+    # Get the transaction details from PayPal
+    details = paypal.get_express_checkout_details(token)
+
+    # Confirm the transaction with PayPal, and update the order
+    payment = paypal.do_express_checkout_payment(token, payer_id, amount)
+
+    return render_to_response('orders/confirmation.html', {
+        'details': details,
+        'payment': payment,
+    }, context_instance=RequestContext(request))

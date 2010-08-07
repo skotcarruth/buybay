@@ -7,7 +7,7 @@ DATABASES = {
         'NAME': 'nweave_buybay',
         'USER': 'nweave_buybay',
         'PASSWORD': 'b760573f',
-        'HOST': '',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }

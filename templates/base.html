@@ -15,7 +15,7 @@
       <li><a href="{% url flatcontent.views.page page_slug="about" %}">About Us</a></li>
       <li><a href="{% url artists.views.index %}">Artists</a></li>
       <li><a href="{% url products.views.index %}">Products</a></li>
-      <li><a href="{% url orders.views.cart %}">Cart ({{ order.get_total_items }})</a></li>
+      <li><a href="{% url orders.views.cart %}">Cart ({{ current_order.get_total_items }})</a></li>
     </ul>
     <hr />
   </div>

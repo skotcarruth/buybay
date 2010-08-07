@@ -37,7 +37,9 @@
     </table>
     <p><input type="submit" value="Update Cart" /></p>
   </form>
-  <p><strong>Shipping:</strong> ???</p>
-  <p><strong>Total:</strong> ${{ cart.total_price|floatformat:2|intcomma }}</p>
+  <p><strong>Subtotal:</strong> ${{ cart.subtotal|floatformat:2|intcomma }}</p>
+  <p><strong>Tax:</strong> ${{ cart.tax|floatformat:2|intcomma }}</p>
+  <p><strong>Shipping:</strong> ${{ cart.shipping|floatformat:2|intcomma }}</p>
+  <p><strong>Total:</strong> ${{ cart.total|floatformat:2|intcomma }}</p>
   <p><a href="{% url orders.views.purchase %}"><img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" /></a></p>
 {% endblock %}

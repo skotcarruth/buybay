@@ -5,9 +5,25 @@
 {% block body %}
   <h2>Order Confirmation</h2>
 
-  <p>Thanks!</p>
+  <p>Thanks for your order!</p>
 
-  <p>{{ details }}</p>
+  <ul>
+    {% for product_in_order in order.get_as_cart.products %}
+      <li>{{ product_in_order.quantity }} x {{ product_in_order.product.name }}</li>
+    {% endfor %}
+  </ul>
 
-  <p>{{ payment }}</p>
+  <p>Your order will be shipped in 4-6 weeks or whatever mumbo jumbo to:</p>
+
+  <p>
+    {{ order.user_shiptoname }}<br />
+    {{ order.user_shiptostreet }}<br />
+    {% if order.user_shiptostreet2 %}{{ order.user_shiptostreet2 }}<br />{% endif %}
+    {{ order.user_shiptocity }}, {{ order.user_shiptostate }} {{ order.user_shiptozip }}<br />
+  </p>
+
+  <p>Please print this page for your reference and suchnot. You can use this order ID number:</p>
+
+  <p>{{ order.paypal_transactionid }}</p>
+
 {% endblock %}

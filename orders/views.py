@@ -1,3 +1,7 @@
+from datetime import datetime
+from decimal import Decimal
+import json
+
 from django.contrib import messages
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
@@ -80,8 +84,8 @@ def remove(request, product_slug=None):
 def purchase(request):
     """Sets up a PayPal express checkout transaction to purchase their cart."""
     order = Order.get_or_create(request)
-    amount = order.get_total_price()
-    if amount <= 0:
+    cart = order.get_as_cart()
+    if cart['total'] <= 0:
         messages.error(request, 'You have to add something to your cart before you check out.')
         return HttpResponseRedirect(reverse('orders.views.cart'))
 
@@ -91,7 +95,7 @@ def purchase(request):
     cancel_url = 'http://%s%s' % (domain, reverse('orders.views.cart'))
     next_url = cancel_url
     try:
-        next_url = paypal.set_express_checkout(amount, return_url, cancel_url)
+        next_url = paypal.set_express_checkout(cart, return_url, cancel_url)
     except PayPalUnavailable:
         messages.error(request, 'Sorry, we were unable to reach PayPal at the moment. Please try again later.')
     except PayPalErrorResponse as e:
@@ -104,7 +108,6 @@ def purchase(request):
 def confirmation(request):
     """Confirms a successful payment for the order."""
     order = Order.get_or_create(request)
-    amount = order.get_total_price()
     token = request.GET.get('token', None)
     payer_id = request.GET.get('PayerID', None)
     if not token or not payer_id:
@@ -115,9 +118,43 @@ def confirmation(request):
     details = paypal.get_express_checkout_details(token)
 
     # Confirm the transaction with PayPal, and update the order
-    payment = paypal.do_express_checkout_payment(token, payer_id, amount)
+    payment = paypal.do_express_checkout_payment(token, payer_id, order.get_as_cart())
+
+    # Finalize the order with payment details
+    order.user_email = details.get('EMAIL', '')
+    order.user_salutation = details.get('SALUTATION', '')
+    order.user_firstname = details.get('FIRSTNAME', '')
+    order.user_middlename = details.get('MIDDLENAME', '')
+    order.user_lastname = details.get('LASTNAME', '')
+    order.user_suffix = details.get('SUFFIX', '')
+    order.user_shiptoname = details.get('PAYMENTREQUEST_0_SHIPTONAME', '')
+    order.user_shiptostreet = details.get('PAYMENTREQUEST_0_SHIPTOSTREET', '')
+    order.user_shiptostreet2 = details.get('PAYMENTREQUEST_0_SHIPTOSTREET2', '')
+    order.user_shiptocity = details.get('PAYMENTREQUEST_0_SHIPTOCITY', '')
+    order.user_shiptostate = details.get('PAYMENTREQUEST_0_SHIPTOSTATE', '')
+    order.user_shiptozip = details.get('PAYMENTREQUEST_0_SHIPTOZIP', '')
+    order.user_shiptocountrycode = details.get('PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE', '')
+    order.user_shiptophonenum = details.get('PAYMENTREQUEST_0_SHIPTOPHONENUM', '')
+
+    # Some of the payment info returned
+    order.paypal_transactionid = payment.get('PAYMENTINFO_0_TRANSACTIONID', '')
+    order.paypal_paymenttype = payment.get('PAYMENTINFO_0_PAYMENTTYPE', '')
+    order.paypal_ordertime = datetime.strptime(payment['PAYMENTINFO_0_ORDERTIME'], '%Y-%m-%dT%H:%M:%SZ') if 'PAYMENTINFO_0_ORDERTIME' in payment else None
+    order.paypal_amt = Decimal(payment.get('PAYMENTINFO_0_AMT', '0.00'))
+    order.paypal_feeamt = Decimal(payment.get('PAYMENTINFO_0_FEEAMT', '0.00'))
+    order.paypal_settleamt = Decimal(payment.get('PAYMENTINFO_0_SETTLEAMT', '0.00'))
+    order.paypal_taxamt = Decimal(payment.get('PAYMENTINFO_0_TAXAMT', '0.00'))
+    order.paypal_paymentstatus = payment.get('PAYMENTINFO_0_PAYMENTSTATUS', '')
+
+    # Dump of the return values of these paypal calls
+    order.paypal_details_dump = json.dumps(details)
+    order.paypal_payment_dump = json.dumps(payment)
+
+    order.save()
+
+    # Clear the user's shopping cart
+    request.session['order_id'] = None
 
     return render_to_response('orders/confirmation.html', {
-        'details': details,
-        'payment': payment,
+        'order': order,
     }, context_instance=RequestContext(request))

@@ -14,8 +14,27 @@ class OrderAdmin(admin.ModelAdmin):
         ('Order Details', {
             'fields': ('id', 'status', 'created_ts',),
         }),
+        ('PayPal Buyer Details', {
+            'fields': ('user_email', 'user_salutation', 'user_firstname',
+                'user_middlename', 'user_lastname', 'user_suffix',
+                'user_shiptoname', 'user_shiptostreet', 'user_shiptostreet2',
+                'user_shiptocity', 'user_shiptostate', 'user_shiptozip',
+                'user_shiptocountrycode', 'user_shiptophonenum',),
+        }),
+        ('PayPal Payment Details', {
+            'fields': ('paypal_transactionid', 'paypal_ordertime',
+                'paypal_paymentstatus', 'paypal_paymenttype', 'paypal_amt',
+                'paypal_feeamt',),
+        })
     )
-    readonly_fields = ('id', 'status', 'created_ts',)
+    readonly_fields = ('id', 'status', 'created_ts', 'user_email',
+        'user_salutation', 'user_firstname', 'user_middlename',
+        'user_lastname', 'user_suffix', 'user_shiptoname',
+        'user_shiptostreet', 'user_shiptostreet2', 'user_shiptocity',
+        'user_shiptostate', 'user_shiptozip', 'user_shiptocountrycode',
+        'user_shiptophonenum', 'paypal_transactionid', 'paypal_ordertime',
+        'paypal_paymentstatus', 'paypal_paymenttype', 'paypal_amt',
+        'paypal_feeamt',)
     inlines = [ProductInOrderInline]
     list_display = ('id', 'status', 'get_total_items', 'get_total_price_display', 'created_ts',)
     list_filter = ('status', 'created_ts',)

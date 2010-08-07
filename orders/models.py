@@ -20,6 +20,36 @@ class Order(models.Model):
 
     created_ts = models.DateTimeField('Created', auto_now_add=True)
 
+    # Contact and shipping info from the payment
+    user_email = models.CharField('email', max_length=200, blank=True)
+    user_salutation = models.CharField('salutation', max_length=20, blank=True)
+    user_firstname = models.CharField('first name', max_length=25, blank=True)
+    user_middlename = models.CharField('last name', max_length=25, blank=True)
+    user_lastname = models.CharField('middle name', max_length=25, blank=True)
+    user_suffix = models.CharField('suffix', max_length=12, blank=True)
+    user_shiptoname = models.CharField('shipping name', max_length=32, blank=True)
+    user_shiptostreet = models.CharField('street', max_length=100, blank=True)
+    user_shiptostreet2 = models.CharField('street 2', max_length=100, blank=True)
+    user_shiptocity = models.CharField('city', max_length=40, blank=True)
+    user_shiptostate = models.CharField('state', max_length=40, blank=True)
+    user_shiptozip = models.CharField('ZIP', max_length=20, blank=True)
+    user_shiptocountrycode = models.CharField('country', max_length=2, blank=True)
+    user_shiptophonenum = models.CharField('phone', max_length=20, blank=True)
+
+    # Some of the payment info returned
+    paypal_transactionid = models.CharField('transaction ID', max_length=25, blank=True)
+    paypal_paymenttype = models.CharField('payment type', max_length=15, blank=True)
+    paypal_ordertime = models.DateTimeField('date (UTC)', blank=True, null=True)
+    paypal_amt = models.DecimalField('amount', max_digits=10, decimal_places=2, blank=True, null=True)
+    paypal_feeamt = models.DecimalField('PayPal fee', max_digits=10, decimal_places=2, blank=True, null=True)
+    paypal_settleamt = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    paypal_taxamt = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    paypal_paymentstatus = models.CharField('status', max_length=25, blank=True)
+
+    # Dump of the return values of these paypal calls
+    paypal_details_dump = models.TextField(blank=True)
+    paypal_payment_dump = models.TextField(blank=True)
+
     class Meta:
         ordering = ['-created_ts']
 
@@ -30,7 +60,7 @@ class Order(models.Model):
         """Returns all the info for displaying a shopping-cart-style representation."""
         cart = {
             'products': [],
-            'total_price': Decimal('0.00'),
+            'subtotal': Decimal('0.00'),
         }
         for product_in_order in self.productinorder_set.all():
             product_in_cart = {
@@ -39,15 +69,30 @@ class Order(models.Model):
                 'total_price': product_in_order.product.price * product_in_order.quantity,
             }
             cart['products'].append(product_in_cart)
-            cart['total_price'] += product_in_cart['total_price']
+            cart['subtotal'] += product_in_cart['total_price']
+        cart['tax'] = self.get_tax_amount(cart['subtotal'])
+        cart['shipping'] = self.get_shipping_amount(self.get_total_items())
+        cart['total'] = cart['subtotal'] + cart['tax'] + cart['shipping']
         return cart
+
+    def get_tax_amount(self, subtotal):
+        """Returns the amount of tax for the items in the cart."""
+        # TODO: make this for rillz
+        TAX_RATE = Decimal('0.0825')
+        return subtotal * TAX_RATE
+
+    def get_shipping_amount(self, total_items):
+        """Returns the amount of shipping charges for the items in the cart."""
+        # TODO: make this for rillz too
+        SHIPPING_PER_ITEM = Decimal('5.00')
+        return total_items * SHIPPING_PER_ITEM
 
     def get_total_items(self):
         """Returns the number of products in the order."""
         return sum([p.quantity for p in self.productinorder_set.all()])
     get_total_items.short_description = 'Items'
 
-    def get_total_price(self):
+    def get_subtotal(self):
         """Returns the total price of all the products in the order."""
         return sum([p.quantity * p.product.price for p in self.productinorder_set.all()])
 

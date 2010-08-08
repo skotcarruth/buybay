@@ -1,22 +1,41 @@
 {% extends "blog/base.html" %}
 {% load markup thumbnail %}
 
+{% block pageClass %}news{% endblock %}
+
 {% block blog_body %}
-  <h2>News</h2>
-  <ul>
-    {% for post in page.object_list %}
-      <li>
-        <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-        <p>Published: {{ post.pub_date|date:"j M Y \a\t P" }}</p>
-        <p>By {{ post.byline }}</p>
-        {% if post.tease %}
+  <h1 id="whatsNewHeader">What&rsquo; New</h1>
+
+	<aside id="sidebar" class="fl">
+   	
+  	<ul id="categories">
+          <li><a href="#">Product News</a></li>
+          <li><a href="#">Announcements</a></li>
+          <li><a href="#">Artist News</a></li>
+          <li><a href="#">Category</a></li>
+      </ul>
+  </aside>
+  <aside id="tweetTweet">
+  	<a href="#" target="_blank" rel="external" title="Follow buythebay on Twitter" id="followLink">Follow @buythebay</a>
+      <p>Thanks <a href="#" target="_blank">@swissmiss</a> for the generous post! <a href="#" target="_blank">http://bit.ly/2U5TJD</a> <span>4 hours ago</span></p>
+  </aside>
+
+	<section id="newsContent">
+	{% for post in page.object_list %}
+  	<article class="post">
+   		<header class="postHeader">
+          	<h2 class="postTitle"><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
+         		<span class="meta">by {{ post.byline }} {{ post.pub_date|date:"j M Y \a\t P" }}</span>
+           </header>
+          {% if post.tease %}
           {{ post.tease|textile }}
-        {% else %}
-          {{ post.body|textile|truncatewords_html:50 }}
-        {% endif %}
-        {{ post.gallery_media.active.all.0.get_media }}
-      </li>
-    {% endfor %}
-  </ul>
+          {% else %}
+          	{{ post.body|textile|truncatewords_html:50 }}
+          {% endif %}
+         <img src="{% thumbnail post.gallery_media.active.all.0.get_media 600x600 %}" alt="{{ post.title }}" />
+      </article>
+      {% endfor %}
+ </section>
+
   {% include "_pagination.html" %}
 {% endblock %}

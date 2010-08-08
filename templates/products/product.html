@@ -3,17 +3,109 @@
 
 {% block title %}{{ block.super }} | Collection | {{ product.name }}{% endblock %}
 
+{% block pageClass %}detail{% endblock %}
+
 {% block body %}
-  <h2>Collection: {{ product.name }}</h2>
-  <p>{{ product.description }}</p>
-  <p><strong>Price:</strong> ${{ product.price|floatformat:2|intcomma }}</p>
-  <p><strong>Offer Ends:</strong> {{ product.offer_end|timeuntil }}</p>
-  <p>
-    <strong>Artists:</strong>
-    {% for artist in product.active_artists.all %}
-      <a href="{{ artist.get_absolute_url }}">{{ artist.name }}</a>
-      {% if not forloop.last %}/{% endif %}
-    {% endfor %}
-  </p>
-  <p><a href="{% url orders.views.add product_slug=product.slug %}">Add to Cart</a></p>
+
+
+	<section id="leftSide">
+    	<nav id="switchProducts">
+        	<ul>
+            	<li class="prevNavItem"><a href="#">Previous Item</a></li>
+                <li class="nextNavItem"><a href="#">Next Item</a></li>
+            </ul>
+        </nav>
+        <article id="mediaViewer">
+        	<div id="mainImage">
+            	<img src="{{ MEDIA_URL }}_images/photos/product/1/main-1.jpg" alt="Main Image 1" />
+            </div>
+            <span>Other views</span>
+            <ul id="mediaCarousel">
+            	<li><a href="#"><img src="{{ MEDIA_URL }}_images/photos/product/1/thumb-1.jpg" alt="1" /></a></li>
+                <li><a href="#"><img src="{{ MEDIA_URL }}_images/photos/product/1/thumb-2.jpg" alt="1" /></a></li>
+                <li><a href="#"><img src="{{ MEDIA_URL }}_images/photos/product/1/thumb-3.jpg" alt="1" /></a></li>
+                <li><a href="#"><img src="{{ MEDIA_URL }}_images/photos/product/1/thumb-4.jpg" alt="1" /></a></li>
+                <li><a href="#"><img src="{{ MEDIA_URL }}_images/photos/product/1/thumb-5.jpg" alt="1" /></a></li>
+                <li><a href="#"><img src="{{ MEDIA_URL }}_images/photos/product/1/thumb-6.jpg" alt="1" /></a></li>
+            </ul>
+        </article>
+        
+        <section id="commentsContainer">
+        	<header id="commentHeader">
+            	<h2>Comments (50)</h2>
+            	<a href="#" id="addComment">Add a Comment</a>
+            </header>
+            <article class="comment">
+            	<p>This is so cool I cannot stand it</p>
+                <address class="authorMeta">
+                 	 <img src="{{ MEDIA_URL }}_images/blog/gravatar_placehold.png" alt="Mitch Gravatar" class="fr" />
+                     <span class="author"><a href="#" rel="external" target="_blank">Mitch Anthony</a></span>
+                     <span class="timeOfComment">2 hours ago</span>
+                    
+                </address>
+            </article>
+            
+            <article class="comment">
+            	<p>This is so cool I cannot stand it</p>
+                <address class="authorMeta">
+                 	 <img src="{{ MEDIA_URL }}_images/blog/gravatar_placehold.png" alt="Mitch Gravatar" class="fr" />
+                     <span class="author"><a href="#" rel="external" target="_blank">Mitch Anthony</a></span>
+                     <span class="timeOfComment">2 hours ago</span>
+                    
+                </address>
+            </article>
+            
+        </section>
+    </section>
+    
+    <section id="rightSide">
+    	<header id="productHeader">
+    		<h1><img src="{{ MEDIA_URL }}_images/photos/product/1/title.png" alt="{{ product.name }}" /></h1>
+        	<span id="productPrice">${{ product.price|floatformat:2|intcomma }}</span>
+        	<h3 id="artistCredit">design by {% for artist in product.active_artists.all %}
+		      <a href="{{ artist.get_absolute_url }}">{{ artist.name }}</a>
+		      {% if not forloop.last %}/{% endif %}
+		    {% endfor %}</h3>
+        </header>
+        
+        <article id="productDetails">
+        	<div id="descTypeLinks">
+            	<a href="#" id="description" class="selected">Description</a>
+                <a href="#" id="design">Design</a>
+            </div>
+            <div id="descCont">
+            	<p>{{ product.description }}</p>
+            </div>
+        </article>
+        
+        <figure id="qtyRemaining">
+        	<p style="width:75%;">Edition 45/50</p>
+        </figure>
+        
+        <span id="addToCart"><a href="{% url orders.views.add product_slug=product.slug %}" title="Add Message in a Bottle to your Cart">Add to Cart</a></span>
+         <figure id="spreadWord">
+        	<h3>Spread!</h3>
+            <ul class="socialLinks">
+        		<li><img src="{{ MEDIA_URL }}_images/icons/facebook.png" alt="Like Buy the Bay on Facebook icon" /> <a href="#" target="_blank" rel="external" title="Like Buy the Bay on Facebook">Facebook</a></li>
+            	<li><img src="{{ MEDIA_URL }}_images/icons/twitter.png" alt="Follow Buy the Bay on Twitter icon" /> <a href="#" target="_blank" rel="external" title="Follow Buy the Bay on Twitter">Twitter</a></li>
+            	<li><img src="{{ MEDIA_URL }}_images/icons/email.png" alt="Email your friends about us icon" /> <a href="#" target="_blank" rel="external" title="Share Buy the Bay via Email">Email</a></li>
+        	</ul>
+        </figure>
+        
+        <aside id="weRecommend">
+        	<h2>Customers who bought this also:</h2>
+            <ul>
+            	<li><a href="#" rel="external" target="_blank">Participated in a beach clean-up</a></li>
+				<li>Cleared invasive vegetation in Malibu Creek</li>
+				<li><a href="#" rel="external" target="_blank">Visited Heal the Bay&rsquo;s aquarium</a></li>
+            </ul>
+        </aside>
+        
+        <aside id="aboutProjectBlurb">
+        	<h2>About the Project</h2>
+            <p>To buy the bay is to help preserve the things we love most about the beach. the proceeds raised through each donation will help benefit heal the bay&rsquo;s efforts to keep L.A.&rsquo;s beaches clean, healthy and safe to enjoy. <a href="{% url flatcontent.views.page page_slug="about-project" %}">Read On</a></p>
+        </aside>
+    </section>
+
+
 {% endblock %}

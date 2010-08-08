@@ -1,0 +1,518 @@
+@charset "UTF-8";
+/*
+Concept and Design by Team One advertising
+Development by philosophie llc
+
+Client: Heal the Bay
+Project: Buy the Bay Website 1.0
+Designers: Tiffany Pan
+Developers: Jeff Schenck, Emerson Taymor, Skot Carruth
+
+
+===COLOR SCHEME===
+
+Background: 
+Links: 
+Headers: 
+Accent: 
+Borders: 
+	
+*/
+
+body{
+	font-family: helvetica, arial, sans-serif;
+	font-size: .625em;
+	background:#fff;
+	color:#787878;
+}
+
+.container{
+	margin: 0 auto;
+	padding:0 10px;
+	width:940px;
+}
+
+/* ~~~~~ HEADER ~~~~~ */
+
+#mainHeader{
+	overflow:hidden;
+	margin-top:15px;
+}
+#cartLinks {display:block;text-align:right;}
+#cartLinks ul li{display:inline;text-transform:uppercase;color:#f15831;padding:0 3px;}
+#cartLinks a{color:#f15831;}
+#logo{
+	display:block;
+	text-indent:-9999px;
+	background:url(../_images/logo.png) no-repeat top left;
+	width:266px;
+	height:65px;
+	margin:30px 0;
+	float:left;
+}
+#mainNav {float:right;margin-top:50px;}
+#mainNav ul li{display:inline;}
+#mainNav ul li a{
+	display:block;
+	float:left;
+	text-indent:-9999px;
+	background-repeat:no-repeat;
+	background-position:center;
+	height:11px;
+	padding:10px 15px;
+	background-color:#fff;
+	margin-right:15px;
+	line-height:48px;
+}
+
+#mainNav ul li a:hover, #mainNav ul li a.selected{background-color:#f0db29;}
+
+#mainNav ul li #homeNav{background-image:url(../_images/nav/home.png);width:31px;}
+#mainNav ul li #newsNav{background-image:url(../_images/nav/news.png);width:31px;}
+#mainNav ul li #aboutNav{background-image:url(../_images/nav/about.png);width:37px;}
+#mainNav ul li #artistsNav{background-image:url(../_images/nav/artists.png);width:45px;}
+#mainNav ul li #collectionNav{background-image:url(../_images/nav/collection.png);width:67px;}
+#mainNav ul li #htbNav{background-image:url(../_images/nav/htb.png);width:58px;height:48px;margin-right:0;padding:0;}
+#mainNav ul li #htbNav:hover, #mainNav ul li #htbNav.selected{background-color:#fff;}
+
+#firstTime{margin-top:30px;display:none;}
+#firstTime p{
+	font-size:2.2em;
+	color:#595959;
+	line-height:1.59em;
+}
+#firstTime p a{color:#299cc1;}
+
+/* ~~~~~ FOOTER ~~~~~ */
+#footer{
+	border-top:1px solid #a0a0a0;
+	padding-top:12px;
+}
+#footer ul{float:left;}
+#footer ul li{
+	display:inline;
+	color:#a0a0a0;
+	border-right:1px solid #a0a0a0;
+	padding:0 10px;
+	font-size:1.1em;
+}
+
+#footer ul li a{color:#a0a0a0;}
+
+#htbFootInfo{
+	float:right;
+	width:205px;
+}
+#htbFootInfo img{float:left;margin-right:10px;}
+#htbFootInfo p{color:#787878;font-size:1.1em;float:left;width:128px;}
+
+
+
+/* ~~~~~ HOME ~~~~~ */
+#featuredSection{
+	width:940px;
+	height:395px;
+	display:block;
+	overflow:hidden;
+	margin-bottom:20px;
+}
+
+#spreadWordHome{
+	display:block;
+	background-color:#bed630;
+	height:37px;
+	line-height:37px;
+	padding:0 10px;
+	margin-bottom:20px;
+}
+#spreadWordHome h3{margin:10px 15px 0 0;}
+#spreadWordHome p{color:#000;float:left;line-height:37px;}
+#spreadWordHome p a{color:#000;text-decoration:underline;}
+#spreadWordHome .socialLinks {float:right;}
+#spreadWordHome .socialLinks li{color:#fff;text-transform:uppercase;line-height:18px;display:inline;padding:0 5px;}
+#spreadWordHome .socialLinks li img{margin-right:3px;}
+#spreadWordHome .socialLinks li a{color:#fff;}
+
+#learnMore{overflow:hidden;margin-bottom:30px;}
+.learnMoreItem{
+	float:left;
+	margin-right:15px;
+	width:222px;
+	position:relative;
+}
+.learnMoreItem h2{margin-bottom:15px;}
+.learnMoreItem img{}
+.learnMoreItem p{color:#fff;background-color:#299cc1;display:block;position:absolute;bottom:0;left:0;padding:10px 8px;width:206px;z-index:2;margin-bottom:0;}
+#whoWeAre{margin-right:0;}
+
+
+
+/* ~~~~~ ABOUT PAGES ~~~~~ */
+#content{overflow:hidden;margin-bottom:30px;}
+.about#content, .artists#content, .news#content, .collection#content{width:780px;}
+.about h1, .artists h1, .news h1, .collection h1{float:right;margin-bottom:25px;}
+.about #sidebar, .artists #sidebar, .news #sidebar{
+	width:120px;
+	paddin-right:60px;
+	text-align:right;
+}
+
+#sidebar{font-size:1.2em;clear:both;}
+#sidebar a.selected, #sidebar a:hover{text-decoration:underline;}
+#sidebar ul li{
+	display:block;
+	margin-bottom:12px;
+}
+#aboutContent, #aboutFooter, #artistContent, #artistFooter, #newsContent, #collectionContent{
+	width:600px;
+	float:right;
+}
+#aboutPhoto, artistPhoto{margin-bottom:28px;}
+
+#aboutFooter h3#getInvolved a, #aboutFooter h3#visitHTB a, #aboutFooter h3#seeProducts a, #aboutFooter h3#visitSite a{
+	color:#fff;
+	text-align:center;
+	text-transform:uppercase;
+	font-size:10px;
+	background-color:#72cadd;
+	float:left;
+	margin-right:10px;
+	height:32px;
+	line-height:32px;
+}
+
+#aboutFooter h3#getInvolved a{width:97px;}
+#aboutFooter h3#visitHTB a{width:118px;}
+
+#spreadWord{
+	display:block;
+	background-color:#bed630;
+	height:32px;
+	line-height:32px;
+	padding:0 10px;
+	float:left;
+	width:330px;
+}
+#spreadWord .socialLinks {float:right;}
+#spreadWord .socialLinks li{color:#fff;text-transform:uppercase;line-height:18px;display:inline;padding:0 2px;}
+#spreadWord .socialLinks li img{margin-right:3px;}
+#spreadWord .socialLinks li a{color:#fff;}
+
+
+/* ~~~~~ ARTISTS PAGE ~~~~~ */
+
+#artistContent a{text-decoration:underline;}
+#aristContent h2{text-transform:uppercase;color:#004a80;font-size:2.8em;margin-bottom:23px;}
+
+/* ~~~~~ NEWS PAGES ~~~~~ */
+#tweetTweet{
+	padding:0 0 25px 55px;
+	background:url(../_images/icons/twitter-bird.png) no-repeat top left;
+	border-bottom:1px solid #a0a0a0;
+	margin-bottom:25px;
+	width:545px;
+	float:right;
+}
+#tweetTweet a#followLink{text-transform:uppercase;color:#17a2dc;display:block;margin:0 0 10px 14px;}
+
+#tweetTweet p{
+	padding-left:14px;
+	background:url(../_images/speech-bubble-left.png) no-repeat top left #e2e2e2;
+	width:533px;
+	color:#787878;
+	font-size:1.4em;
+	height:30px;
+	line-height:30px;
+}
+#tweetTweet p a{color:#787878;}
+#tweetTweet span{text-transform:uppercase;padding-left:15px;color:#17a2dc;}
+
+#newsContent .post{
+	overflow:hidden;
+	margin-bottom:30px;
+	padding-bottom:25px;
+	border-bottom:1px solid #a0a0a0;
+}
+#newsContent .post .postHeader{overflow:hidden;margin-bottom:25px;}
+#newsContent .post .postHeader h2{font-size:2.2em;float:left;display:block;width:450px;font-weight:normal;}
+#newsContent .post .postHeader a{color:#787878;}
+#newsContent .post .postHeader .meta{float:right;width:150px;display:block;text-align:right; color:#a5a5a5;font-style:italic;margin-top:10px;}
+#newsContent .post p{color:#101010;}
+
+
+/* ~~~~~ COLLECTION PAGE ~~~~~ */
+.collection #sidebar{
+	width:115px;
+	padding-right:45px;
+	text-align:right;
+}
+
+.collection #sidebar ul{margin-bottom:30px;}
+.collection #sidebar ul#tags li{display:inline;font-style:italic;line-height:1.67em;}
+.collection #sidebar ul#tags li.listHeader{display:block;}
+
+.collection #sidebar ul#tags li a.selected{
+	padding:3px 5px 3px 10px;
+	background:url(../_images/icons/x.png) no-repeat 4px 7px #ddd;
+	text-decoration:none;
+	-moz-border-radius: 4px;  
+	-webkit-border-radius: 4px; 
+}
+.collection #sidebar ul#tags li a.selected:hover{background-color:#c0c0c0;}
+
+#collectionContent{width:620px;}
+
+#collectionContent .product{
+	width:299px;
+	margin:0 20px 50px 0;
+	float:left;
+}
+#collectionContent .product.two{margin-right:0;}
+#collectionContent .product .productPhoto{
+	width:299px;
+	height:199px;
+	overflow:hidden;
+}
+#collectionContent .product .productPhoto img{
+	margin-bottom:15px;
+
+}
+h2.productTitle{font-size:2.1em;color:#252525;text-transform:uppercase;margin-bottom:0px;font-weight:normal;}
+p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
+
+
+/* ~~~~~ PRODUCT DETAILS PAGE ~~~~~ */
+
+#leftSide{
+	width:578px;
+	float:left;
+	margin-right:20px;
+}
+#rightSide{
+	width:330px;
+	float:right;
+	padding-left:10px;
+}
+#switchProducts ul{display:block;width:100%;margin-bottom:12px;overflow:hidden;}
+#switchProducts ul li a{color:#787878;text-transform:uppercase;}
+#switchProducts ul li.prevNavItem{float:left;padding-left:10px;background:url(../_images/icons/small-triangle-left.png) no-repeat left center;}
+#switchProducts ul li.nextNavItem{float:right;padding-right:10px;background:url(../_images/icons/small-list-triangle.png) no-repeat right center;}
+#mainImage{margin-bottom:12px;}
+#mediaViewer span{color:#959595;text-transform:uppercase;}
+#mediaViewer ul li{display:inline;}
+#mediaViewer{
+	padding-bottom:15px;
+	margin-bottom:20px;
+	border-bottom:1px solid #787878;
+}
+
+#commentHeader {margin-bottom:25px;overflow:hidden;}
+#commentHeader h2{
+	color:#101010;
+	text-transform:uppercase;
+	font-size:2em;
+	float:left;
+}
+
+#commentHeader a#addComment{
+	float:right;
+	color:#787878;
+	text-transform:uppercase;
+}
+.comment{overflow:hidden;padding-bottom:15px;margin-bottom:15px;border-bottom:1px solid #787878;}
+.comment p{
+	width:420px;
+	display:block;
+	font-size:1.1em;
+	line-height:1.4em;
+	float:left;
+}
+.comment  .authorMeta{
+	float:right;
+	width:157px;
+	display:block;
+	color:#787878;
+	font-size:1.1em;
+}
+
+.comment .authorMeta .author{text-align:right;width:110px;float:left;}
+.comment .authorMeta .timeOfComment{text-align:right;width:110px;float:left;}
+.comment .authorMeta .author a{font-weight:bold;color:#787878;}
+.comment  .authorMeta img{margin-left:5px;}
+
+
+#productHeader h1{float:left;padding-top:10px;}
+#productHeader #productPrice{
+	background:url(../_images/icons/starburst-trans.png) no-repeat top left;
+	display:block;
+	text-align:center;
+	width:50px;
+	height:50px;
+	line-height:50px;
+	color:#fff;
+	float:right;
+	font-size:1.2em;
+}
+#artistCredit{
+	clear:both;
+	font-size:1.2em;
+	color:#787878;
+	margin-bottom:30px;
+}
+#artistCredit a{color:#787878;text-decoration:underline;}
+
+#descTypeLinks{border-bottom:1px solid #787878;display:block;width:100%;padding-bottom:5px;margin-bottom:15px;}
+#descTypeLinks a{color:#717171;text-transform:uppercase;padding:5px 0;}
+#descTypeLinks a.selected{color:#101010;}
+#descTypeLinks #description{padding-right:10px;margin-right:10px;border-right:1px solid #787878;}
+
+
+#descCont p{color:#101010;font-size:1em;}
+
+#qtyRemaining{
+	display:block;
+	background-color:#ededed;
+	width:230px;
+	height:33px;
+	float:left;
+	line-height:33px;
+	position:relative;
+	margin-right:15px;
+}
+#qtyRemaining p{
+	line-height:33px;
+	background-color:#f15831;
+	height:33px;
+	color:#fff;
+	display:block;
+	text-transform:uppercase;
+	padding-left:10px;
+	position:absolute;
+	top:0;left:0;
+	z-index:1px;
+	margin:0;
+}
+#addToCart a{
+	line-height:33px;
+	background-color:#f15831;
+	height:33px;
+	color:#fff;
+	display:block;
+	text-transform:uppercase;
+	text-align:center;
+	float:left;
+	width:85px;
+}
+
+#rightSide #spreadWord{
+	width:310px;margin:10px 0 25px;
+	clear:both;
+}
+
+#weRecommend{margin:0px 0 25px;clear:both;}
+#weRecommend h2{
+	margin-bottom:15px;
+	background-image:url(../_images/headers/subhead/customers-also-bought.png);
+	width:118px;height:15px;
+}
+
+#weRecommend ul li{
+	color:#787878;
+	font-size:1.1em;
+	padding-left:17px;
+	background:url(../_images/icons/small-list-triangle.png) no-repeat left center;
+	margin-bottom:8px;
+}
+
+#weRecommend ul li a{	color:#787878;}
+
+#aboutProjectBlurb{
+	background-color:#72cadd;
+	padding:18px;
+	margin-bottom:25px;
+}
+
+#aboutProjectBlurb h2{
+	margin-bottom:12px;
+	background-image:url(../_images/headers/subhead/about-the-project-white.png);
+	width:215px;height:15px;
+}
+
+#aboutProjectBlurb p{color:#fff;margin-bottom:0;}
+#aboutProjectBlurb p a{color:#fff;text-decoration:underline;}
+
+/* ~~~~~ TYPOGRAPHY ~~~~~ */
+
+a {text-decoration:none; color:#101010;}
+a:hover {color: ;}
+a.selected{color:;}
+h1 {font-size: ; color:  ; margin-bottom: ; font-weight:bold;}
+h2 {font-size: ; color:  ; margin-bottom: ; font-weight:normal;}
+h3 {font-size: ; font-weight: bold; color:  ; margin: ;font-weight:normal;}
+p {font-size: 1.1em;line-height:1.5em;margin-bottom:20px;}
+
+#spreadWord h3{color:#fff;text-transform:uppercase;font-size:1em;float:left;}
+
+h1#artistsHeader, h1#collectionHeader, h1#about-project, h1#whatsNewHeader, h1#faq, h1#heal-bay, h1#get-involved, 
+#spreadWordHome h3, #aboutProjectBlurb h2, #weRecommend h2,
+.learnMoreItem h2 a
+{
+	text-indent:-9999px;
+	display:block;
+	background-repeat:no-repeat;
+}
+
+h1#artistsHeader{background-image:url(../_images/headers/artists.png);width:98px;height:30px;}
+h1#collectionHeader{background-image:url(../_images/headers/collection.png);width:143px;height:30px;}
+h1#whatsNewHeader{background-image:url(../_images/headers/whats-new.png);width:152px;height:30px;}
+h1#faq{background-image:url(../_images/headers/faq.png);width:46px;height:32px;}
+h1#heal-bay{background-image:url(../_images/headers/heal-the-bay.png);width:171px;height:30px;}
+h1#about-project{background-image:url(../_images/headers/about-the-project.png);width:257px;height:32px;}
+h1#get-involved{background-image:url(../_images/headers/get-involved.png);width:174px;height:32px;}
+
+#spreadWordHome h3{
+	float:left;
+	background-image:url(../_images/headers/subhead/spread-the-word.png);
+	width:118px;
+	height:16px;
+}
+
+#aboutProject h2 a{background-image:url(../_images/headers/subhead/about-the-project.png);width:118px;height:15px;}
+#aboutArtists h2 a{background-image:url(../_images/headers/subhead/artists-designers.png);width:127px;height:15px;}
+#theLatest h2 a{background-image:url(../_images/headers/subhead/the-latest.png);width:67px;height:15px;}
+#whoWeAre h2 a{background-image:url(../_images/headers/subhead/who-we-are.png);width:72px;height:15px;}
+
+/* UTILITY CLASSES */
+.fl {float: left;}
+.fr {float: right;}
+.cl {clear: left;}
+.cr {clear: right;}
+.clear {clear: both;}
+em{font-style:italic;}
+strong{font-weight:bold;}
+
+.transparent{  
+    filter:alpha(opacity=90);  
+    -moz-opacity:0.9;  
+    -khtml-opacity: 0.9;  
+    opacity: 0.9;  
+}
+
+.dropShadow{
+	-moz-box-shadow: 0px -1px 5px #333;
+	-webkit-box-shadow: 0px -1px 5px #333;
+	box-shadow: 0px -1px 5px #333;
+}
+
+.roundedCorners{
+	-moz-border-radius: 20px;  
+	-webkit-border-radius: 20px; 
+}
+
+a[href$="pdf"]:after,
+a[href$="doc"]:after {
+margin:0 0 0 5px;
+font:bold 12px "Lucida Grande";
+content: " (PDF)";
+}
+a[href$=".doc"]:after {content: " (DOC)";}

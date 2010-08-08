@@ -2,10 +2,39 @@
 {% load markup thumbnail %}
 
 {% block title %}{{ block.super }} | {{ page.name }} {% endblock %}
+{% block pageClass %}about{% endblock %}
 
 {% block body %}
-  <h2>{{ page.name }}</h2>
+<h1 id="{{ page.slug }}">{{ page.name }}</h1>
+<aside id="sidebar" class="fl">
+	<nav id="aboutNav">
+    	<ul>
+        	<li><a href="{% url flatcontent.views.page page_slug="about-project" %}" class="selected">About</a></li>
+            <li><a href="{% url flatcontent.views.page page_slug="heal-bay" %}">Heal the Bay</a></li>
+            <li><a href="{% url flatcontent.views.page page_slug="get-involved" %}">Get Involved</a></li>
+            <li><a href="{% url flatcontent.views.page page_slug="faq" %}">FAQ</a></li>
+            <li><a href="{% url flatcontent.views.page page_slug="contact-us" %}">Contact Us</a></li>
+        </ul>
+    </nav>
 
-  <p><img src="{% thumbnail page.image 300x200 crop upscale %}" /></p>
-  {{ page.content|textile }}
+</aside>
+
+<article id="aboutContent">
+
+	<figure id="aboutPhoto"><img src="{% thumbnail page.image 600x600 %}" alt="{{ page.name }}" /></figure>
+	{{ page.content|textile }}	
+</article>
+<aside id="aboutFooter">
+	<h3 id="getInvolved"><a href="#">Get Involved</a></h3>
+  <h3 id="visitHTB"><a href="http://www.healthebay.org" rel="external" target="_blank">Visit Heal the Bay</a></h3>
+  <figure id="spreadWord">
+  	<h3>Spread the Word</h3>
+      <ul class="socialLinks">
+  		<li><img src="{{ MEDIA_URL }}_images/icons/facebook.png" alt="Like Buy the Bay on Facebook icon" /> <a href="#" target="_blank" rel="external" title="Like Buy the Bay on Facebook">Facebook</a></li>
+      	<li><img src="{{ MEDIA_URL }}_images/icons/twitter.png" alt="Follow Buy the Bay on Twitter icon" /> <a href="#" target="_blank" rel="external" title="Follow Buy the Bay on Twitter">Twitter</a></li>
+      	<li><img src="{{ MEDIA_URL }}_images/icons/email.png" alt="Email your friends about us icon" /> <a href="#" target="_blank" rel="external" title="Share Buy the Bay via Email">Email</a></li>
+  	</ul>
+  </figure>
+</aside>
+
 {% endblock %}

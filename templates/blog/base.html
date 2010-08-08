@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}{{ block.super }} | Blog{% endblock %}
+{% block pageClass %}news{% endblock %}
 
 {% block body %}
-  <h3>Archive</h3>
+ {% block blog_body %}
+<h1 id="whatsNewHeader">What&rsquo; New</h1>
   <ul>
     {% for archive_month, num_posts in archive_months %}
       <li>
@@ -14,5 +16,5 @@
       </li>
     {% endfor %}
   </ul>
-  {% block blog_body %}{% endblock %}
+ {% endblock %}
 {% endblock %}

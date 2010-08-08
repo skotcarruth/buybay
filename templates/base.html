@@ -17,12 +17,13 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 </head>
 
+
 <body class="">
 <div class="container">
 <header id="mainHeader">
 	<div id="cartLinks">
     	<ul>
-        	<li><a href="{% url orders.views.cart %}">View Cart ({{ order.get_total_items }})</a></li>
+        	<li><a href="{% url orders.views.cart %}">View Cart ({{ current_order.get_total_items }})</a></li>
             <li>|</li>
             <li><a href="/checkout">Checkout</a></li>
         </ul>

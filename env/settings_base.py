@@ -78,6 +78,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'blog.context_processors.archive',
     'orders.context_processors.current_order',
+    'products.context_processors.tags',
 )
 
 MIDDLEWARE_CLASSES = (

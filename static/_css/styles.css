@@ -40,6 +40,7 @@ body{
 }
 #cartLinks {display:block;text-align:right;}
 #cartLinks ul li{display:inline;text-transform:uppercase;color:#f15831;padding:0 3px;}
+#cartLinks ul li#cartIcon{padding-left:18px;background:url(../_images/icons/cart.png) no-repeat top left;}
 #cartLinks a{color:#f15831;}
 #logo{
 	display:block;

@@ -40,7 +40,7 @@ def tag(request, tag_slug=None):
 
 def product(request, product_slug=None):
     """A detail page for a product."""
-    product = get_object_or_404(Product, is_active=True, slug=product_slug)
+    product = get_object_or_404(Product.objects.active(), slug=product_slug)
     return render_to_response('products/product.html', {
         'product': product,
     }, context_instance=RequestContext(request))

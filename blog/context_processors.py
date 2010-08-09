@@ -1,6 +1,6 @@
 from datetime import timedelta
 from django.core.urlresolvers import resolve
-from blog.models import Post
+from blog.models import Post, Tag
 
 
 def archive(request):
@@ -24,3 +24,13 @@ def archive(request):
         months.append((start_date, num_posts))
         start_date = (start_date + timedelta(days=31)).replace(day=1)
     return {'archive_months': months}
+
+def tags(request):
+    """Adds a list of product tags to the context."""
+    # Don't waste the DB hits if it's not a products page
+    view, args, kwargs = resolve(request.path)
+    if view.__module__ != 'blog.views':
+        return {}
+
+    # Return the list of active tags
+    return {'blog_tags': Tag.objects.active()}

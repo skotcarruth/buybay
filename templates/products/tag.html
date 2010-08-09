@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}{{ tag.name }} | Collection | {{ block.super }}{% endblock %}
+
+{% block body %}
+  <h2>{{ tag.name }}</h2>
+  <ul>
+    {% for product in products %}
+      <li>{{ product.name }} (add other details)</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

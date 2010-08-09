@@ -33,9 +33,34 @@ class Tag(models.Model):
         return self.product_set.count()
     num_products.short_description = 'Products'
 
+SORT_OPTIONS = {
+    'name': {'attr': 'name', 'up': '', 'down': '-'},
+    'price': {'attr': 'price', 'up': '', 'down': '-'},
+    'date': {'attr': 'created_ts', 'up': '-', 'down': ''},
+}
+STATUS_OPTIONS = {
+    'all': None,
+    'for_sale': 'FOR_SALE',
+    'coming_soon': 'COMING_SOON',
+    'archived': 'ARCHIVED',
+}
+def product_filter(qs, status):
+    status = STATUS_OPTIONS.get(status, STATUS_OPTIONS['all'])
+    if status is not None:
+        return qs.filter(status=getattr(Product, status))
+    return qs
+
+def product_sort(qs, sort, sort_dir):
+    if sort not in SORT_OPTIONS:
+        sort = 'name'
+    if sort_dir not in ('up', 'down'):
+        sort_dir = 'up'
+    ordering = '%s%s' % (SORT_OPTIONS[sort][sort_dir], SORT_OPTIONS[sort]['attr'])
+    return qs.order_by(ordering)
+
 class ProductManager(models.Manager):
     def active(self):
-        return self.filter(status__in=(COMING_SOON, FOR_SALE, ARCHIVED))
+        return self.filter(status__in=(Product.COMING_SOON, Product.FOR_SALE, Product.ARCHIVED))
 
 class Product(models.Model):
     """A product in the collection."""

@@ -29,7 +29,7 @@ class ProductAdmin(admin.ModelAdmin):
                 'artists', 'tags',),
         }),
         ('Main Images', {
-            'fields': ('main_image_1', 'main_image_2',),
+            'fields': ('name_image', 'main_image_1', 'main_image_2',),
         }),
         ('Payment Info', {
             'fields': ('status', 'price', 'min_quantity', 'max_quantity',

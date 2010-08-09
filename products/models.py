@@ -93,6 +93,7 @@ class Product(models.Model):
     current_quantity = models.PositiveIntegerField(default=0)
 
     # Images and video
+    name_image = models.ImageField(upload_to='uploads/product_images/', blank=True, null=True)
     main_image_1 = models.ImageField(upload_to='uploads/product_images/', blank=True, null=True)
     main_image_2 = models.ImageField(upload_to='uploads/product_images/', blank=True, null=True)
     gallery_media = generic.GenericRelation(GalleryMedia)

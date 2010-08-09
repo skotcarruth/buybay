@@ -20,6 +20,8 @@ def index(request):
 def artist(request, artist_slug=None):
     """Detail page for an artist."""
     artist = get_object_or_404(Artist, is_active=True, slug=artist_slug)
+    artist_list = Artist.objects.filter(is_active=True).all()
     return render_to_response('artists/artist.html', {
         'artist': artist,
+        'artist_list': artist_list,
     }, context_instance=RequestContext(request))

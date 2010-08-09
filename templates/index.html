@@ -1,16 +1,64 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 
+{% block pageClass %}home{% endblock %}
+
 {% block body %}
-  <h2>Home Page</h2>
-  <ul>
-    {% for feature in features %}
-      <li>
-        <a href="{{ feature.get_destination_url }}">
-          <img src="{% thumbnail feature.image_before 60x40 crop upscale %}" />
-          <img src="{% thumbnail feature.image_after 60x40 crop upscale %}" />
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+
+	<article id="featuredSection">
+		<ul id="featuredContent">
+			 {% for feature in features %}
+			<li>  
+				<a href="{{ feature.get_destination_url }}">
+		          <img src="{% thumbnail feature.image_before 940x395 crop %}" />
+		          <img src="{% thumbnail feature.image_after 940x395 crop %}" />
+		        </a>
+		     </li>
+		    {% endfor %}
+		</ul>
+    	<ul id="featControls">
+        	<li class="viewCollection"><a href="#">View Collection</a></li>
+        	<li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+        </ul>
+    </article>
+    
+    <aside id="spreadWordHome">
+    	<h3>Spread the Word</h3>
+        <p>Help us get the message out on <a href="#" target="_blank" rel="external" title="Like Buy the Bay on Facebook">Facebook</a>, <a href="#" target="_blank" rel="external" title="Follow Buy the Bay on Twitter">Twitter</a>, and more— it&rsquo;s one thing that costs nothing!</p>
+        <ul class="socialLinks">
+        	<li><img src="{{ MEDIA_URL }}_images/icons/facebook.png" alt="Like Buy the Bay on Facebook icon" /> <a href="#" target="_blank" rel="external" title="Like Buy the Bay on Facebook">Facebook</a></li>
+            <li><img src="{{ MEDIA_URL }}_images/icons/twitter.png" alt="Follow Buy the Bay on Twitter icon" /> <a href="#" target="_blank" rel="external" title="Follow Buy the Bay on Twitter">Twitter</a></li>
+            <li><img src="{{ MEDIA_URL }}_images/icons/email.png" alt="Email your friends about us icon" /> <a href="#" target="_blank" rel="external" title="Share Buy the Bay via Email">Email</a></li>
+        </ul>
+    </aside>
+    
+    <section id="learnMore">
+    	<article id="aboutProject" class="learnMoreItem">
+        	<h2><a href="{% url flatcontent.views.page page_slug="about-project" %}">About the Project</a></h2>
+            <a href="{% url flatcontent.views.page page_slug="about-project" %}"><img src="{{ MEDIA_URL }}_images/photos/home/about.jpg" alt="About the Buy the Bay Project" /></a>
+            <p class="transparent">Learn more about the project from Heal the Bay and how, together we can help preserve the beach we love.</p>
+        </article>
+        
+        <article id="aboutArtists" class="learnMoreItem">
+   	    	<h2><a href="{% url artists.views.index %}">Artists &amp; Designers</a></h2>
+            <a href="{% url artists.views.index %}"><img src="{{ MEDIA_URL }}_images/photos/home/artists.jpg" alt="About the Buy the Bay Artists" /></a>
+            <p class="transparent">Browse our talented group of artists, illustrators and designers who helped make this project possible.</p>
+        </article>
+        
+        <article id="theLatest" class="learnMoreItem">
+   	    	<h2><a href="{% url blog.views.index %}">The Latest</a></h2>
+        	<a href="{% url blog.views.index %}"><img src="{{ MEDIA_URL }}_images/photos/home/whats-new.jpg" alt="The Latest in Buy the Bay News" /></a>
+            <p class="transparent">See Buy the Bay in the news, go behind the scenes with artists, and find out other ways you can help!</p>
+        </article>
+        
+        <article id="whoWeAre" class="learnMoreItem">
+   	   		<h2><a href="#">Who We Are</a></h2>
+            <a href="#"><img src="{{ MEDIA_URL }}_images/photos/home/who-we-are.jpg" alt="Who is Heal the bay and what do they do?" /></a>
+            <p class="transparent">Learn how Heal the Bay helps protect the beaches and coastal waters of Southern California.</p>
+        </article>
+    </section>
+
 {% endblock %}

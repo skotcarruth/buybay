@@ -116,7 +116,12 @@ body{
 	overflow:hidden;
 	margin-bottom:20px;
 }
-
+#featuredContent ul li{
+    width:940px;
+	height:395px;
+	display:block;
+	overflow:hidden;
+}
 #spreadWordHome{
 	display:block;
 	background-color:#bed630;

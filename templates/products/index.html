@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load params %}
 
 {% block title %}Collection | {{ block.super }}{% endblock %}
 {% block pageClass %}collection{% endblock %}
@@ -7,19 +8,23 @@
 
 	<aside id="sidebar" class="fl">
      	<ul id="filterByStatus">
-            <li><a href="#" class="selected">All Products</a></li>
-            <li><a href="#">For Sale</a></li>
-            <li><a href="#">Coming Soon</a></li>
-            <li><a href="#">Archived</a></li>
+            <li><a href="{% params filter="all" %}" class="selected">All Products</a></li>
+            <li><a href="{% params filter="for_sale" %}">For Sale</a></li>
+            <li><a href="{% params filter="coming_soon" %}">Coming Soon</a></li>
+            <li><a href="{% params filter="archived" %}">Archived</a></li>
         </ul>
         
         <ul id="sortBy">
         	<li>Sort:</li>
-        	<li><a href="#">By Price</a></li>
-            <li><a href="#">By Date Posted</a></li>
+        	<li><a href="{% params sort="name" dir="up","down" %}">By Name</a></li>
+        	<li><a href="{% params sort="price" dir="up","down" %}">By Price</a></li>
+            <li><a href="{% params sort="date" dir="up","down" %}">By Date Posted</a></li>
         </ul>
         
     	<ul id="tags">
+    	  {% for tag in product_tags %}
+      	  <li><a href="{% url products.views.tag tag_slug=tag.slug %}">{{ tag.name }}</a></li>
+    	  {% endfor %}
         	<li class="listHeader">Tags:</li>
             <li><a href="#" class="selected">Poster,</a></li>
             <li><a href="#">Package,</a></li>
@@ -49,9 +54,4 @@
         </article>
         
      </section>
-  <ul>
-    {% for product in products %}
-      <li><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></li>
-    {% endfor %}
-  </ul>
 {% endblock %}

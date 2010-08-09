@@ -24,4 +24,4 @@ class Artist(models.Model):
         return ('artists.views.artist', (), {'artist_slug': self.slug})
 
     def active_products(self):
-        return self.product_set.filter(is_active=True)
+        return self.product_set.active()

@@ -10,12 +10,11 @@
 
 	<aside id="sidebar" class="fl">
    	
-  	<ul id="categories">
-          <li><a href="#">Product News</a></li>
-          <li><a href="#">Announcements</a></li>
-          <li><a href="#">Artist News</a></li>
-          <li><a href="#">Category</a></li>
-      </ul>
+  		<ul id="categories">
+	  	  {% for tag in blog_tags %}
+	  	    <li><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a></li>
+	  	  {% endfor %}
+	    </ul>
   </aside>
 
 <section id="newsContent">
@@ -27,7 +26,7 @@
   {{ post.body|textile }}
   <p>
     {% for media in post.gallery_media.active.all %}
-      {{ media.get_media }}
+      <img src="{% thumbnail media.get_media 600x600 %}" alt="{{ post.title }}" />
     {% endfor %}
   </p>
   <p>Categories:

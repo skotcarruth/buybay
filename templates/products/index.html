@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load params %}
+{% load markup thumbnail %}
 
 {% block title %}Collection | {{ block.super }}{% endblock %}
 {% block pageClass %}collection{% endblock %}
@@ -22,36 +23,22 @@
         </ul>
         
     	<ul id="tags">
+			<li class="listHeader">Tags:</li>
     	  {% for tag in product_tags %}
-      	  <li><a href="{% url products.views.tag tag_slug=tag.slug %}">{{ tag.name }}</a></li>
+      	  <li><a href="{% url products.views.tag tag_slug=tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %},{% endif %}</li>
     	  {% endfor %}
-        	<li class="listHeader">Tags:</li>
-            <li><a href="#" class="selected">Poster,</a></li>
-            <li><a href="#">Package,</a></li>
-            <li><a href="#">Product,</a></li>
-            <li><a href="#">Summer,</a></li>
-            <li><a href="#">Sunshine,</a></li>
-            <li><a href="#">Blue,</a></li>
-            <li><a href="#">Wave,</a></li>
-            <li><a href="#">Water,</a></li>
-            <li><a href="#">Sky,</a></li>
-            <li><a href="#">Gift,</a></li>
-            <li><a href="#">Music,</a></li>
         </ul>
     </aside>
     
     <section id="collectionContent">
-    	
-        <article class="product">
-        	<a href="{{ product.get_absolute_url }}" class="productPhoto"><img src="_images/photos/collections/1_1.jpg" alt="{{ product.name }}"></a>
-            <h2 class="productTitle"><a href="#">{{ product.name }}</a></h2>
-            <p class="productArtist">design by <a href="#">Henri Lucas</a></p>
+    	{% for product in products %}
+        <article class="product {% cycle '' 'two' %}">
+        	<a href="{{ product.get_absolute_url }}" class="productPhoto"><img src="{% thumbnail product.main_image_1 299x199 crop %}" alt="{{ product.name }}"></a>
+            <h2 class="productTitle"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h2>
+            <p class="productArtist">design by {% for artist in product.active_artists.all %}<a href="{{ artist.get_absolute_url }}">{{ artist.name }}</a>{% endfor %}</p>
         </article>
-        <article class="product two">
-        	<a href="#" class="productPhoto"><img src="_images/photos/collections/1_1.jpg" alt="Summer Beach Concert w/ Jack Johnson"></a>
-            <h2 class="productTitle"><a href="#">An Afternoon of Sunshine</a></h2>
-            <p class="productArtist">design by <a href="#">Gail Swanland</a> + <a href="#">Brian Roettinger</a></p>
-        </article>
+{% endfor %}
+
         
      </section>
 {% endblock %}

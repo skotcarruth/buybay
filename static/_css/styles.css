@@ -116,6 +116,7 @@ body{
 	display:block;
 	overflow:hidden;
 	margin-bottom:20px;
+	position:relative;
 }
 #featuredContent ul li{
     width:940px;
@@ -123,6 +124,10 @@ body{
 	display:block;
 	overflow:hidden;
 }
+#featControls {position:absolute;right:0px;bottom:5px;z-index:90;}
+#featuredSection #featControls li{display:inline;margin:0;}
+#featuredSection #featControls li a{padding:4px 6px;background-color:#fff;font-size:1.2em;}
+
 #spreadWordHome{
 	display:block;
 	background-color:#bed630;
@@ -135,8 +140,8 @@ body{
 #spreadWordHome p{color:#000;float:left;line-height:37px;}
 #spreadWordHome p a{color:#000;text-decoration:underline;}
 #spreadWordHome .socialLinks {float:right;}
-#spreadWordHome .socialLinks li{color:#fff;text-transform:uppercase;line-height:18px;display:inline;padding:0 5px;}
-#spreadWordHome .socialLinks li img{margin-right:3px;}
+#spreadWordHome .socialLinks li{color:#fff;text-transform:uppercase;display:inline;padding:0 5px;}
+#spreadWordHome .socialLinks li img{margin-right:3px;vertical-align:middle;}
 #spreadWordHome .socialLinks li a{color:#fff;}
 
 #learnMore{overflow:hidden;margin-bottom:30px;}
@@ -189,6 +194,8 @@ body{
 
 #aboutFooter h3#getInvolved a{width:97px;}
 #aboutFooter h3#visitHTB a{width:118px;}
+#aboutFooter h3#seeProducts a{width:97px;}
+#aboutFooter h3#visitSite a{width:73px;}
 
 #spreadWord{
 	display:block;
@@ -200,15 +207,15 @@ body{
 	width:330px;
 }
 #spreadWord .socialLinks {float:right;}
-#spreadWord .socialLinks li{color:#fff;text-transform:uppercase;line-height:18px;display:inline;padding:0 2px;}
-#spreadWord .socialLinks li img{margin-right:3px;}
+#spreadWord .socialLinks li{color:#fff;text-transform:uppercase;display:inline;padding:0 2px;}
+#spreadWord .socialLinks li img{margin-right:3px;vertical-align:middle;}
 #spreadWord .socialLinks li a{color:#fff;}
 
 
 /* ~~~~~ ARTISTS PAGE ~~~~~ */
 
 #artistContent a{text-decoration:underline;}
-#aristContent h2{text-transform:uppercase;color:#004a80;font-size:2.8em;margin-bottom:23px;}
+#artistContent h2{text-transform:uppercase;color:#004a80;font-size:2.4em;margin:25px 0;}
 
 /* ~~~~~ NEWS PAGES ~~~~~ */
 #tweetTweet{
@@ -304,7 +311,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 #switchProducts ul li.prevNavItem{float:left;padding-left:10px;background:url(../_images/icons/small-triangle-left.png) no-repeat left center;}
 #switchProducts ul li.nextNavItem{float:right;padding-right:10px;background:url(../_images/icons/small-list-triangle.png) no-repeat right center;}
 #mainImage{margin-bottom:12px;}
-#mediaViewer span{color:#959595;text-transform:uppercase;}
+#mediaViewer span{color:#959595;text-transform:uppercase;display:block;margin-bottom:3px;}
 #mediaViewer ul li{display:inline;}
 #mediaViewer{
 	padding-bottom:15px;
@@ -373,7 +380,8 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 #descTypeLinks #description{padding-right:10px;margin-right:10px;border-right:1px solid #787878;}
 
 
-#descCont p{color:#101010;font-size:1em;}
+#descCont p, #designCont p{color:#101010;font-size:1em;}
+#designCont{display:none;}
 
 #qtyRemaining{
 	display:block;
@@ -419,7 +427,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 #weRecommend h2{
 	margin-bottom:15px;
 	background-image:url(../_images/headers/subhead/customers-also-bought.png);
-	width:118px;height:15px;
+	width:215px;height:15px;
 }
 
 #weRecommend ul li{
@@ -459,7 +467,7 @@ p {font-size: 1.1em;line-height:1.5em;margin-bottom:20px;}
 
 #spreadWord h3{color:#fff;text-transform:uppercase;font-size:1em;float:left;}
 
-h1#artistsHeader, h1#collectionHeader, h1#about-project, h1#whatsNewHeader, h1#faq, h1#heal-bay, h1#get-involved, 
+h1#artistsHeader, h1#collectionHeader, h1#about-project, h1#whatsNewHeader, h1#faq, h1#heal-the-bay, h1#get-involved, 
 #spreadWordHome h3, #aboutProjectBlurb h2, #weRecommend h2,
 .learnMoreItem h2 a
 {
@@ -472,7 +480,7 @@ h1#artistsHeader{background-image:url(../_images/headers/artists.png);width:98px
 h1#collectionHeader{background-image:url(../_images/headers/collection.png);width:143px;height:30px;}
 h1#whatsNewHeader{background-image:url(../_images/headers/whats-new.png);width:152px;height:30px;}
 h1#faq{background-image:url(../_images/headers/faq.png);width:46px;height:32px;}
-h1#heal-bay{background-image:url(../_images/headers/heal-the-bay.png);width:171px;height:30px;}
+h1#heal-the-bay{background-image:url(../_images/headers/heal-the-bay.png);width:171px;height:30px;}
 h1#about-project{background-image:url(../_images/headers/about-the-project.png);width:257px;height:32px;}
 h1#get-involved{background-image:url(../_images/headers/get-involved.png);width:174px;height:32px;}
 

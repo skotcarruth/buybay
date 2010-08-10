@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load markup thumbnail %}
 {% load humanize %}
 
 {% block title %}{{ block.super }} | Collection | {{ product.name }}{% endblock %}
@@ -60,11 +61,11 @@
     
     <section id="rightSide">
     	<header id="productHeader">
-    		<h1><img src="{{ MEDIA_URL }}_images/photos/product/1/title.png" alt="{{ product.name }}" /></h1>
-        	<span id="productPrice">${{ product.price|floatformat:2|intcomma }}</span>
+    		<h1><img src="{% thumbnail product.name_image 280x199 crop %}" alt="{{ product.name }}" /></h1>
+        	<span id="productPrice">${{ product.price|intcomma }}</span>
         	<h3 id="artistCredit">design by {% for artist in product.active_artists.all %}
 		      <a href="{{ artist.get_absolute_url }}">{{ artist.name }}</a>
-		      {% if not forloop.last %}/{% endif %}
+		      {% if not forloop.last %},{% endif %}
 		    {% endfor %}</h3>
         </header>
         
@@ -76,10 +77,13 @@
             <div id="descCont">
             	<p>{{ product.description }}</p>
             </div>
+			<div id="designCont">
+            	<p>{{ product.design }}</p>
+            </div>
         </article>
         
         <figure id="qtyRemaining">
-        	<p style="width:75%;">Edition 45/50</p>
+        	<p style="width:75%;">Edition {{ product.order_set.count }}/{{ product.max_quantity }}</p>
         </figure>
         
         <span id="addToCart"><a href="{% url orders.views.add product_slug=product.slug %}" title="Add Message in a Bottle to your Cart">Add to Cart</a></span>
@@ -95,9 +99,9 @@
         <aside id="weRecommend">
         	<h2>Customers who bought this also:</h2>
             <ul>
-            	<li><a href="#" rel="external" target="_blank">Participated in a beach clean-up</a></li>
-				<li>Cleared invasive vegetation in Malibu Creek</li>
-				<li><a href="#" rel="external" target="_blank">Visited Heal the Bay&rsquo;s aquarium</a></li>
+            	{% if product.related_info_1 %}<li>{{ product.related_info_1 }}</li>{% endif %}
+				{% if product.related_info_2 %}<li>{{ product.related_info_2 }}</li>{% endif %}
+				{% if product.related_info_3 %}<li>{{ product.related_info_3 }}</li>{% endif %}
             </ul>
         </aside>
         

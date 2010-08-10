@@ -12,8 +12,8 @@
 	<section id="leftSide">
     	<nav id="switchProducts">
         	<ul>
-            	<li class="prevNavItem"><a href="{{ product.get_previous.get_absolute_url }}">Previous Item</a></li>
-                <li class="nextNavItem"><a href="{{ product.get_next.get_absolute_url }}">Next Item</a></li>
+            	{% if product.get_previous.get_absolute_url %}<li class="prevNavItem"><a href="{{ product.get_previous.get_absolute_url }}">Previous Item</a></li>{% endif %}
+                {% if product.get_next.get_absolute_url %}<li class="nextNavItem"><a href="{{ product.get_next.get_absolute_url }}">Next Item</a></li>{% endif %}
             </ul>
         </nav>
         <article id="mediaViewer">
@@ -83,26 +83,34 @@
         </article>
         
         <figure id="qtyRemaining">
-        	<p style="width:75%;">Edition {{ product.order_set.count }}/{{ product.max_quantity }}</p>
+			<span>Edition {{ product.order_set.count }}/{{ product.max_quantity }}</span>
+        	<p style="width:{% widthratio product.order_set.count product.max_quantity 100 %}%;"></p>
         </figure>
         
         <span id="addToCart"><a href="{% url orders.views.add product_slug=product.slug %}" title="Add Message in a Bottle to your Cart">Add to Cart</a></span>
          <figure id="spreadWord">
         	<h3>Spread!</h3>
-            <ul class="socialLinks">
-        		<li><img src="{{ MEDIA_URL }}_images/icons/facebook.png" alt="Like Buy the Bay on Facebook icon" /> <a href="#" target="_blank" rel="external" title="Like Buy the Bay on Facebook">Facebook</a></li>
-            	<li><img src="{{ MEDIA_URL }}_images/icons/twitter.png" alt="Follow Buy the Bay on Twitter icon" /> <a href="#" target="_blank" rel="external" title="Follow Buy the Bay on Twitter">Twitter</a></li>
-            	<li><img src="{{ MEDIA_URL }}_images/icons/email.png" alt="Email your friends about us icon" /> <a href="#" target="_blank" rel="external" title="Share Buy the Bay via Email">Email</a></li>
-        	</ul>
+            	<!-- AddThis Button BEGIN -->
+				<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+		        <ul class="socialLinks addthis_toolbox addthis_default_style">
+		        	<li><a class="addthis_button_facebook">Facebook</a></li>
+		            <li><a class="addthis_button_twitter">Twitter</a></li>
+		            <li><a class="addthis_button_email">Email</a></li>
+					<!--<li><a href="http://www.addthis.com/bookmark.php?v=250&amp;username=philosophie" class="addthis_button_compact"></a></li>-->
+		        </ul>
+				<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=philosophie"></script>
+				<!-- AddThis Button END -->
         </figure>
         
         <aside id="weRecommend">
+			{% if product.related_info_1 %}
         	<h2>Customers who bought this also:</h2>
             <ul>
             	{% if product.related_info_1 %}<li>{{ product.related_info_1 }}</li>{% endif %}
 				{% if product.related_info_2 %}<li>{{ product.related_info_2 }}</li>{% endif %}
 				{% if product.related_info_3 %}<li>{{ product.related_info_3 }}</li>{% endif %}
             </ul>
+			{% endif %}
         </aside>
         
         <aside id="aboutProjectBlurb">

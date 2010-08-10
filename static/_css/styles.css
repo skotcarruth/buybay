@@ -42,6 +42,7 @@ body{
 #cartLinks ul li{display:inline;text-transform:uppercase;color:#f15831;padding:0 3px;}
 #cartLinks ul li#cartIcon{padding-left:18px;background:url(../_images/icons/cart.png) no-repeat top left;}
 #cartLinks a{color:#f15831;}
+#cartLinks ul li a:hover{color:#787878;}
 #logo{
 	display:block;
 	text-indent:-9999px;
@@ -97,8 +98,9 @@ body{
 	padding:0 10px;
 	font-size:1.1em;
 }
-
+#footer ul li.last{border:none;}
 #footer ul li a{color:#a0a0a0;}
+#footer ul li a:hover{color:#787878;}
 
 #htbFootInfo{
 	float:right;
@@ -139,10 +141,12 @@ body{
 #spreadWordHome h3{margin:10px 15px 0 0;}
 #spreadWordHome p{color:#000;float:left;line-height:37px;}
 #spreadWordHome p a{color:#000;text-decoration:underline;}
+
 #spreadWordHome .socialLinks {float:right;}
 #spreadWordHome .socialLinks li{color:#fff;text-transform:uppercase;display:inline;padding:0 5px;}
 #spreadWordHome .socialLinks li img{margin-right:3px;vertical-align:middle;}
 #spreadWordHome .socialLinks li a{color:#fff;}
+#spreadWordHome .socialLinks li a:hover{color:#004A80;}
 
 #learnMore{overflow:hidden;margin-bottom:30px;}
 .learnMoreItem{
@@ -154,6 +158,7 @@ body{
 .learnMoreItem h2{margin-bottom:15px;}
 .learnMoreItem img{}
 .learnMoreItem p{color:#fff;background-color:#299cc1;display:block;position:absolute;bottom:0;left:0;padding:10px 8px;width:206px;z-index:2;margin-bottom:0;}
+.learnMoreItem p a{color:#fff;}
 #whoWeAre{margin-right:0;}
 
 
@@ -202,7 +207,7 @@ body{
 	background-color:#bed630;
 	height:32px;
 	line-height:32px;
-	padding:0 10px;
+	padding:0 6px 0 10px;
 	float:left;
 	width:330px;
 }
@@ -210,7 +215,7 @@ body{
 #spreadWord .socialLinks li{color:#fff;text-transform:uppercase;display:inline;padding:0 2px;}
 #spreadWord .socialLinks li img{margin-right:3px;vertical-align:middle;}
 #spreadWord .socialLinks li a{color:#fff;}
-
+#spreadWord .socialLinks li a:hover{color:#004A80;}
 
 /* ~~~~~ ARTISTS PAGE ~~~~~ */
 
@@ -249,6 +254,7 @@ body{
 #newsContent .post .postHeader{overflow:hidden;margin-bottom:25px;}
 #newsContent .post .postHeader h2{font-size:2.2em;float:left;display:block;width:450px;font-weight:normal;}
 #newsContent .post .postHeader a{color:#787878;}
+#newsContent .post .postHeader a:hover{color:#101010;}
 #newsContent .post .postHeader .meta{float:right;width:150px;display:block;text-align:right; color:#a5a5a5;font-style:italic;margin-top:10px;}
 #newsContent .post p{color:#101010;}
 
@@ -458,7 +464,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 /* ~~~~~ TYPOGRAPHY ~~~~~ */
 
 a {text-decoration:none; color:#101010;}
-a:hover {color: ;}
+a:hover {color: #004A80;}
 a.selected{color:;}
 h1 {font-size: ; color:  ; margin-bottom: ; font-weight:bold;}
 h2 {font-size: ; color:  ; margin-bottom: ; font-weight:normal;}
@@ -530,3 +536,11 @@ font:bold 12px "Lucida Grande";
 content: " (PDF)";
 }
 a[href$=".doc"]:after {content: " (DOC)";}
+
+.pagination{clear:both;}
+
+/* ADD THIS CODE */
+.addthis_toolbox.addthis_default_style span{margin:10px 4px 0 0;}
+.addthis_default_style .at300b, .addthis_default_style .at300m{padding:0 5px;}
+#spreadWord .addthis_toolbox.addthis_default_style span{margin-top:8px;}
+#spreadWord .addthis_default_style .at300b, #spreadWord .addthis_default_style .at300m{padding:0 4px;}

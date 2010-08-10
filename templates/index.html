@@ -17,7 +17,7 @@
 		    {% endfor %}
 		</ul>
     	<ul id="featControls">
-        	<li class="viewCollection"><a href="#">View Collection</a></li>
+        	<li class="viewCollection"><a href="{% url products.views.index %}">View Collection</a></li>
         	<li><a href="#">1</a></li>
             <li><a href="#">2</a></li>
             <li><a href="#">3</a></li>
@@ -28,36 +28,41 @@
     <aside id="spreadWordHome">
     	<h3>Spread the Word</h3>
         <p>Help us get the message out on <a href="#" target="_blank" rel="external" title="Like Buy the Bay on Facebook">Facebook</a>, <a href="#" target="_blank" rel="external" title="Follow Buy the Bay on Twitter">Twitter</a>, and more— it&rsquo;s one thing that costs nothing!</p>
-        <ul class="socialLinks">
-        	<li><img src="{{ MEDIA_URL }}_images/icons/facebook.png" alt="Like Buy the Bay on Facebook icon" /> <a href="#" target="_blank" rel="external" title="Like Buy the Bay on Facebook">Facebook</a></li>
-            <li><img src="{{ MEDIA_URL }}_images/icons/twitter.png" alt="Follow Buy the Bay on Twitter icon" /> <a href="#" target="_blank" rel="external" title="Follow Buy the Bay on Twitter">Twitter</a></li>
-            <li><img src="{{ MEDIA_URL }}_images/icons/email.png" alt="Email your friends about us icon" /> <a href="#" target="_blank" rel="external" title="Share Buy the Bay via Email">Email</a></li>
+<!-- AddThis Button BEGIN -->
+<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+        <ul class="socialLinks addthis_toolbox addthis_default_style">
+        	<li><a class="addthis_button_facebook">Facebook</a></li>
+            <li><a class="addthis_button_twitter">Twitter</a></li>
+            <li><a class="addthis_button_email">Email</a></li>
+			<!--<li><a href="http://www.addthis.com/bookmark.php?v=250&amp;username=philosophie" class="addthis_button_compact"></a></li>-->
         </ul>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=philosophie"></script>
+			<!-- AddThis Button END -->
     </aside>
     
     <section id="learnMore">
     	<article id="aboutProject" class="learnMoreItem">
         	<h2><a href="{% url flatcontent.views.page page_slug="about-project" %}">About the Project</a></h2>
             <a href="{% url flatcontent.views.page page_slug="about-project" %}"><img src="{{ MEDIA_URL }}_images/photos/home/about.jpg" alt="About the Buy the Bay Project" /></a>
-            <p class="transparent">Learn more about the project from Heal the Bay and how, together we can help preserve the beach we love.</p>
+            <p class="transparent"><a href="{% url flatcontent.views.page page_slug="about-project" %}">Learn more about the project from Heal the Bay and how, together we can help preserve the beach we love.</a></p>
         </article>
         
         <article id="aboutArtists" class="learnMoreItem">
    	    	<h2><a href="{% url artists.views.index %}">Artists &amp; Designers</a></h2>
             <a href="{% url artists.views.index %}"><img src="{{ MEDIA_URL }}_images/photos/home/artists.jpg" alt="About the Buy the Bay Artists" /></a>
-            <p class="transparent">Browse our talented group of artists, illustrators and designers who helped make this project possible.</p>
+            <p class="transparent"><a href="{% url artists.views.index %}">Browse our talented group of artists, illustrators and designers who helped make this project possible.</a></p>
         </article>
         
         <article id="theLatest" class="learnMoreItem">
    	    	<h2><a href="{% url blog.views.index %}">The Latest</a></h2>
         	<a href="{% url blog.views.index %}"><img src="{{ MEDIA_URL }}_images/photos/home/whats-new.jpg" alt="The Latest in Buy the Bay News" /></a>
-            <p class="transparent">See Buy the Bay in the news, go behind the scenes with artists, and find out other ways you can help!</p>
+            <p class="transparent"><a href="{% url blog.views.index %}">See Buy the Bay in the news, go behind the scenes with artists, and find out other ways you can help!</a></p>
         </article>
         
         <article id="whoWeAre" class="learnMoreItem">
-   	   		<h2><a href="#">Who We Are</a></h2>
-            <a href="#"><img src="{{ MEDIA_URL }}_images/photos/home/who-we-are.jpg" alt="Who is Heal the bay and what do they do?" /></a>
-            <p class="transparent">Learn how Heal the Bay helps protect the beaches and coastal waters of Southern California.</p>
+   	   		<h2><a href="{% url flatcontent.views.page page_slug="heal-the-bay" %}">Who We Are</a></h2>
+            <a href="{% url flatcontent.views.page page_slug="heal-the-bay" %}"><img src="{{ MEDIA_URL }}_images/photos/home/who-we-are.jpg" alt="Who is Heal the bay and what do they do?" /></a>
+            <p class="transparent"><a href="{% url flatcontent.views.page page_slug="heal-the-bay" %}">Learn how Heal the Bay helps protect the beaches and coastal waters of Southern California.</a></p>
         </article>
     </section>
 

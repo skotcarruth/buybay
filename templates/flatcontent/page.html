@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load markup thumbnail %}
+{% load markup thumbnail selected %}
 
 {% block title %}{{ block.super }} | {{ page.name }} {% endblock %}
 {% block pageClass %}about{% endblock %}
@@ -9,11 +9,11 @@
 <aside id="sidebar" class="fl">
 	<nav id="aboutNav">
     	<ul>
-        	<li><a href="{% url flatcontent.views.page page_slug="about-project" %}" class="selected">About</a></li>
-            <li><a href="{% url flatcontent.views.page page_slug="heal-the-bay" %}">Heal the Bay</a></li>
-            <li><a href="{% url flatcontent.views.page page_slug="get-involved" %}">Get Involved</a></li>
-            <li><a href="{% url flatcontent.views.page page_slug="faq" %}">FAQ</a></li>
-            <li><a href="{% url flatcontent.views.page page_slug="contact-us" %}">Contact Us</a></li>
+        	<li><a href="{% url flatcontent.views.page page_slug="about-project" %}" class="{% selected flatcontent.views.page page_slug="about-project" %}">About</a></li>
+            <li><a href="{% url flatcontent.views.page page_slug="heal-the-bay" %}" class="{% selected flatcontent.views.page page_slug="heal-the-bay" %}">Heal the Bay</a></li>
+            <li><a href="{% url flatcontent.views.page page_slug="get-involved" %}" class="{% selected flatcontent.views.page page_slug="get-involved" %}">Get Involved</a></li>
+            <li><a href="{% url flatcontent.views.page page_slug="faq" %}" class="{% selected flatcontent.views.page page_slug="faq" %}">FAQ</a></li>
+            <li><a href="{% url flatcontent.views.page page_slug="contact-us" %}" class="{% selected flatcontent.views.page page_slug="contact-us" %}">Contact Us</a></li>
         </ul>
     </nav>
 
@@ -25,15 +25,20 @@
 	{{ page.content|textile }}	
 </article>
 <aside id="aboutFooter">
-	<h3 id="getInvolved"><a href="#">Get Involved</a></h3>
+	<h3 id="getInvolved"><a href="{% url flatcontent.views.page page_slug="get-involved" %}">Get Involved</a></h3>
   <h3 id="visitHTB"><a href="http://www.healthebay.org" rel="external" target="_blank">Visit Heal the Bay</a></h3>
   <figure id="spreadWord">
   	<h3>Spread the Word</h3>
-      <ul class="socialLinks">
-  		<li><img src="{{ MEDIA_URL }}_images/icons/facebook.png" alt="Like Buy the Bay on Facebook icon" /> <a href="#" target="_blank" rel="external" title="Like Buy the Bay on Facebook">Facebook</a></li>
-      	<li><img src="{{ MEDIA_URL }}_images/icons/twitter.png" alt="Follow Buy the Bay on Twitter icon" /> <a href="#" target="_blank" rel="external" title="Follow Buy the Bay on Twitter">Twitter</a></li>
-      	<li><img src="{{ MEDIA_URL }}_images/icons/email.png" alt="Email your friends about us icon" /> <a href="#" target="_blank" rel="external" title="Share Buy the Bay via Email">Email</a></li>
-  	</ul>
+      		<!-- AddThis Button BEGIN -->
+			<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+	        <ul class="socialLinks addthis_toolbox addthis_default_style">
+	        	<li><a class="addthis_button_facebook">Facebook</a></li>
+	            <li><a class="addthis_button_twitter">Twitter</a></li>
+	            <li><a class="addthis_button_email">Email</a></li>
+				<!--<li><a href="http://www.addthis.com/bookmark.php?v=250&amp;username=philosophie" class="addthis_button_compact"></a></li>-->
+	        </ul>
+			<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=philosophie"></script>
+			<!-- AddThis Button END -->
   </figure>
 </aside>
 

@@ -117,3 +117,17 @@ class Product(models.Model):
 
     def active_artists(self):
         return self.artists.filter(is_active=True)
+
+    def get_previous(self):
+        """Returns the previous active Product, by created date, or None."""
+        previous = Product.objects.active().filter(created_ts__lt=self.created_ts).order_by('-created_ts')
+        if previous.exists():
+            return previous[0]
+        return None
+
+    def get_next(self):
+        """Returns the next active Product, by created date, or None."""
+        next = Product.objects.active().filter(created_ts__gt=self.created_ts).order_by('created_ts')
+        if next.exists():
+            return next[0]
+        return None

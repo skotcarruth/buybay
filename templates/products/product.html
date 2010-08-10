@@ -11,8 +11,8 @@
 	<section id="leftSide">
     	<nav id="switchProducts">
         	<ul>
-            	<li class="prevNavItem"><a href="#">Previous Item</a></li>
-                <li class="nextNavItem"><a href="#">Next Item</a></li>
+            	<li class="prevNavItem"><a href="{{ product.get_previous.get_absolute_url }}">Previous Item</a></li>
+                <li class="nextNavItem"><a href="{{ product.get_next.get_absolute_url }}">Next Item</a></li>
             </ul>
         </nav>
         <article id="mediaViewer">

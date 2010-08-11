@@ -118,6 +118,16 @@
             <p>To buy the bay is to help preserve the things we love most about the beach. the proceeds raised through each donation will help benefit heal the bay&rsquo;s efforts to keep L.A.&rsquo;s beaches clean, healthy and safe to enjoy. <a href="{% url flatcontent.views.page page_slug="about-project" %}">Read On</a></p>
         </aside>
     </section>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("a#design").click(
+				 function() {$("#descCont").hide(); $("#designCont").show(); $("#design").addClass('selected'); $("#description").removeClass('selected');}
+			);
+			$("a#description").click(
+				 function() {$("#descCont").show();$("#designCont").hide(); $("#design").removeClass('selected'); $("#description").addClass('selected');}
+			);
+		});
 
+	</script>
 
 {% endblock %}

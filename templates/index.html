@@ -6,23 +6,25 @@
 {% block body %}
 
 	<article id="featuredSection">
+		<div id="featContainer">
 		<ul id="featuredContent">
 			 {% for feature in features %}
 			<li>  
 				<a href="{{ feature.get_destination_url }}">
-		          <img src="{% thumbnail feature.image_before 940x395 crop %}" />
-		          <img src="{% thumbnail feature.image_after 940x395 crop %}" />
+		          <img src="{% thumbnail feature.image_before 940x395 crop %}" class="featOn" />
+		          <img src="{% thumbnail feature.image_after 940x395 crop %}" class="featOver"  />
 		        </a>
 		     </li>
 		    {% endfor %}
 		</ul>
-    	<ul id="featControls">
+    	<!--<ol id="featControls">
         	<li class="viewCollection"><a href="{% url products.views.index %}">View Collection</a></li>
         	<li><a href="#">1</a></li>
             <li><a href="#">2</a></li>
             <li><a href="#">3</a></li>
             <li><a href="#">4</a></li>
-        </ul>
+        </ol>-->
+		</div>
     </article>
     
     <aside id="spreadWordHome">
@@ -65,5 +67,20 @@
             <p class="transparent"><a href="{% url flatcontent.views.page page_slug="heal-the-bay" %}">Learn how Heal the Bay helps protect the beaches and coastal waters of Southern California.</a></p>
         </article>
     </section>
-
+<script type="text/javascript" src="{{ MEDIA_URL }}_js/easySlider1.7.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#featContainer ").easySlider({ 
+			auto:true,
+			continuous:true,
+			numeric: true,
+			numericId: 'featControls'
+		});
+		$("#featuredSection li a").hover(
+	  		function() { $(this).children(".featOn").hide(); $(this).children(".featOver").show(); },
+	  		function() { $(this).children(".featOn").show(); $(this).children(".featOver").hide();  }
+		);
+	});
+	
+</script>
 {% endblock %}

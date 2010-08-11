@@ -120,16 +120,23 @@ body{
 	margin-bottom:20px;
 	position:relative;
 }
-#featuredContent ul li{
-    width:940px;
-	height:395px;
-	display:block;
-	overflow:hidden;
-}
-#featControls {position:absolute;right:0px;bottom:5px;z-index:90;}
-#featuredSection #featControls li{display:inline;margin:0;}
-#featuredSection #featControls li a{padding:4px 6px;background-color:#fff;font-size:1.2em;}
 
+#featContainer ul, #featContainer li{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+#featContainer li{ 
+	width:940px;
+	height:395px;
+	overflow:hidden; 
+}
+#featControls {position:absolute;right:0px;bottom:5px;z-index:90;list-style:none;}
+#featControls li{display:inline;margin:0;}
+#featControls li a{padding:4px 6px;background-color:#fff;font-size:1.2em;}
+#featControls li.current a{
+    background-color:#5DC9E1;
+    color:#fff;}
 #spreadWordHome{
 	display:block;
 	background-color:#bed630;
@@ -267,8 +274,9 @@ body{
 }
 
 .collection #sidebar ul{margin-bottom:30px;}
+.collection #sidebar ul#tags {display:none;}
 .collection #sidebar ul#tags li{display:inline;font-style:italic;line-height:1.67em;}
-.collection #sidebar ul#tags li.listHeader{display:block;}
+.collection #sidebar .listHeader{display:block;margin-bottom:4px;}
 
 .collection #sidebar ul#tags li a.selected{
 	padding:3px 5px 3px 10px;
@@ -296,6 +304,8 @@ body{
 	margin-bottom:15px;
 
 }
+
+#collectionContent .product .productPhoto img.overPhoto{display:none;}
 h2.productTitle{font-size:2.1em;color:#252525;text-transform:uppercase;margin-bottom:0px;font-weight:normal;}
 p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 
@@ -539,8 +549,9 @@ a[href$=".doc"]:after {content: " (DOC)";}
 
 .pagination{clear:both;}
 
-/* ADD THIS CODE */
+/* ADD THIS STYLES */
 .addthis_toolbox.addthis_default_style span{margin:10px 4px 0 0;}
 .addthis_default_style .at300b, .addthis_default_style .at300m{padding:0 5px;}
 #spreadWord .addthis_toolbox.addthis_default_style span{margin-top:8px;}
 #spreadWord .addthis_default_style .at300b, #spreadWord .addthis_default_style .at300m{padding:0 4px;}
+	

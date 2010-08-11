@@ -22,8 +22,9 @@
             <li><a href="{% params sort="date" dir="up","down" %}">By Date Posted</a></li>
         </ul>
         
+		<span class="listHeader">Tags:</span>
     	<ul id="tags">
-			<li class="listHeader">Tags:</li>
+			
     	  {% for tag in product_tags %}
       	  <li><a href="{% url products.views.tag tag_slug=tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %},{% endif %}</li>
     	  {% endfor %}
@@ -33,12 +34,28 @@
     <section id="collectionContent">
     	{% for product in products %}
         <article class="product {% cycle '' 'two' %}">
-        	<a href="{{ product.get_absolute_url }}" class="productPhoto"><img src="{% thumbnail product.main_image_1 299x199 crop %}" alt="{{ product.name }}"></a>
+        	<a href="{{ product.get_absolute_url }}" class="productPhoto"><img src="{% thumbnail product.main_image_1 299x199 crop %}" class="startPhoto" alt="{{ product.name }}"><img src="{% thumbnail product.main_image_2 299x199 crop %}" class="overPhoto" alt="{{ product.name }}"></a>
             <h2 class="productTitle"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h2>
             <p class="productArtist">design by {% for artist in product.active_artists.all %}<a href="{{ artist.get_absolute_url }}">{{ artist.name }}</a>{% endfor %}</p>
         </article>
+
+{% empty %}
+<h3>Oh no! There are no products. Try a different filter!</h3>
 {% endfor %}
 
         
      </section>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$(".productPhoto").hover(
+		  function() { $(this).children(".startPhoto").hide(); $(this).children(".overPhoto").show(); },
+		  function() { $(this).children(".startPhoto").show(); $(this).children(".overPhoto").hide();  }
+		);
+		$(".listHeader").click(
+			 function() {$("#tags").slideToggle('100', function() {
+			    // Animation complete.
+			  }); }
+		);
+	});
+	</script>
 {% endblock %}

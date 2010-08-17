@@ -24,7 +24,7 @@
   	<article class="post">
    		<header class="postHeader">
           	<h2 class="postTitle"><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
-         		<span class="meta">by {{ post.byline }} {{ post.pub_date|date:"j M Y \a\t P" }}</span>
+         		<span class="meta">by {{ post.byline }} on {{ post.pub_date|date:"SHORT_DATE_FORMAT" }}</span>
            </header>
           {% if post.tease %}
           {{ post.tease|textile }}

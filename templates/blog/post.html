@@ -1,7 +1,7 @@
 {% extends "blog/base.html" %}
 {% load markup thumbnail %}
 
-{% block title %}{{ block.super }} | {{ post.title }}{% endblock %}
+{% block title %}{{ post.title }} | {{ block.super }}{% endblock %}
 
 {% block pageClass %}news{% endblock %}
 
@@ -17,11 +17,11 @@
 	    </ul>
   </aside>
 
-<section id="newsContent">
+<section id="newsContent" class="single">
 <article class="post">
 	<header class="postHeader">
       	<h2 class="postTitle"><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
-     		<span class="meta">by {{ post.byline }} {{ post.pub_date|date:"j M Y \a\t P" }}</span>
+     		<span class="meta">by {{ post.byline }} on {{ post.pub_date|date:"SHORT_DATE_FORMAT" }}</span>
        </header>
   {{ post.body|textile }}
   <p>
@@ -35,6 +35,19 @@
       {% if not forloop.last %}/{% endif %}
     {% endfor %}
   </p>
+	<figure id="spreadWord">
+   	<h3>Spread the Word</h3>
+       	<!-- AddThis Button BEGIN -->
+			<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+	        <ul class="socialLinks addthis_toolbox addthis_default_style">
+	        	<li><a class="addthis_button_facebook">Facebook</a></li>
+	            <li><a class="addthis_button_twitter">Twitter</a></li>
+	            <li><a class="addthis_button_email">Email</a></li>
+				<!--<li><a href="http://www.addthis.com/bookmark.php?v=250&amp;username=philosophie" class="addthis_button_compact"></a></li>-->
+	        </ul>
+			<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=philosophie"></script>
+			<!-- AddThis Button END -->
+   </figure>
 </article>
 
 </section>

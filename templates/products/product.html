@@ -2,7 +2,8 @@
 {% load markup thumbnail %}
 {% load humanize %}
 
-{% block title %}{{ block.super }} | Collection | {{ product.name }}{% endblock %}
+{% block title %}{{ product.name }} | Collection | {{ block.super }}{% endblock %}
+{% block fbtitle %}{{ product.name }} on {{ block.super }}{% endblock %}
 
 {% block pageClass %}detail{% endblock %}
 
@@ -82,7 +83,7 @@
             </div>
         </article>
         
-        <figure id="qtyRemaining">
+        <figure id="qtyRemaining" class="">
 			<span>Edition {{ product.order_set.count }}/{{ product.max_quantity }}</span>
         	<p style="width:{% widthratio product.order_set.count product.max_quantity 100 %}%;"></p>
         </figure>
@@ -118,6 +119,7 @@
             <p>To buy the bay is to help preserve the things we love most about the beach. the proceeds raised through each donation will help benefit heal the bay&rsquo;s efforts to keep L.A.&rsquo;s beaches clean, healthy and safe to enjoy. <a href="{% url flatcontent.views.page page_slug="about-project" %}">Read On</a></p>
         </aside>
     </section>
+<fb:like href="{{ request.get_host|iriencode }}{{ request.path_info|iriencode }}" layout="button_count" show_faces="false" width="60" action="like"></fb:like>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("a#design").click(

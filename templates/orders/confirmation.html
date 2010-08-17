@@ -1,19 +1,18 @@
 {% extends "base.html" %}
-
-{% block title %}{{ block.super }} | Order Confirmation {% endblock %}
+{% block title %}Order Confirmation | {{ block.super }}{% endblock %}
+{% block pageClass %}thankyou{% endblock %}
 
 {% block body %}
-  <h2>Order Confirmation</h2>
-
-  <p>Thanks for your order!</p>
+  <h1 id="thankyou">Thank you for buying the bay</h1>
 
   <ul>
+	<li>Order ID number: {{ order.paypal_transactionid }}</li>
     {% for product_in_order in order.get_as_cart.products %}
       <li>{{ product_in_order.quantity }} x {{ product_in_order.product.name }}</li>
     {% endfor %}
   </ul>
 
-  <p>Your order will be shipped in 4-6 weeks or whatever mumbo jumbo to:</p>
+  <p>Your order will be shipped in 4-6 weeks to:</p>
 
   <p>
     {{ order.user_shiptoname }}<br />
@@ -22,8 +21,11 @@
     {{ order.user_shiptocity }}, {{ order.user_shiptostate }} {{ order.user_shiptozip }}<br />
   </p>
 
-  <p>Please print this page for your reference and suchnot. You can use this order ID number:</p>
-
-  <p>{{ order.paypal_transactionid }}</p>
-
+	<h2>Here are a few things you can do that don’t cost anything:</h2>
+	<ul id="howtohelp">
+		<li><a href="#" id="fbShare">Share</a> this project with friends on <a href="http://www.facebook.com/healthebayfans" target="_blank" rel="external" title="Like Heal the Bay on Facebook">Facebook</a></li>
+		<li><a href="http://twitter.com/buythebay" target="_blank" rel="external" title="Follow Buy the Bay on Twitter" id="followUs">Follow us</a> on Twitter for updates on new products &amp; artists</li>
+		<li><a href="http://www.facebook.com/healthebayfans" target="_blank" rel="external" title="Like Heal the Bay on Facebook" id="becomeAFan">Become a fan</a> of Heal the Bay or get on our <a href="#" target="_blank" rel="external" title="Join our mailing list">mailing list</a> for news</li>
+		<li><a href="#" target="_blank" rel="external" title="Participate in a Heal the Bay event" id="participateClean">Participate</a> in an upcoming beach cleanup or other <a href="#" target="_blank" rel="external">event</a></li>
+	</ul>
 {% endblock %}

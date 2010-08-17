@@ -1,11 +1,16 @@
 {% load selected %}
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 <meta charset="utf-8" />
 <title>{% block title %}Buy the Bay{% endblock %}</title>
 <meta name="keywords" content="{% block metakeywords %}Heal the Bay, Los Angeles, LA, beach, coast, volunteer{% endblock %}" />
-<meta name="description" content="{% block metadesc %}Heal the Bay, Los Angeles, LA, beach, coast, volunteer{% endblock %}" />
+<meta name="description" content="{% block metadesc %}Buy the Bay{% endblock %}" />
+<meta property="og:title" content="{% block fbtitle %}Buy the Bay{% endblock %}"/>
+<meta property="og:type" content="non_profit"/>
+<meta property="og:image" content="http://{{ request.get_host }}{{ MEDIA_URL }}_images/logo.png"/>
+<meta property="og:site_name" content="Buy the Bay"/>
+<meta property="fb:app_id" content="131758660197606"/>
 
 <link rel="shortcut icon" href="/favicon.ico" /><!--Favorite Icon-->
 <link href="{{ MEDIA_URL }}_css/reset.css" rel="stylesheet" type="text/css" />
@@ -20,6 +25,19 @@
 
 
 <body class="">
+	<div id="fb-root"></div>
+	<script>
+	  window.fbAsyncInit = function() {
+	    FB.init({appId: '131758660197606', status: true, cookie: true,
+	             xfbml: true});
+	  };
+	  (function() {
+	    var e = document.createElement('script'); e.async = true;
+	    e.src = document.location.protocol +
+	      '//connect.facebook.net/en_US/all.js';
+	    document.getElementById('fb-root').appendChild(e);
+	  }());
+	</script>
 <div class="container">
 <header id="mainHeader">
 	<div id="cartLinks">
@@ -67,7 +85,10 @@
     </nav>
 
     <aside id="htbFootInfo">
-    	<a href="http://www.healthebay.org" target="_blank" rel="external"><img src="{{ MEDIA_URL }}_images/icons/htb.png" alt="Heal the Bay logo" /></a>
+		<article id="htbLike">
+    		<a href="http://www.healthebay.org" target="_blank" rel="external"><img src="{{ MEDIA_URL }}_images/icons/htb.png" alt="Heal the Bay logo" /></a>
+			<fb:like href="http://www.healthebay.org" layout="button_count" show_faces="false" width="60" action="like"></fb:like>
+		</article>
     	<p>Heal the Bay is a 501(c)3 non-profit organization. All gifts are tax-deductible up to the fullest extent of the law.</p>
     </aside>
 </footer>

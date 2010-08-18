@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% load params %}
-{% load markup thumbnail %}
+{% load params markup thumbnail %}
 
 {% block title %}Collection | {{ block.super }}{% endblock %}
 {% block pageClass %}collection{% endblock %}
@@ -40,7 +39,7 @@
         </article>
 
 {% empty %}
-<h3>Oh no! There are no products. Try a different filter!</h3>
+<h3 class="noResults">Oh no! There are no products. Try a different filter!</h3>
 {% endfor %}
 
         

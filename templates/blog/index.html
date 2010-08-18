@@ -34,7 +34,8 @@
          <img src="{% thumbnail post.gallery_media.active.all.0.get_media 600x600 %}" alt="{{ post.title }}" />
       </article>
       {% endfor %}
+
+	  {% include "_pagination.html" %}
  </section>
 
-  {% include "_pagination.html" %}
 {% endblock %}

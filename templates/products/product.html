@@ -18,10 +18,10 @@
             </ul>
         </nav>
         <article id="mediaViewer">
-        	<div id="mainImage">
+        	<!--<div id="mainImage">
             	<img src="{{ MEDIA_URL }}_images/photos/product/1/main-1.jpg" alt="Main Image 1" />
             </div>
-            <span>Other views</span>
+            <span>Other views</span>-->
             <ul id="mediaCarousel">
             	<li><a href="#"><img src="{{ MEDIA_URL }}_images/photos/product/1/thumb-1.jpg" alt="1" /></a></li>
                 <li><a href="#"><img src="{{ MEDIA_URL }}_images/photos/product/1/thumb-2.jpg" alt="1" /></a></li>
@@ -74,6 +74,7 @@
         	<div id="descTypeLinks">
             	<a href="#" id="description" class="selected">Description</a>
                 <a href="#" id="design">Design</a>
+				<figure class="likeProduct"><fb:like href="{{ request.get_host|iriencode }}{{ request.path_info|iriencode }}" layout="button_count" show_faces="false" width="60" action="like"></fb:like></figure>
             </div>
             <div id="descCont">
             	<p>{{ product.description }}</p>
@@ -119,7 +120,7 @@
             <p>To buy the bay is to help preserve the things we love most about the beach. the proceeds raised through each donation will help benefit heal the bay&rsquo;s efforts to keep L.A.&rsquo;s beaches clean, healthy and safe to enjoy. <a href="{% url flatcontent.views.page page_slug="about-project" %}">Read On</a></p>
         </aside>
     </section>
-<fb:like href="{{ request.get_host|iriencode }}{{ request.path_info|iriencode }}" layout="button_count" show_faces="false" width="60" action="like"></fb:like>
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("a#design").click(
@@ -130,6 +131,28 @@
 			);
 		});
 
+	</script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}_js/jquery.pikachoose.4.0.2.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}_js/jquery.jcarousel.min.js"></script>
+	<script language="javascript">
+		<!--
+		$(document).ready(
+			function (){
+				$("#mediaCarousel").PikaChoose({showCaptions:false});
+
+				$("#mediaCarousel").jcarousel({scroll:4,					
+					initCallback: function(carousel) 
+					{
+				        $(carousel.list).find('img').click(function() {
+				        	//console.log($(this).parents('.jcarousel-item').attr('jcarouselindex'));
+				            carousel.scroll(parseInt($(this).parents('.jcarousel-item').attr('jcarouselindex')));
+				        });
+				    }
+			    });
+
+			});
+
+		-->
 	</script>
 
 {% endblock %}

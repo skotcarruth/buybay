@@ -132,12 +132,34 @@ body{
 	height:395px;
 	overflow:hidden; 
 }
-#featControls {position:absolute;right:0px;bottom:5px;z-index:90;list-style:none;}
+#viewCollection a{padding:5px 6px;background-color:#fff;font-size:1.2em;position:absolute;right:0px;bottom:0px;z-index:90;
+    filter:alpha(opacity=80);  
+    -moz-opacity:0.8;  
+    -khtml-opacity: 0.8;  
+    opacity: 0.8;
+}
+#viewCollection a:hover{
+    filter:alpha(opacity=100);  
+       -moz-opacity:1;  
+       -khtml-opacity: 1;  
+       opacity: 1;
+}
+#featControls {position:absolute;right:100px;bottom:5px;z-index:90;list-style:none;}
 #featControls li{display:inline;margin:0;}
-#featControls li a{padding:4px 6px;background-color:#fff;font-size:1.2em;}
+#featControls li a{padding:4px 6px;background-color:#fff;font-size:1.2em;
+    filter:alpha(opacity=70);  
+    -moz-opacity:0.7;  
+    -khtml-opacity: 0.7;  
+    opacity: 0.7;
+}
 #featControls li.current a{
     background-color:#5DC9E1;
-    color:#fff;}
+    color:#fff;
+    filter:alpha(opacity=100);  
+    -moz-opacity:1;  
+    -khtml-opacity: 1;  
+    opacity: 1;
+}
 #spreadWordHome{
 	display:block;
 	background-color:#bed630;
@@ -229,7 +251,7 @@ body{
 /* ~~~~~ ARTISTS PAGE ~~~~~ */
 
 #artistContent a{text-decoration:underline;}
-#artistContent h2{text-transform:uppercase;color:#004a80;font-size:2.4em;margin:25px 0;}
+#artistContent h2{text-transform:uppercase;color:#004a80;font-size:2.4em;margin:25px 0;font-family:"proxima-nova-extra-condensed-1";}
 
 /* ~~~~~ NEWS PAGES ~~~~~ */
 #tweetTweet{
@@ -279,6 +301,10 @@ body{
 }
 
 .collection #sidebar ul{margin-bottom:30px;}
+.collection #sidebar ul#sortBy a{padding-right:10px;}
+.collection #sidebar ul#sortBy a.up{background:url(../_images/icons/small-triangle-up.png) no-repeat center right;}
+.collection #sidebar ul#sortBy a.down{background:url(../_images/icons/small-triangle-down.png) no-repeat center right;}
+
 .collection #sidebar ul#tags {display:none;}
 .collection #sidebar ul#tags li{display:inline;font-style:italic;line-height:1.67em;}
 .collection #sidebar .listHeader{display:block;margin-bottom:4px;}
@@ -311,10 +337,10 @@ body{
 }
 
 #collectionContent .product .productPhoto img.overPhoto{display:none;}
-h2.productTitle{font-size:2.1em;color:#252525;text-transform:uppercase;margin-bottom:0px;font-weight:normal;}
+h2.productTitle{font-size:2.1em;color:#252525;text-transform:uppercase;margin-bottom:0px;font-weight:normal;font-family:"proxima-nova-extra-condensed-1";}
 p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 
-
+.pagination{font-size:1.1em;padding-bottom:5px;}
 /* ~~~~~ PRODUCT DETAILS PAGE ~~~~~ */
 
 #leftSide{
@@ -346,6 +372,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 	text-transform:uppercase;
 	font-size:2em;
 	float:left;
+	font-family:"proxima-nova-extra-condensed-1";
 }
 
 #commentHeader a#addComment{
@@ -375,7 +402,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 .comment  .authorMeta img{margin-left:5px;}
 
 
-#productHeader h1{float:left;padding-top:10px;}
+#productHeader h1{float:left;padding-top:10px;font-family:"proxima-nova-extra-condensed-1";font-size:2em;}
 #productHeader #productPrice{
 	background:url(../_images/icons/starburst-trans.png) no-repeat top left;
 	display:block;
@@ -385,7 +412,8 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 	line-height:50px;
 	color:#fff;
 	float:right;
-	font-size:1.2em;
+	font-size:1.8em;
+	font-family:"proxima-nova-extra-condensed-1";
 }
 #artistCredit{
 	clear:both;
@@ -399,7 +427,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 #descTypeLinks a{color:#717171;text-transform:uppercase;padding:5px 0;}
 #descTypeLinks a.selected{color:#101010;}
 #descTypeLinks #description{padding-right:10px;margin-right:10px;border-right:1px solid #787878;}
-
+.likeProduct{float:right;margin-top:-8px;}
 
 #descCont p, #designCont p{color:#101010;font-size:1em;}
 #designCont{display:none;}
@@ -551,6 +579,9 @@ h1#yourcart{background-image:url(../_images/headers/your-cart.png);width:139px;h
 #aboutArtists h2 a{background-image:url(../_images/headers/subhead/artists-designers.png);width:127px;height:15px;}
 #theLatest h2 a{background-image:url(../_images/headers/subhead/the-latest.png);width:67px;height:15px;}
 #whoWeAre h2 a{background-image:url(../_images/headers/subhead/who-we-are.png);width:72px;height:15px;}
+h3.noResults{font-size:1.8em;}
+h2#sortingByTag{margin-bottom:25px;}
+h2#sortingByTag span{color:#f15831;}
 
 /* UTILITY CLASSES */
 .fl {float: left;}

@@ -31,7 +31,9 @@
           {% else %}
           	{{ post.body|textile|truncatewords_html:50 }}
           {% endif %}
+		{% if post.gallery_media.active.all.0.get_media %}
          <img src="{% thumbnail post.gallery_media.active.all.0.get_media 600x600 %}" alt="{{ post.title }}" />
+		{% endif %}
       </article>
       {% endfor %}
 

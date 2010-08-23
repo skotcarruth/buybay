@@ -25,9 +25,11 @@
        </header>
   {{ post.body|textile }}
   <p>
+	{% if post.gallery_media.active.all.0.get_media %}
     {% for media in post.gallery_media.active.all %}
       <img src="{% thumbnail media.get_media 600x600 %}" alt="{{ post.title }}" />
     {% endfor %}
+	{% endif %}
   </p>
   <p>Categories:
     {% for tag in post.tags.all %}

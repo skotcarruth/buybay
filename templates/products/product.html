@@ -22,14 +22,13 @@
             	<img src="{{ MEDIA_URL }}_images/photos/product/1/main-1.jpg" alt="Main Image 1" />
             </div>
             <span>Other views</span>-->
+			{% if product.gallery_media.active.all.0.get_media %}
             <ul id="mediaCarousel">
-            	<li><a href="#"><img src="{{ MEDIA_URL }}_images/photos/product/1/thumb-1.jpg" alt="1" /></a></li>
-                <li><a href="#"><img src="{{ MEDIA_URL }}_images/photos/product/1/thumb-2.jpg" alt="1" /></a></li>
-                <li><a href="#"><img src="{{ MEDIA_URL }}_images/photos/product/1/thumb-3.jpg" alt="1" /></a></li>
-                <li><a href="#"><img src="{{ MEDIA_URL }}_images/photos/product/1/thumb-4.jpg" alt="1" /></a></li>
-                <li><a href="#"><img src="{{ MEDIA_URL }}_images/photos/product/1/thumb-5.jpg" alt="1" /></a></li>
-                <li><a href="#"><img src="{{ MEDIA_URL }}_images/photos/product/1/thumb-6.jpg" alt="1" /></a></li>
+				{% for media in product.gallery_media.active.all %}
+			      <li><img src="{% thumbnail media.get_media 576x327 %}" alt="{{ product.name}}" /></li>
+			    {% endfor %}
             </ul>
+			{% endif %}
         </article>
         
         <section id="commentsContainer">

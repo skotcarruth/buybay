@@ -56,10 +56,10 @@
     <nav id="mainNav">
         <ul>
             <li><a href="{% url views.index %}" id="homeNav" class="{% selected views.index exact=true %}">Home</a></li>
-            <li><a href="{% url blog.views.index %}" id="newsNav" class="{% selected blog.views.index %}">News</a></li>
-            <li><a href="{% url flatcontent.views.page page_slug="about-project" %}" id="aboutNav" class="{% selected flatcontent.views.page page_slug="about-project" %}">About</a></li>
+			<li><a href="{% url products.views.index %}" id="collectionNav" class="{% selected products.views.index %}">Collection</a></li>
             <li><a href="{% url artists.views.index %}" id="artistsNav" class="{% selected artists.views.index %}">Artists</a></li>
-            <li><a href="{% url products.views.index %}" id="collectionNav" class="{% selected products.views.index %}">Collection</a></li>
+			<li><a href="{% url flatcontent.views.page page_slug="about-project" %}" id="aboutNav" class="{% selected flatcontent.views.page page_slug="about-project" %}">About</a></li>
+            <li><a href="{% url blog.views.index %}" id="newsNav" class="{% selected blog.views.index %}">News</a></li>
             <li><a href="http://www.healthebay.org" target="_blank" id="htbNav" rel="external">Brought to you by: Heal the Bay</a></li>
         </ul>
     </nav>
@@ -80,10 +80,9 @@
     	<ul>
         	<li><a href="{% url orders.views.cart %}">View Cart</a></li>
             <li><a href="http://www.healthebay.org" rel="external" target="_blank">Visit Heal the Bay</a></li>
-            <li><a href="{% url flatcontent.views.page page_slug="how-does-work" %}">How does this work?</a></li>
+            <li><a href="{% url flatcontent.views.page page_slug="faq" %}">FAQ</a></li>
             <li><a href="{% url flatcontent.views.page page_slug="get-involved" %}">Get Involved</a></li>
-            <li><a href="{% url flatcontent.views.page page_slug="donate" %}">Donate</a></li>
-            <li><a href="{% url flatcontent.views.page page_slug="privacy-policy" %}">Privacy Policy</a></li>
+            <li><a href="{% url flatcontent.views.page page_slug="site-info" %}">Privacy Policy</a></li>
             <li class="last"><a href="{% url flatcontent.views.page page_slug="contact-us" %}">Contact Us</a></li>
         </ul>
     </nav>

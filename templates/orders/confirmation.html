@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Order Confirmation | {{ block.super }}{% endblock %}
-{% block pageClass %}thankyou{% endblock %}
+{% block pageClass %}thankyouPg{% endblock %}
 
 {% block body %}
   <h1 id="thankyou">Thank you for buying the bay</h1>
-
+<section id="cartInfo">
   <ul>
 	<li>Order ID number: {{ order.paypal_transactionid }}</li>
     {% for product_in_order in order.get_as_cart.products %}
@@ -20,12 +20,12 @@
     {% if order.user_shiptostreet2 %}{{ order.user_shiptostreet2 }}<br />{% endif %}
     {{ order.user_shiptocity }}, {{ order.user_shiptostate }} {{ order.user_shiptozip }}<br />
   </p>
-
-	<h2>Here are a few things you can do that don’t cost anything:</h2>
+	<h2>Thank you so much for your contribution. It will go a long way toward helping us preserve our most cherished beach experiences. Still, there is a lot of work to do, and you can continue to help in ways that cost nothing.</h2>
 	<ul id="howtohelp">
-		<li><a href="#" id="fbShare">Share</a> this project with friends on <a href="http://www.facebook.com/healthebayfans" target="_blank" rel="external" title="Like Heal the Bay on Facebook">Facebook</a></li>
-		<li><a href="http://twitter.com/buythebay" target="_blank" rel="external" title="Follow Buy the Bay on Twitter" id="followUs">Follow us</a> on Twitter for updates on new products &amp; artists</li>
-		<li><a href="http://www.facebook.com/healthebayfans" target="_blank" rel="external" title="Like Heal the Bay on Facebook" id="becomeAFan">Become a fan</a> of Heal the Bay or get on our <a href="#" target="_blank" rel="external" title="Join our mailing list">mailing list</a> for news</li>
-		<li><a href="#" target="_blank" rel="external" title="Participate in a Heal the Bay event" id="participateClean">Participate</a> in an upcoming beach cleanup or other <a href="#" target="_blank" rel="external">event</a></li>
+		<li>You can <a href="#" id="fbShare" class="colorLink">Share</a> this project with friends on <a href="http://www.facebook.com/healthebayfans" target="_blank" rel="external" title="Like Heal the Bay on Facebook">Facebook</a></li>
+		<li>You can <a href="http://twitter.com/buythebay" target="_blank" rel="external" title="Follow Buy the Bay on Twitter" id="followUs" class="colorLink">Follow us</a> on Twitter for updates on all new products and artists.</li>
+		<li>You can <a href="http://www.facebook.com/healthebayfans" target="_blank" rel="external" title="Like Heal the Bay on Facebook" id="becomeAFan" class="colorLink">Become a fan</a> of Heal the Bay or join our <a href="#" target="_blank" rel="external" title="Join our mailing list">mailing list</a> for new updates.</li>
+		<li>You can <a href="#" target="_blank" rel="external" title="Participate in a Heal the Bay event" id="participateClean" class="colorLink">Participate</a> in an upcoming beach cleanup or similar event.</li>
 	</ul>
+	</section>
 {% endblock %}

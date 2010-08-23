@@ -537,6 +537,25 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 #priceDetails ul li span{font-size:.8em;color:#f15831;text-align:left;text-transform:uppercase;display:block;width:160px;padding-right:20px;float:left;}
 
 
+/* ~~~~~ THANK YOU PAGE ~~~~~ */
+.thankyouPg h2{font-size:2.1em;color:#595959;margin-bottom:60px;}
+
+#howtohelp li{font-size:2.1em;display:block;margin-bottom:10px;color:#595959;}
+#howtohelp li a{text-decoration:underline;color:#595959;font-weight:normal;}
+
+#howtohelp li a.colorLink{
+    text-decoration:none;
+    text-transform:uppercase;
+    color:#fff;
+    padding:4px 8px;
+    font-size:.52em;
+}
+#howtohelp li a.colorLink#fbShare{background-color:#bed630;}
+#howtohelp li a.colorLink#followUs{background-color:#f15831;}
+#howtohelp li a.colorLink#becomeAFan{background-color:#17a2dc;}
+#howtohelp li a.colorLink#participateClean{background-color:#004a80;}
+
+
 /* ~~~~~ TYPOGRAPHY ~~~~~ */
 
 a {text-decoration:none; color:#101010;}
@@ -550,6 +569,7 @@ p {font-size: 1.1em;line-height:1.5em;margin-bottom:20px;}
 #spreadWord h3{color:#fff;text-transform:uppercase;font-size:1em;float:left;}
 
 h1#artistsHeader, h1#collectionHeader, h1#about-project, h1#whatsNewHeader, h1#faq, h1#heal-the-bay, h1#get-involved, h1#thankyou, h1#yourcart,
+h1#contact-us, h1#site-info,
 #spreadWordHome h3, #aboutProjectBlurb h2, #weRecommend h2,
 .learnMoreItem h2 a
 {
@@ -565,6 +585,8 @@ h1#faq{background-image:url(../_images/headers/faq.png);width:46px;height:32px;}
 h1#heal-the-bay{background-image:url(../_images/headers/heal-the-bay.png);width:171px;height:30px;}
 h1#about-project{background-image:url(../_images/headers/about-the-project.png);width:257px;height:32px;}
 h1#get-involved{background-image:url(../_images/headers/get-involved.png);width:174px;height:32px;}
+h1#contact-us{background-image:url(../_images/headers/contact-us.png);width:153px;height:32px;}
+h1#site-info{background-image:url(../_images/headers/site-info.png);width:118px;height:32px;}
 h1#thankyou{background-image:url(../_images/headers/thank-you.png);width:406px;height:32px;}
 h1#yourcart{background-image:url(../_images/headers/your-cart.png);width:139px;height:32px;}
 

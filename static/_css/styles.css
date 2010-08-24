@@ -77,7 +77,7 @@ body{
 #mainNav ul li #htbNav{background-image:url(../_images/nav/htb.png);width:58px;height:48px;margin-right:0;padding:0;}
 #mainNav ul li #htbNav:hover, #mainNav ul li #htbNav.selected{background-color:#fff;}
 
-#firstTime{margin-top:30px;display:none;}
+#firstTime{margin-top:30px;clear:both;overflow:hidden;}
 #firstTime p{
 	font-size:2.2em;
 	color:#595959;

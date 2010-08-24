@@ -23,12 +23,16 @@
 
 <article id="aboutContent">
 
-	<figure id="aboutPhoto"><img src="{% thumbnail page.image 600x600 %}" alt="{{ page.name }}" /></figure>
+		{% if page.image %}
+			<figure id="aboutPhoto"><img src="{% thumbnail page.image 600x600 %}" alt="{{ page.name }}" /></figure>
+		{% endif %}
 	{{ page.content|textile }}	
+	{% if page.slug == "heal-the-bay" %}
+		<div class="fbShare"><fb:like href="http://www.healthebay.org" layout="button_count" show_faces="true" width="60" action="like"></fb:like></div>
+	{% endif %}
 </article>
 <aside id="aboutFooter">
-	{% if page.slug != "get-involved" %}
-	<h3 id="getInvolved"><a href="{% url flatcontent.views.page page_slug="get-involved" %}">Get Involved</a></h3>{% endif %}
+	<h3 id="getInvolved"><a href="http://www.healthebay.org/waystoheal/10waystoheal.asp" rel="external" target="_blank" >Get Involved</a></h3>
   <h3 id="visitHTB"><a href="http://www.healthebay.org" rel="external" target="_blank">Visit Heal the Bay</a></h3>
   <figure id="spreadWord">
   	<h3>Spread the Word</h3>

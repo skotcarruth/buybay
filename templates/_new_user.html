@@ -3,7 +3,6 @@
 {% if request.session.new_user %}
   	<article id="firstTime">
 	{% blurb "new_user" %}
-  	<p>Sun, water and sand. Brought together, these ingredients create moments of joy and happiness that we each experienced in our own special way. Buy the Bay takes these priceless experiences and makes them available for you to own or give to someone else. Each can be purchased for a minimum donation, with 100% of the proceeds benefiting Heal The Bay and our continued efforts
-to preserve the very things we love about the beach. <a href="#">Learn more</a></p>
+  	<p>Sun, water and sand. Brought together, these ingredients create moments of joy and happiness that we each experience in our own special way. We’re making these priceless experiences available for you to own, with 100% of the proceeds benefiting Heal the Bay and our continued efforts to preserve the beach we love. When you Buy the Bay, you show how much the beach is worth to you. <a href="{% url flatcontent.views.page page_slug="about-project" %}">Learn more</a></p>
   </article>
 {% endif %}

@@ -213,7 +213,9 @@ body{
 	width:600px;
 	float:right;
 }
-#aboutPhoto, artistPhoto{margin-bottom:28px;}
+#aboutPhoto, .artistPhoto{margin-bottom:28px;}
+
+#aboutContent .fbShare{margin-bottom:15px;}
 
 #aboutFooter h3#getInvolved a, #aboutFooter h3#visitHTB a, #aboutFooter h3#seeProducts a, #aboutFooter h3#visitSite a{
 	color:#fff;
@@ -252,6 +254,7 @@ body{
 
 #artistContent a{text-decoration:underline;}
 #artistContent h2{text-transform:uppercase;color:#004a80;font-size:2.4em;margin:25px 0;font-family:"proxima-nova-extra-condensed-1";}
+p.disclaimer{font-size:1em;padding-top:20px;font-style:italic;}
 
 /* ~~~~~ NEWS PAGES ~~~~~ */
 #tweetTweet{

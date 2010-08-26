@@ -10,7 +10,7 @@
 
 	<aside id="sidebar" class="fl">
    	
-  		<ul id="categories">
+  		<ul id="categories" style="display:none;">
 	  	  {% for tag in blog_tags %}
 	  	    <li><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a></li>
 	  	  {% endfor %}

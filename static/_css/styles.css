@@ -40,7 +40,7 @@ body{
 }
 #cartLinks {display:block;text-align:right;}
 #cartLinks ul li{display:inline;text-transform:uppercase;color:#f15831;padding:0 3px;}
-#cartLinks ul li#cartIcon{padding-left:18px;background:url(../_images/icons/cart.png) no-repeat top left;}
+#cartLinks ul li#cartIcon{padding:0px 3px 4px 18px;background:url(../_images/icons/cart.png) no-repeat top left;}
 #cartLinks a{color:#f15831;}
 #cartLinks ul li a:hover{color:#787878;}
 #logo{
@@ -74,7 +74,7 @@ body{
 #mainNav ul li #aboutNav{background-image:url(../_images/nav/about.png);width:37px;}
 #mainNav ul li #artistsNav{background-image:url(../_images/nav/artists.png);width:45px;}
 #mainNav ul li #collectionNav{background-image:url(../_images/nav/collection.png);width:67px;}
-#mainNav ul li #htbNav{background-image:url(../_images/nav/htb.png);width:58px;height:48px;margin-right:0;padding:0;}
+#mainNav ul li #htbNav{background-image:url(../_images/nav/htb.png);width:58px;height:48px;margin:-10px 0 0;padding:0;}
 #mainNav ul li #htbNav:hover, #mainNav ul li #htbNav.selected{background-color:#fff;}
 
 #firstTime{margin-top:30px;clear:both;overflow:hidden;}
@@ -107,8 +107,8 @@ body{
 	width:220px;
 }
 #htbFootInfo img{margin-bottom:3px;}
-#htbFootInfo #htbLike{float:left;margin-right:10px;width:60px;}
-#htbFootInfo p{color:#787878;font-size:1.1em;float:left;width:128px;}
+#htbFootInfo #htbLike{float:left;margin-left:10px;width:60px;}
+#htbFootInfo p{color:#787878;font-size:1.1em;float:left;width:140px;text-align:right;}
 
 
 
@@ -131,6 +131,11 @@ body{
 	width:940px;
 	height:395px;
 	overflow:hidden; 
+}
+#featContainer li img.featOver{
+    position:absolute;
+    top:0;left:0;
+    display:none;
 }
 #viewCollection a{padding:5px 6px;background-color:#fff;font-size:1.2em;position:absolute;right:0px;bottom:0px;z-index:90;
     filter:alpha(opacity=80);  
@@ -430,7 +435,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 #descTypeLinks a{color:#717171;text-transform:uppercase;padding:5px 0;}
 #descTypeLinks a.selected{color:#101010;}
 #descTypeLinks #description{padding-right:10px;margin-right:10px;border-right:1px solid #787878;}
-.likeProduct{float:right;margin-top:-8px;}
+.likeProduct{float:right;margin:-8px 0 0 50px;}
 
 #descCont p, #designCont p{color:#101010;font-size:1em;}
 #designCont{display:none;}
@@ -475,7 +480,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 }
 
 #rightSide #spreadWord{
-	width:310px;margin:10px 0 25px;
+	width:320px;margin:15px 0 25px;
 	clear:both;
 }
 

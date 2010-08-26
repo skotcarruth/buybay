@@ -24,12 +24,7 @@
 		<p>See {{ artist.name }}&rsquo;s products: {% for product in artist.active_products.all %}<a href="{{ product.get_absolute_url }}">{{ product.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>	
  </article>
  <aside id="aboutFooter">
- 	<h3 id="seeProducts"><a href="{% if artist.product_set.count > 1 %}
-	    {% url products.views.index %}?filter={{ artist.slug }}
-	  {% else %}
-	    {{ artist.product_set.all.0.get_absolute_url }}
-	  {% endif %}">See Products</a></h3>
-     <h3 id="visitSite"><a href="{{ artist.website }}" target="_blank">Visit Site</a></h3>
+ 	
      <figure id="spreadWord">
      	<h3>Spread the Word</h3>
          	<!-- AddThis Button BEGIN -->

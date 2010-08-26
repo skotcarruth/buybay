@@ -46,26 +46,26 @@
     <section id="learnMore">
     	<article id="aboutProject" class="learnMoreItem">
         	<h2><a href="{% url flatcontent.views.page page_slug="about-project" %}">About the Project</a></h2>
-            <a href="{% url flatcontent.views.page page_slug="about-project" %}"><img src="{{ MEDIA_URL }}_images/photos/home/about.jpg" alt="About the Buy the Bay Project" /></a>
-            <p class="transparent"><a href="{% url flatcontent.views.page page_slug="about-project" %}">Learn more about the project from Heal The Bay and how, together, we can help preserve the beach we love.</a></p>
+            <a href="{% url flatcontent.views.page page_slug="about-project" %}"><img src="{{ MEDIA_URL }}_images/photos/home/about.jpg" alt="About the Buy the Bay Project" />
+            <p class="transparent">Learn more about the project from Heal The Bay and how, together, we can help preserve the beach we love.</p></a>
         </article>
         
         <article id="aboutArtists" class="learnMoreItem">
    	    	<h2><a href="{% url artists.views.index %}">Artists &amp; Designers</a></h2>
-            <a href="{% url artists.views.index %}"><img src="{{ MEDIA_URL }}_images/photos/home/artists.jpg" alt="About the Buy the Bay Artists" /></a>
-            <p class="transparent"><a href="{% url artists.views.index %}">Browse our talented group of artists, illustrators and designers who helped make this project possible.</a></p>
+            <a href="{% url artists.views.index %}"><img src="{{ MEDIA_URL }}_images/photos/home/artists.jpg" alt="About the Buy the Bay Artists" />
+            <p class="transparent">Browse our talented group of artists, illustrators and designers who helped make this project possible.</p></a>
         </article>
         
         <article id="theLatest" class="learnMoreItem">
    	    	<h2><a href="{% url blog.views.index %}">The Latest</a></h2>
-        	<a href="{% url blog.views.index %}"><img src="{{ MEDIA_URL }}_images/photos/home/whats-new.jpg" alt="The Latest in Buy the Bay News" /></a>
-            <p class="transparent"><a href="{% url blog.views.index %}">See <em>Buy The Bay</em> in the news, go behind the scenes with artists and find out other ways you can help.</a></p>
+        	<a href="{% url blog.views.index %}"><img src="{{ MEDIA_URL }}_images/photos/home/whats-new.jpg" alt="The Latest in Buy the Bay News" />
+            <p class="transparent">See <em>Buy The Bay</em> in the news, go behind the scenes with artists and find out other ways you can help.</p></a>
         </article>
         
         <article id="whoWeAre" class="learnMoreItem">
    	   		<h2><a href="{% url flatcontent.views.page page_slug="heal-the-bay" %}">Who We Are</a></h2>
-            <a href="{% url flatcontent.views.page page_slug="heal-the-bay" %}"><img src="{{ MEDIA_URL }}_images/photos/home/who-we-are.jpg" alt="Who is Heal the bay and what do they do?" /></a>
-            <p class="transparent"><a href="{% url flatcontent.views.page page_slug="heal-the-bay" %}">Learn how, Heal The Bay has helped protect the beaches and coastal waters of Southern California for a quarter-century.</a></p>
+            <a href="{% url flatcontent.views.page page_slug="heal-the-bay" %}"><img src="{{ MEDIA_URL }}_images/photos/home/who-we-are.jpg" alt="Who is Heal the bay and what do they do?" />
+            <p class="transparent">Learn how, Heal The Bay has helped protect the beaches and coastal waters of Southern California for a quarter-century.</p></a>
         </article>
     </section>
 <script type="text/javascript" src="{{ MEDIA_URL }}_js/easySlider1.7.js"></script>
@@ -76,12 +76,12 @@
 			continuous:true,
 			numeric: true,
 			speed: 1200,
-			pause: 5000,
+			pause: 7000,
 			numericId: 'featControls'
 		});
 		$("#featuredSection li a").hover(
-	  		function() { $(this).children(".featOn").hide(); $(this).children(".featOver").show(); },
-	  		function() { $(this).children(".featOn").show(); $(this).children(".featOver").hide();  }
+	  		function() { $(this).children(".featOn").fadeOut(); $(this).children(".featOver").fadeIn(); },
+	  		function() { $(this).children(".featOn").fadeIn(); $(this).children(".featOver").fadeOut();  }
 		);
 	});
 	

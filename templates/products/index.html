@@ -48,8 +48,8 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$(".productPhoto").hover(
-		  function() { $(this).children(".startPhoto").hide(); $(this).children(".overPhoto").show(); },
-		  function() { $(this).children(".startPhoto").show(); $(this).children(".overPhoto").hide();  }
+		  function() {  $(this).children(".overPhoto").fadeIn(); },
+		  function() {  $(this).children(".overPhoto").fadeOut();  }
 		);
 		$(".listHeader").click(
 			 function() {$("#tags").slideToggle('100', function() {

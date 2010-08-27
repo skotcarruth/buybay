@@ -332,6 +332,7 @@ p.disclaimer{font-size:1em;padding-top:20px;font-style:italic;}
 	width:299px;
 	margin:0 20px 50px 0;
 	float:left;
+	position:relative;
 }
 #collectionContent .product.two{margin-right:0;}
 #collectionContent .product .productPhoto{
@@ -341,10 +342,13 @@ p.disclaimer{font-size:1em;padding-top:20px;font-style:italic;}
 }
 #collectionContent .product .productPhoto img{
 	margin-bottom:15px;
-
+}
+#collectionContent .product .productPhoto img.overPhoto{
+    position:absolute;
+    top:0;left:0;
+    display:none;
 }
 
-#collectionContent .product .productPhoto img.overPhoto{display:none;}
 h2.productTitle{font-size:2.1em;color:#252525;text-transform:uppercase;margin-bottom:0px;font-weight:normal;font-family:"proxima-nova-extra-condensed-1";}
 p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 

@@ -2,7 +2,8 @@
 {% load markup thumbnail %}
 
 {% block title %}{{ post.title }} | {{ block.super }}{% endblock %}
-
+{% block metadesc %}{{ post.body|slice:":155" }}{% endblock %}
+{% block fbdesc %}{{ post.body|slice:":155" }}{% endblock %}
 {% block pageClass %}news{% endblock %}
 
 {% block blog_body %}
@@ -38,7 +39,7 @@
     {% endfor %}
   </p>
 	<figure id="spreadWord">
-   	<h3>Spread the Word</h3>
+   	<h3>Share This!</h3>
        	<!-- AddThis Button BEGIN -->
 			<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
 	        <ul class="socialLinks addthis_toolbox addthis_default_style">

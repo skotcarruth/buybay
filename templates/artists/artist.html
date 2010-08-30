@@ -2,7 +2,8 @@
 {% load markup thumbnail selected %}
 {% block title %}{{ block.super }} | Artists | {{ artist.name }}{% endblock %}
 {% block pageClass %}artists{% endblock %}
-
+{% block metadesc %}{{ artist.description }}{% endblock %}
+{% block fbdesc %}{{ artist.description }}{% endblock %}
 {% block body %}
 <h1 id="artistsHeader">Artists</h1>
 
@@ -26,7 +27,7 @@
  <aside id="aboutFooter">
  	
      <figure id="spreadWord">
-     	<h3>Spread the Word</h3>
+     	<h3>Share This!</h3>
          	<!-- AddThis Button BEGIN -->
 			<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
 	        <ul class="socialLinks addthis_toolbox addthis_default_style">

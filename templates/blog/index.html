@@ -23,7 +23,7 @@
 	{% for post in page.object_list %}
   	<article class="post">
    		<header class="postHeader">
-          	<h2 class="postTitle"><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
+          	<h2 class="postTitle"><a href="{{ post.get_absolute_url }}" title="Read about {{ post.title }}">{{ post.title }}</a></h2>
          		<span class="meta">by {{ post.byline }} on {{ post.pub_date|date:"SHORT_DATE_FORMAT" }}</span>
            </header>
           {% if post.tease %}
@@ -32,7 +32,7 @@
           	{{ post.body|textile|truncatewords_html:50 }}
           {% endif %}
 		{% if post.gallery_media.active.all.0.get_media %}
-         <img src="{% thumbnail post.gallery_media.active.all.0.get_media 600x600 %}" alt="{{ post.title }}" />
+        <a href="{{ post.get_absolute_url }}" title="Read about {{ post.title }}"> <img src="{% thumbnail post.gallery_media.active.all.0.get_media 600x600 %}" alt="{{ post.title }}" /></a>
 		{% endif %}
       </article>
       {% endfor %}

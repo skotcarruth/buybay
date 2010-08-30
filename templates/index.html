@@ -8,7 +8,7 @@
 	<article id="featuredSection">
 		<div id="featContainer">
 		<ul id="featuredContent">
-			 {% for feature in features %}
+			 {% for feature in features|slice:":5" %}
 			<li>  
 				<a href="{{ feature.get_destination_url }}">
 		          <img src="{% thumbnail feature.image_before 940x395 crop %}" class="featOn" />

@@ -4,6 +4,8 @@
 
 {% block title %}{{ product.name }} | Collection | {{ block.super }}{% endblock %}
 {% block fbtitle %}{{ product.name }} on {{ block.super }}{% endblock %}
+{% block metadesc %}{{ product.description|slice:":155"  }}{% endblock %}
+{% block fbdesc %}{{ product.description|slice:":155"  }}{% endblock %}
 
 {% block pageClass %}detail{% endblock %}
 
@@ -73,7 +75,7 @@
         	<div id="descTypeLinks">
             	<a href="#" id="description" class="selected">Description</a>
                 <a href="#" id="design">Design</a>
-				<figure class="likeProduct"><fb:like href="{{ request.get_host|iriencode }}{{ request.path_info|iriencode }}" layout="button_count" show_faces="false" width="60" action="like"></fb:like></figure>
+				<figure class="likeProduct"><fb:like href="{{ request.get_host|iriencode }}{{ request.path_info|iriencode }}" layout="button_count" show_faces="false" width="30" action="like"></fb:like></figure>
             </div>
             <div id="descCont">
             	<p>{{ product.description }}</p>

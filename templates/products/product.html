@@ -62,7 +62,7 @@
     <section id="rightSide">
     	<header id="productHeader">
     		<h1>{% if product.name_image %}<img src="{% thumbnail product.name_image 280x199 crop %}" alt="{{ product.name }}" />{% else %}{{ product.name }}{% endif %}</h1>
-        	<span id="productPrice">${{ product.price|intcomma }}</span>
+        	<span id="productPrice">${{ product.price|floatformat:0 }}</span>
         	<h3 id="artistCredit">> design by {% for artist in product.active_artists.all %}
 		      <a href="{{ artist.get_absolute_url }}">{{ artist.name }}</a>
 		      {% if not forloop.last %},{% endif %}

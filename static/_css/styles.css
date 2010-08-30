@@ -104,10 +104,10 @@ body{
 
 #htbFootInfo{
 	float:right;
-	width:220px;
+	width:215px;
 }
 #htbFootInfo img{margin-bottom:3px;}
-#htbFootInfo #htbLike{float:left;margin-left:10px;width:60px;}
+#htbFootInfo #htbLike{float:right;margin-left:10px;width:60px;}
 #htbFootInfo p{color:#787878;font-size:1.1em;float:left;width:140px;text-align:right;}
 
 
@@ -170,7 +170,7 @@ body{
 	background-color:#bed630;
 	height:37px;
 	line-height:37px;
-	padding:0 10px;
+	padding:0 10px 0 10px;
 	margin-bottom:20px;
 }
 #spreadWordHome h3{margin:10px 15px 0 0;}
@@ -178,8 +178,10 @@ body{
 #spreadWordHome p a{color:#000;text-decoration:underline;}
 
 #spreadWordHome .socialLinks {float:right;}
-#spreadWordHome .socialLinks li{color:#fff;text-transform:uppercase;display:inline;padding:0 5px;}
+#spreadWordHome .socialLinks li{color:#fff;text-transform:uppercase;display:inline;padding:0 0px;}
+#spreadWordHome .socialLinks li.last{padding-right:0;margin-right:0;}
 #spreadWordHome .socialLinks li img{margin-right:3px;vertical-align:middle;}
+#spreadWordHome .socialLinks li.last img{margin-right:0;}
 #spreadWordHome .socialLinks li a{color:#fff;}
 #spreadWordHome .socialLinks li a:hover{color:#004A80;}
 
@@ -192,7 +194,7 @@ body{
 }
 .learnMoreItem h2{margin-bottom:15px;}
 .learnMoreItem img{}
-.learnMoreItem p{color:#fff;background-color:#299cc1;display:block;position:absolute;bottom:0;left:0;padding:10px 8px;width:206px;z-index:2;margin-bottom:0;}
+.learnMoreItem p{color:#fff;background-color:#299cc1;/*background-color:#91c9dd;*/display:block;position:absolute;bottom:0;left:0;padding:10px 8px;width:206px;z-index:2;margin-bottom:0;}
 .learnMoreItem p a{color:#fff;}
 #whoWeAre{margin-right:0;}
 
@@ -245,8 +247,7 @@ body{
 	height:32px;
 	line-height:32px;
 	padding:0 6px 0 10px;
-	float:left;
-	width:330px;
+	width:584px;
 }
 .news #spreadWord{width:600px;}
 #spreadWord .socialLinks {float:right;}
@@ -457,7 +458,8 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:0;}
 #qtyRemaining span{
     position:absolute;
     top:0;left:15px;
-    z-index:10;}
+    z-index:10;
+    text-transform:uppercase;}
 #qtyRemaining p{
 	line-height:33px;
 	background-color:#f15831;

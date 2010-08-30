@@ -63,7 +63,7 @@
     	<header id="productHeader">
     		<h1>{% if product.name_image %}<img src="{% thumbnail product.name_image 280x199 crop %}" alt="{{ product.name }}" />{% else %}{{ product.name }}{% endif %}</h1>
         	<span id="productPrice">${{ product.price|intcomma }}</span>
-        	<h3 id="artistCredit">design by > {% for artist in product.active_artists.all %}
+        	<h3 id="artistCredit">> design by {% for artist in product.active_artists.all %}
 		      <a href="{{ artist.get_absolute_url }}">{{ artist.name }}</a>
 		      {% if not forloop.last %},{% endif %}
 		    {% endfor %}</h3>
@@ -84,7 +84,7 @@
         </article>
         
         <figure id="qtyRemaining" class="">
-			<span>Remaining {{ product.order_set.count }}/{{ product.max_quantity }}</span>
+			<span>{{ product.order_set.count }}/{{ product.max_quantity }} remaining</span>
         	<p style="width:{% widthratio product.order_set.count product.max_quantity 100 %}%;"></p>
         </figure>
         

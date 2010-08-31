@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load thumbnail %}
+{% load thumbnail markup %}
 
 {% block pageClass %}home{% endblock %}
 
@@ -18,13 +18,7 @@
 		    {% endfor %}
 		</ul>
 		<div id="viewCollection"><a href="{% url products.views.index %}">View Collection</a></div>
-    	<!--<ol id="featControls">
-        	<li class="viewCollection"><a href="{% url products.views.index %}">View Collection</a></li>
-        	<li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-        </ol>-->
+    
 		</div>
     </article>
     

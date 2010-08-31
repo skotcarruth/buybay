@@ -77,13 +77,15 @@ body{
 #mainNav ul li #htbNav{background-image:url(../_images/nav/htb.png);width:58px;height:48px;margin:-10px 0 0;padding:0;}
 #mainNav ul li #htbNav:hover, #mainNav ul li #htbNav.selected{background-color:#fff;}
 
-#firstTime{margin-top:30px;clear:both;overflow:hidden;}
+#closeBtn{float:right;padding:4px 6px;background-color:#ccc;color:#fff;cursor:pointer;}
+#firstTime{margin-top:30px;clear:both;overflow:hidden;display:none;margin-bottom:15px;}
 #firstTime p{
 	font-size:2.2em;
 	color:#595959;
 	line-height:1.59em;
 }
 #firstTime p a{color:#299cc1;}
+#firstCarat{display:none;float:right;padding:4px 6px;cursor:pointer;font-size:1.2em;}
 
 /* ~~~~~ FOOTER ~~~~~ */
 #footer{

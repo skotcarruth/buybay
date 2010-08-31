@@ -1,7 +1,23 @@
 {% load flat %}
 
-{% if request.session.new_user %}
-  	<article id="firstTime">
-  	<p>{% blurb "new_user" %} <a href="{% url flatcontent.views.page page_slug="about-project" %}">Learn more</a></p>
+{% if request.session.new_user %}{% endif %}
+  
+<article id="firstTime">
+	<div id="closeBtn">X</div>
+	<div id="firstCarat">Are you a new visitor? ^</div>
+  	<p>{% blurb "new_user" %} <!--<a href="{% url flatcontent.views.page page_slug="about-project" %}">Learn more</a>--></p>
   </article>
-{% endif %}
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$("#firstTime").delay(1000).slideDown();
+		$("#closeBtn").click(
+	  		function() { $("#firstTime p").slideUp();$(this).hide();$("#firstCarat").show();
+		});
+		$("#firstCarat").click(
+		  		function() { $("#firstTime p").slideDown();$(this).hide();$("#closeBtn").show();
+		});
+	});
+
+</script>

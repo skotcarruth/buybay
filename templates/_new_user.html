@@ -1,6 +1,4 @@
 {% load flat %}
-
-{% if request.session.new_user %}{% endif %}
   
 <article id="firstTime">
 	<div id="closeBtn">X</div>
@@ -11,7 +9,9 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		$("#firstTime").delay(1000).slideDown();
+		{% if request.session.new_user %}$("#firstTime p").delay(1000).slideDown();$("#closeBtn").show();
+		{% else %}$("#firstCarat").show();
+		{% endif %}
 		$("#closeBtn").click(
 	  		function() { $("#firstTime p").slideUp();$(this).hide();$("#firstCarat").show();
 		});

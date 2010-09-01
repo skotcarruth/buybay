@@ -43,4 +43,5 @@ def product(request, product_slug=None):
     product = get_object_or_404(Product.objects.active(), slug=product_slug)
     return render_to_response('products/product.html', {
         'product': product,
+        'ratio': float(product.current_quantity) / float(product.max_quantity),
     }, context_instance=RequestContext(request))

@@ -80,13 +80,22 @@ body{
 #closeBtn{float:right;padding:4px 6px;background-color:#ccc;color:#fff;cursor:pointer;display:none;}
 #firstTime{margin-top:30px;clear:both;overflow:hidden;margin-bottom:15px;}
 #firstTime p{
-	font-size:2.2em;
+	font-size:2.4em;
 	color:#595959;
 	line-height:1.59em;
 	display:none;
+	clear:both;
 }
 #firstTime p a{color:#299cc1;}
-#firstCarat{display:none;float:right;padding:4px 6px;cursor:pointer;font-size:1.2em;}
+#firstCarat{
+    display:none;
+    float:right;
+    padding:4px 10px 4px 6px;
+    cursor:pointer;
+    font-size:1.2em;
+    text-transform:uppercase;
+    background:url(../_images/icons/small-list-triangle.png) no-repeat 5px right;
+}
 
 /* ~~~~~ FOOTER ~~~~~ */
 #footer{
@@ -197,7 +206,10 @@ body{
 }
 .learnMoreItem h2{margin-bottom:15px;}
 .learnMoreItem img{}
-.learnMoreItem p{color:#fff;background-color:#299cc1;/*background-color:#91c9dd;*/display:block;position:absolute;bottom:0;left:0;padding:10px 8px;width:206px;z-index:2;margin-bottom:0;}
+.learnMoreItem p{color:#fff;background-color:#299cc1;/*background-color:#91c9dd;*/display:block;position:absolute;filter:alpha(opacity=90);  
+-moz-opacity:0.9;  
+-khtml-opacity: 0.9;  
+opacity: 0.9;bottom:0;left:0;padding:10px 8px;width:206px;z-index:2;margin-bottom:0;}
 .learnMoreItem p a{color:#fff;}
 #whoWeAre{margin-right:0;}
 
@@ -262,7 +274,7 @@ body{
 /* ~~~~~ ARTISTS PAGE ~~~~~ */
 
 #artistContent a{text-decoration:underline;}
-#artistContent h2{text-transform:uppercase;color:#004a80;font-size:2.4em;margin:25px 0;font-family:"proxima-nova-extra-condensed-1";}
+#artistContent h2{text-transform:uppercase;color:#004a80;font-size:2.4em;margin:25px 0;font-family:"proxima-nova-extra-condensed-1", helvetica, arial, sans-serif;}
 p.disclaimer{font-size:1em;padding-top:20px;font-style:italic;}
 
 /* ~~~~~ NEWS PAGES ~~~~~ */
@@ -313,9 +325,9 @@ p.disclaimer{font-size:1em;padding-top:20px;font-style:italic;}
 }
 
 .collection #sidebar ul{margin-bottom:30px;}
-.collection #sidebar ul#sortBy a{padding-right:10px;}
-.collection #sidebar ul#sortBy a.up{background:url(../_images/icons/small-triangle-up.png) no-repeat center right;}
-.collection #sidebar ul#sortBy a.down{background:url(../_images/icons/small-triangle-down.png) no-repeat center right;}
+.collection #sidebar ul#sortBy a{}
+.collection #sidebar ul#sortBy a.up{background:url(../_images/icons/small-triangle-up.png) no-repeat center right;padding-right:12px;}
+.collection #sidebar ul#sortBy a.down{background:url(../_images/icons/small-triangle-down.png) no-repeat center right;padding-right:12px;}
 
 .collection #sidebar ul#tags {display:none;}
 .collection #sidebar ul#tags li{display:inline;font-style:italic;line-height:1.67em;}
@@ -353,7 +365,7 @@ p.disclaimer{font-size:1em;padding-top:20px;font-style:italic;}
     display:none;
 }
 
-h2.productTitle{font-size:2.1em;color:#252525;text-transform:uppercase;margin-bottom:0px;font-weight:normal;font-family:"proxima-nova-extra-condensed-1";}
+h2.productTitle{font-size:2.1em;color:#252525;text-transform:uppercase;margin-bottom:0px;font-weight:normal;font-family:"proxima-nova-extra-condensed-1", helvetica, arial, sans-serif;}
 p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 
 .pagination{font-size:1.1em;padding-bottom:5px;}
@@ -388,7 +400,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 	text-transform:uppercase;
 	font-size:2em;
 	float:left;
-	font-family:"proxima-nova-extra-condensed-1";
+	font-family:"proxima-nova-extra-condensed-1", helvetica, arial, sans-serif;
 }
 
 #commentHeader a#addComment{
@@ -418,7 +430,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 .comment  .authorMeta img{margin-left:5px;}
 
 
-#productHeader h1{float:left;padding-top:10px;font-family:"proxima-nova-extra-condensed-1";font-size:2em;}
+#productHeader h1{float:left;padding-top:10px;font-family:"proxima-nova-extra-condensed-1", helvetica, arial, sans-serif;font-size:2em;}
 #productHeader #productPrice{
 	background:url(../_images/icons/starburst-trans.png) no-repeat top left;
 	display:block;
@@ -460,9 +472,10 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 }
 #qtyRemaining span{
     position:absolute;
-    top:0;left:15px;
+    top:0;right:15px;
     z-index:10;
     text-transform:uppercase;}
+#qtyRemaining span.greaterThan{left:15px;}
 #qtyRemaining p{
 	line-height:33px;
 	background-color:#f15831;

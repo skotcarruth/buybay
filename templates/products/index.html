@@ -8,17 +8,17 @@
 
 	<aside id="sidebar" class="fl">
      	<ul id="filterByStatus">
-            <li><a href="{% params filter="all" %}" class="selected">All Products</a></li>
-            <li><a href="{% params filter="for_sale" %}">For Sale</a></li>
-            <li><a href="{% params filter="coming_soon" %}">Coming Soon</a></li>
-            <li><a href="{% params filter="archived" %}">Archived</a></li>
+            <li><a href="{% params filter="all" %}" class="{% if request.GET.filter == "all" or "filter" not in request.GET %}selected{% endif %}">All Products</a></li>
+            <li><a href="{% params filter="for_sale" %}" class="{% if request.GET.filter == "for_sale" %}selected{% endif %}">For Sale</a></li>
+            <li><a href="{% params filter="coming_soon" %}" class="{% if request.GET.filter == "coming_soon" %}selected{% endif %}">Coming Soon</a></li>
+            <li><a href="{% params filter="archived" %}" class="{% if request.GET.filter == "archived" %}selected{% endif %}">Archived</a></li>
         </ul>
         
         <ul id="sortBy">
         	<li>Sort:</li>
-        	<li><a href="{% params sort="name" dir="up","down" %}">By Name</a></li>
-        	<li><a href="{% params sort="price" dir="up","down" %}">By Price</a></li>
-            <li><a href="{% params sort="date" dir="up","down" %}">By Date Posted</a></li>
+        	<li><a href="{% params sort="name" dir="up","down" %}" class="{% if request.GET.sort == "name" %}{% if request.GET.dir == "up" %}up{% endif %}{% if request.GET.dir == "down" %}down{% endif %}{% endif %}">By Name</a></li>
+        	<li><a href="{% params sort="price" dir="up","down" %}" class="{% if request.GET.sort == "price" %}{% if request.GET.dir == "up" %}up{% endif %}{% if request.GET.dir == "down" %}down{% endif %}{% endif %}">By Price</a></li>
+            <li><a href="{% params sort="date" dir="up","down" %}" class="{% if request.GET.sort == "date" %}{% if request.GET.dir == "up" %}up{% endif %}{% if request.GET.dir == "down" %}down{% endif %}{% endif %}">By Date Posted</a></li>
         </ul>
         
 		<span class="listHeader" style="display:none;">Tags:</span>

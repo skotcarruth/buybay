@@ -11,7 +11,7 @@
  	<nav id="artistsNav">
      	<ul>
 			{% for sidebar_artist in artist_list %}
-         	 <li><a href="{{ sidebar_artist.get_absolute_url }}" class="">{{ sidebar_artist.name }}</a></li>
+         	 <li><a href="{{ sidebar_artist.get_absolute_url }}" class="{% selected artists.views.artist artist_slug=sidebar_artist.slug %}">{{ sidebar_artist.name }}</a></li>
             {% endfor %}
          </ul>
      </nav>

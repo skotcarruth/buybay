@@ -32,7 +32,12 @@
           	{{ post.body|textile|truncatewords_html:50 }}
           {% endif %}
 		{% if post.gallery_media.active.all.0.get_media %}
-        <a href="{{ post.get_absolute_url }}" title="Read about {{ post.title }}"> <img src="{% thumbnail post.gallery_media.active.all.0.get_media 600x600 %}" alt="{{ post.title }}" /></a>
+		{% if post.gallery_media.active.all.0.image %}
+	       <a href="{{ post.get_absolute_url }}" title="Read about {{ post.title }}"> <img src="{% thumbnail post.gallery_media.active.all.0.get_media 600x600 %}" alt="{{ post.title }}" /></a>
+		{% endif %}
+		{% if post.gallery_media.active.all.0.video %}
+		{% endif %}
+       
 		{% endif %}
       </article>
       {% endfor %}

@@ -2,8 +2,8 @@
   
 <article id="firstTime">
 	<div id="closeBtn">X</div>
-	<div id="firstCarat">Are you a new visitor? ^</div>
-  	<p>{% blurb "new_user" %} <!--<a href="{% url flatcontent.views.page page_slug="about-project" %}">Learn more</a>--></p>
+	<div id="firstCarat">Our Mission</div>
+  	{% blurb "new_user" %} <!--<a href="{% url flatcontent.views.page page_slug="about-project" %}">Learn more</a>-->
   </article>
 
 <script type="text/javascript">
@@ -13,10 +13,10 @@
 		{% else %}$("#firstCarat").show();
 		{% endif %}
 		$("#closeBtn").click(
-	  		function() { $("#firstTime p").slideUp();$(this).hide();$("#firstCarat").show();
+	  		function() { $(this).hide();$("#firstCarat").show();$("#firstTime p").slideUp();
 		});
 		$("#firstCarat").click(
-		  		function() { $("#firstTime p").slideDown();$(this).hide();$("#closeBtn").show();
+		  		function() { $(this).hide();$("#closeBtn").show();$("#firstTime p").slideDown();
 		});
 	});
 

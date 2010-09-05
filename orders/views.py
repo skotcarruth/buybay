@@ -69,7 +69,7 @@ def add(request, product_slug=None):
 
 def remove(request, product_slug=None):
     """Remove a product from the cart."""
-    product = get_object_or_404(Product, is_active=True, slug=product_slug)
+    product = get_object_or_404(Product.objects.active(), slug=product_slug)
     order = Order.get_or_create(request)
 
     # Delete the product from the order

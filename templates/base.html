@@ -72,7 +72,7 @@
             <li><a href="{% url views.index %}" id="homeNav" class="{% selected views.index exact=true %}">Home</a></li>
 			<li><a href="{% url products.views.index %}" id="collectionNav" class="{% selected products.views.index %}">Collection</a></li>
             <li><a href="{% url artists.views.index %}" id="artistsNav" class="{% selected artists.views.index %}">Artists</a></li>
-			<li><a href="{% url flatcontent.views.page page_slug="about-project" %}" id="aboutNav" class="{% selected flatcontent.views.page page_slug="about-project" %}">About</a></li>
+			<li><a href="{% url flatcontent.views.page page_slug="about-project" %}" id="aboutNav" class="{% selected flatcontent.views.index %}">About</a></li>
             <li><a href="{% url blog.views.index %}" id="newsNav" class="{% selected blog.views.index %}">News</a></li>
             <li><a href="http://www.healthebay.org" target="_blank" id="htbNav" rel="external">Brought to you by: Heal the Bay</a></li>
         </ul>

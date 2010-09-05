@@ -48,7 +48,7 @@ def cart(request):
 
 def add(request, product_slug=None):
     """Add a product to the cart."""
-    product = get_object_or_404(Product, is_active=True, slug=product_slug)
+    product = get_object_or_404(Product.objects.active(), slug=product_slug)
     order = Order.get_or_create(request)
 
     # Check if the product is already in the order

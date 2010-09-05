@@ -78,13 +78,13 @@ class Order(models.Model):
     def get_tax_amount(self, subtotal):
         """Returns the amount of tax for the items in the cart."""
         # TODO: make this for rillz
-        TAX_RATE = Decimal('0.0825')
+        TAX_RATE = Decimal('0.0925')
         return subtotal * TAX_RATE
 
     def get_shipping_amount(self, total_items):
         """Returns the amount of shipping charges for the items in the cart."""
         # TODO: make this for rillz too
-        SHIPPING_PER_ITEM = Decimal('5.00')
+        SHIPPING_PER_ITEM = Decimal('0.00')
         return total_items * SHIPPING_PER_ITEM
 
     def get_total_items(self):

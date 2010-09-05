@@ -54,15 +54,17 @@ def add(request, product_slug=None):
     # Check if the product is already in the order
     product_in_order = order.productinorder_set.filter(product=product).all()
     if len(product_in_order):
-        # Add 1 to the quantity of that product
-        product_in_order = product_in_order[0]
-        product_in_order.quantity += 1
-        messages.success(request, 'Added another "%s" to your cart.' % product.name)
+        # Disallow adding more than one of any product
+        messages.warning(request, 'You can only add one of each product to your cart.')
+        # # Add 1 to the quantity of that product
+        # product_in_order = product_in_order[0]
+        # product_in_order.quantity += 1
+        # messages.success(request, 'Added another "%s" to your cart.' % product.name)
     else:
         # Add the product to the order
         product_in_order = ProductInOrder(order=order, product=product)
         messages.success(request, 'Added "%s" to your cart.' % product.name)
-    product_in_order.save()
+        product_in_order.save()
 
     # Redirect to the shopping cart
     return HttpResponseRedirect(reverse('orders.views.cart'))

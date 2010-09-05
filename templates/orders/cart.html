@@ -28,8 +28,8 @@
 			</a>
 			<h3><a href="{% url products.views.product product_slug=product_in_cart.product.slug %}">{{ product_in_cart.product.name }}</a></h3>
 			</td>
-		  <td class="itemQty" valign="middle">1</td>
-          <td class="itemPrice" valign="middle">${{ product_in_cart.product.price|floatformat:2|intcomma }}</td>
+		  <td class="itemQty" valign="middle">{{ product_in_cart.quantity }}</td>
+          <td class="itemPrice" valign="middle">${{ product_in_cart.total_price|floatformat:2|intcomma }}</td>
           <td class="itemRemove" valign="middle"><a href="{% url orders.views.remove product_slug=product_in_cart.product.slug %}">X</a></td>
         </tr>
       {% empty %}

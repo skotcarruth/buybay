@@ -80,6 +80,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'blog.context_processors.tags',
     'orders.context_processors.current_order',
     'products.context_processors.tags',
+    'fbcomments.context_processors.settings_context',
 )
 
 MIDDLEWARE_CLASSES = (

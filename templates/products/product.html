@@ -10,7 +10,38 @@
 {% block pageClass %}detail{% endblock %}
 
 {% block body %}
+  <fb:login-button autologoutlink="true"></fb:login-button>
 
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: '158099770871210',
+        status: true,
+        cookie: true,
+        xfbml: true
+      });
+
+      FB.Event.subscribe('auth.login', function(response) {
+        console.log('login');
+      });
+      FB.Event.subscribe('auth.logout', function(response) {
+        console.log('logout');
+      });
+      FB.getLoginStatus(function(response) {
+        if (response.session) {
+          console.log('login');
+        }
+      });
+    };
+
+    (function() {
+      var e = document.createElement('script');
+      e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+      e.async = true;
+      document.getElementById('fb-root').appendChild(e);
+    }());
+  </script>
 
 	<section id="leftSide">
     	<nav id="switchProducts">

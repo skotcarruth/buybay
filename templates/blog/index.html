@@ -4,6 +4,8 @@
 {% block pageClass %}news{% endblock %}
 
 {% block blog_body %}
+  <script src="http://platform.twitter.com/anywhere.js?id={{ settings.TWITTER_API_KEY }}&v=1" type="text/javascript"></script>
+
   <h1 id="whatsNewHeader">What&rsquo; New</h1>
 
 	<aside id="sidebar" class="fl">
@@ -15,8 +17,8 @@
     </ul>
   </aside>
   <aside id="tweetTweet">
-  	<a href="#" target="_blank" rel="external" title="Follow buythebay on Twitter" id="followLink">Follow @buythebay</a>
-      <p>Thanks <a href="#" target="_blank">@swissmiss</a> for the generous post! <a href="#" target="_blank">http://bit.ly/2U5TJD</a> <span>4 hours ago</span></p>
+    <span id="followLink"></span>
+  	<p id="latestTweet">Loading latest tweet...</p>
   </aside>
 
 	<section id="newsContent">
@@ -44,5 +46,58 @@
 
 	  {% include "_pagination.html" %}
  </section>
+
+  <script type="text/javascript">
+    $(function() {
+      // Add the follow button
+      twttr.anywhere(function(T) {
+        T('#followLink').followButton('{{ settings.TWITTER_USERNAME }}');
+      });
+
+      // Load the latest tweet
+      $.getJSON('http://twitter.com/statuses/user_timeline/{{ settings.TWITTER_USERNAME }}.json?callback=?&count=1', function(data, textStatus) {
+        if (data.length < 1) {
+          $('#latestTweet').text('Unable to load tweet.');
+          return;
+        }
+
+        // Pull the text and date from the tweet
+        var tweetText = data[0].text;
+        var tweetCreated = new Date(data[0].created_at);
+
+        // Calculate the time since the tweet
+        var now = new Date();
+        var timeSince = now.getTime() - tweetCreated.getTime();
+        var daysSince = Math.floor(timeSince / (1000 * 60 * 60 * 24));
+        timeSince -= daysSince * 1000 * 60 * 60 * 24;
+        var hoursSince = Math.floor(timeSince / (1000 * 60 * 60));
+        timeSince -= hoursSince * 1000 * 60 * 60;
+        var minutesSince = Math.floor(timeSince / (1000 * 60));
+        if (daysSince > 2) {
+          var timeSinceText = daysSince + ' days ago';
+        }
+        else if (daysSince) {
+          var timeSinceText = daysSince + ' days, ' + hoursSince + ' hours ago';
+        }
+        else if (hoursSince) {
+          var timeSinceText = hoursSince + ' hours, ' + minutesSince + ' minutes ago';
+        }
+        else {
+          var timeSinceText = minutesSince + ' minutes ago';
+        }
+
+        // Update the page with the tweet
+        $('#latestTweet')
+          .empty()
+          .text(tweetText)
+          .append('<span>' + timeSinceText + '</span>');
+
+        // Enable Twitter @Anywhere
+        twttr.anywhere(function(T) {
+          T('#latestTweet').hovercards();
+        });
+      });
+    });
+  </script>
 
 {% endblock %}

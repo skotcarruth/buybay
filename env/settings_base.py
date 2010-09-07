@@ -130,3 +130,5 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 
 PAYPAL_VERSION = '64.0'
 
+TWITTER_USERNAME = 'buythebay'
+

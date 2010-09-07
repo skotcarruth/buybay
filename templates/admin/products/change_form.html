@@ -1,0 +1,98 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+  <script src="http://platform.twitter.com/anywhere.js?id={{ settings.TWITTER_API_KEY }}&v=1" type="text/javascript"></script>
+{% endblock %}
+
+{% block after_related_objects %}
+  {% if change %}{% if not is_popup %}
+
+    <fieldset class="module aligned">
+      <h2>Tweet this product</h2>
+      <div style="margin: 10px; font-size: 12px; font-weight: bold;">You can promote this product by sending the tweet below! <span style="color: red;">(NOTE: Whichever Twitter user you have signed in as will be sending this tweet!)</span></div>
+      <div style="margin: 10px; font-size: 12px; font-weight: bold;">
+        <img id="twitterImage" src="" style="vertical-align: middle; margin-right: 5px;" width="25" height="25" />
+        <span id="twitterUser" style="font-weight: bold;"></span>
+        <a id="twitterSignout" href="#">(log out)</a>
+        <span id="twitterSignin"></span>
+      </div>
+      <div class="form-row">
+        <div id="tweetProduct"></div>
+      </div>
+    </fieldset>
+
+    <script type="text/javascript">
+      $(function() {
+        function commas(num) {
+          num += '';
+          var re = /(\d+)(\d{3})/;
+          while (re.test(num)) {
+            num = num.replace(re, '$1' + ',' + '$2');
+          }
+          return num;
+        }
+
+        // Display the logged-in twitter username, if applicable
+        $('#twitterSignout').click(function() {
+          twttr.anywhere.signOut();
+          return false;
+        });
+        function showUser(e, user) {
+          var username = user.data('screen_name');
+          var imageUrl = user.data('profile_image_url');
+          $('#twitterUser').text(username);
+          $('#twitterImage').attr('src', imageUrl);
+          $('#twitterSignout').show();
+          $('#twitterSignin').hide();
+        }
+        function hideUser(e) {
+          $('#twitterUser').text('');
+          $('#twitterImage').attr('src', '');
+          $('#twitterSignout').hide();
+          $('#twitterSignin').show();
+        }
+        twttr.anywhere(function(T) {
+          T('#twitterSignin').connectButton();
+          T.bind('authComplete', showUser);
+          T.bind('signOut', hideUser);
+          if (T.isConnected()) {
+            showUser(null, T.currentUser);
+          }
+          else {
+            hideUser();
+          }
+        });
+
+        // Determine the product info
+        var productName = $('#id_name').val();
+        var productPrice = commas(Math.ceil(parseFloat($('#id_price').val())));
+        var productUrl = 'http://{{ request.get_host }}{% url django.contrib.contenttypes.views.shortcut content_type_id object_id %}';
+
+        // Use bit.ly to shorten the URL
+        var bitly_url = 'http://api.bit.ly/v3/shorten?login={{ settings.BITLY_LOGIN }}&apiKey={{ settings.BITLY_API_KEY }}&longUrl=' + encodeURIComponent(productUrl) + '&format=json&callback=?';
+        $.getJSON(bitly_url, function(data, textStatus) {
+          if (data.status_code && data.status_code == 200) {
+            var url = data.data.url;
+          }
+          else {
+            var url = productUrl;
+          }
+          initTweetBox(productName, productPrice, url);
+        });
+
+        // Create the tweet box
+        function initTweetBox(name, price, url) {
+          twttr.anywhere(function(T) {
+            T('#tweetProduct').tweetBox({
+              label: 'Tweet about this product',
+              defaultContent: 'Help save the bay by buying ' + name + ' for just $' + price + '! ' + url
+            });
+          });
+        }
+      });
+    </script>
+
+  {% endif %}{% endif %}
+{% endblock %}

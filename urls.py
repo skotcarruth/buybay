@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     (r'^cart/', include('orders.urls')),
     (r'^about/', include('flatcontent.urls')),
 
+    (r'^p/(\d+)/(\d+)/', 'django.contrib.contenttypes.views.shortcut'),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),

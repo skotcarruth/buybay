@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.core.urlresolvers import resolve
+
 from products.models import Tag
 
 
@@ -11,3 +13,7 @@ def tags(request):
 
     # Return the list of active tags
     return {'product_tags': Tag.objects.active()}
+
+def settings_context(request):
+    """Adds the settings object to the context."""
+    return {'settings': settings}

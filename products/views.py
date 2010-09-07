@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
+from products.forms import CommentForm
 from products.models import Product, Tag, product_filter, product_sort
 
 
@@ -41,7 +42,22 @@ def tag(request, tag_slug=None):
 def product(request, product_slug=None):
     """A detail page for a product."""
     product = get_object_or_404(Product.objects.active(), slug=product_slug)
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.product = product
+            comment.save()
+            comment_form = CommentForm()
+    else:
+        comment_form = CommentForm()
+
+    comments = product.productcomment_set.active()
+
     return render_to_response('products/product.html', {
+        'comments': comments,
+        'comment_form': comment_form,
         'product': product,
         'ratio': float(product.current_quantity) / float(product.max_quantity),
     }, context_instance=RequestContext(request))

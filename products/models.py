@@ -131,3 +131,28 @@ class Product(models.Model):
         if next.exists():
             return next[0]
         return None
+
+class ProductCommentManager(models.Manager):
+    def active(self):
+        return self.filter(is_active=True)
+
+class ProductComment(models.Model):
+    """A comment on a product."""
+    product = models.ForeignKey('Product')
+    facebook_id = models.CharField(max_length=30, blank=True)
+    name = models.CharField(max_length=400)
+    thumb_url = models.URLField(verify_exists=False, blank=True)
+    comment = models.TextField()
+
+    created_ts = models.DateTimeField(auto_now_add=True)
+    updated_ts = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)
+
+    objects = ProductCommentManager()
+
+    class Meta:
+        ordering = ['created_ts']
+        verbose_name = u'comment'
+
+    def __unicode__(self):
+        return '%s comment (%s)' % (self.product.name, self.created_ts)

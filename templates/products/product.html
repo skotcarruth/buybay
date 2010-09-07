@@ -10,27 +10,59 @@
 {% block pageClass %}detail{% endblock %}
 
 {% block body %}
-  <fb:login-button autologoutlink="true"></fb:login-button>
-
   <div id="fb-root"></div>
   <script>
+    window.FBComments = {};
+    window.FBComments.login = function(response) {
+      FB.api('/me', function(response) {
+        if (response.error) {
+          alert('Sorry, we are having trouble talking to Facebook right now.');
+          return;
+        }
+
+        // Fill in the hidden comment form details
+        $('#id_facebook_id').val(response.id);
+        $('#id_name').val(response.name);
+        $('#id_thumb_url').val('http://graph.facebook.com/' + response.id + '/picture');
+
+        // Display the user's info as it will appear
+        $('#commentUser img').attr('src', 'http://graph.facebook.com/' + response.id + '/picture');
+        $('#commentUser span').text(response.name);
+
+        // Hide the login message and show the comment form
+        $('#loggedIn').show();
+        $('#loggedOut').hide();
+      });
+    };
+    window.FBComments.logout = function(response) {
+      // Erase the hidden comment form details
+      $('#id_facebook_id, #id_name, #id_thumb_url').val('');
+
+      // Erase the user's info from the preview
+      $('#commentUser img').attr('src', '');
+      $('#commentUser span').text('');
+
+      // Show the login message and hide the comment form
+      $('#loggedIn').hide();
+      $('#loggedOut').show();
+    };
+
     window.fbAsyncInit = function() {
       FB.init({
-        appId: '{{ settings.FB_APP_ID }}',
+        appId: '{{ settings.FACEBOOK_APP_ID }}',
         status: true,
         cookie: true,
         xfbml: true
       });
 
-      FB.Event.subscribe('auth.login', function(response) {
-        console.log('login');
-      });
-      FB.Event.subscribe('auth.logout', function(response) {
-        console.log('logout');
-      });
+      FB.Event.subscribe('auth.login', window.FBComments.login);
+      FB.Event.subscribe('auth.logout', window.FBComments.logout);
       FB.getLoginStatus(function(response) {
         if (response.session) {
-          console.log('login');
+          window.FBComments.login(response);
+        }
+        else {
+          window.FBComments.logout(response);
         }
       });
     };
@@ -68,35 +100,42 @@
             </ul>
 			{% endif %}
         </article>
-        
+
         <section id="commentsContainer">
         	<header id="commentHeader">
-            	<h2>Comments (50)</h2>
-            	<a href="#" id="addComment">Add a Comment</a>
-            </header>
+          	<h2>Comments ({{ comments|length }})</h2>
+          </header>
+          {% for comment in comments %}
             <article class="comment">
-            	<p>This is so cool I cannot stand it</p>
-                <address class="authorMeta">
-                 	 <img src="{{ MEDIA_URL }}_images/blog/gravatar_placehold.png" alt="Mitch Gravatar" class="fr" />
-                     <span class="author"><a href="#" rel="external" target="_blank">Mitch Anthony</a></span>
-                     <span class="timeOfComment">2 hours ago</span>
-                    
-                </address>
+            	<p>{{ comment.comment }}</p>
+              <address class="authorMeta">
+                <img src="{{ comment.thumb_url }}" alt="Mugshot" class="fr" />
+                <span class="author">{{ comment.name }}</span>
+                <span class="timeOfComment">{{ comment.created_ts|timesince }} ago</span>
+              </address>
             </article>
-            
-            <article class="comment">
-            	<p>This is so cool I cannot stand it</p>
-                <address class="authorMeta">
-                 	 <img src="{{ MEDIA_URL }}_images/blog/gravatar_placehold.png" alt="Mitch Gravatar" class="fr" />
-                     <span class="author"><a href="#" rel="external" target="_blank">Mitch Anthony</a></span>
-                     <span class="timeOfComment">2 hours ago</span>
-                    
-                </address>
-            </article>
-            
+          {% endfor %}
+          <div id="commentForm">
+            <h2>Add a Comment</h2>
+            <div id="loggedOut">
+              <p>Before you can comment, we need to get your name from Facebook.</p>
+            </div>
+            <fb:login-button autologoutlink="true"></fb:login-button>
+            <div id="loggedIn">
+              <div id="commentUser">
+                <img src="" />
+                <span></span>
+              </div>
+              <form method="POST" action="{% url products.views.product product_slug=product.slug %}">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <p><input type="submit" value="Submit Comment" /></p>
+              </form>
+            </div>
+          </div>
         </section>
     </section>
-    
+
     <section id="rightSide">
     	<header id="productHeader">
     		<h1>{% if product.name_image %}<img src="{% thumbnail product.name_image 280x199 crop %}" alt="{{ product.name }}" />{% else %}{{ product.name }}{% endif %}</h1>

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db import models
 
 from galleries.admin import GalleryMediaInline
-from products.models import Product, Tag
+from products.models import Product, Tag, ProductComment
 
 
 class TagAdmin(admin.ModelAdmin):
@@ -38,7 +38,7 @@ class ProductAdmin(admin.ModelAdmin):
         ('Metadata', {
             'fields': ('created_ts', 'updated_ts',),
             'classes': ('collapse',),
-        })
+        }),
     )
     prepopulated_fields = {'slug': ('name',)}
     readonly_fields = ('created_ts', 'updated_ts', 'current_quantity',)
@@ -48,5 +48,20 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('tags', 'status',)
     search_fields = ('name', 'description', 'design',)
 
+class ProductCommentAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Comment Info', {
+            'fields': ('product', 'name', 'thumb_url', 'comment',),
+        }),
+        ('Metadata', {
+            'fields': ('is_active', 'created_ts', 'updated_ts',),
+        }),
+    )
+    readonly_fields = ('created_ts', 'updated_ts', 'product', 'name', 'thumb_url', 'comment',)
+    list_display = ('product', 'name', 'is_active', 'created_ts',)
+    list_filter = ('is_active', 'created_ts',)
+    search_fields = ('name', 'comment',)
+
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(ProductComment, ProductCommentAdmin)

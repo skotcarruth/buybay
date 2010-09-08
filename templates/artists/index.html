@@ -18,21 +18,23 @@
  </aside>
 
 <article id="artistContent">
- 	<figure id="artistPhoto"><img src="{% thumbnail artist.image 600x600 %}" alt="{{ artist.name }} Photo" /></figure>
-     <h2>{{ artist.name }}</h2>
-     <p>{{ artist.description }}</p>
-		<p>See {{ artist.name }}&rsquo;s products: {% for product in artist.active_products.all %}<a href="{{ product.get_absolute_url }}">{{ product.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>	
+ 	<figure id="artistPhoto"><img src="{{ MEDIA_URL }}_images/photos/artists-landing-top.jpg" alt="Artist Home Photo" /></figure>
+   
+     <p>We would like to thank all of our unbelievably creative friends who have been such an inspiration in bringing these products to life.</p>
+
+	<p>Click any name to the left to learn more about each.</p> 
+
+	<p>Everything you see on this site — product creations, designs, packaging, photography, writing — is a donation of time to Heal the Bay. If you&rsqup;re an artist, illustrator, designer, photographer or writer, and you're interested in using your talents to help preserve something priceless about the beach, please contact us at <a href="mailto:help@buythebay.org" rel="nofollow">help@buythebay.org</a></p>
+	
  </article>
- <aside id="aboutFooter">
- 	<h3 id="seeProducts"><a href="#">See Products</a></h3>
-     <h3 id="visitSite"><a href="{{ artist.website }}" target="_blank">Visit Site</a></h3>
-     <figure id="spreadWord">
+ <footer id="aboutFooter">
+     <!--<figure id="spreadWord">
      	<h3>Spread the Word</h3>
          <ul class="socialLinks">
      		<li><img src="{{ MEDIA_URL }}_images/icons/facebook.png" alt="Like Buy the Bay on Facebook icon" /> <a href="#" target="_blank" rel="external" title="Like Buy the Bay on Facebook">Facebook</a></li>
          	<li><img src="{{ MEDIA_URL }}_images/icons/twitter.png" alt="Follow Buy the Bay on Twitter icon" /> <a href="#" target="_blank" rel="external" title="Follow Buy the Bay on Twitter">Twitter</a></li>
          	<li><img src="{{ MEDIA_URL }}_images/icons/email.png" alt="Email your friends about us icon" /> <a href="#" target="_blank" rel="external" title="Share Buy the Bay via Email">Email</a></li>
      	</ul>
-     </figure>
- </aside>
+     </figure>-->
+ </footer>
 {% endblock %}

@@ -235,7 +235,7 @@ opacity: 0.9;bottom:0;left:0;padding:10px 8px;width:206px;z-index:2;margin-botto
 	width:600px;
 	float:right;
 }
-#aboutPhoto, .artistPhoto{margin-bottom:28px;}
+#aboutPhoto, .artistPhoto, #artistPhoto{margin-bottom:28px;}
 
 #aboutContent .fbShare{margin-bottom:15px;}
 
@@ -279,23 +279,24 @@ p.disclaimer{font-size:1em;padding-top:20px;font-style:italic;}
 
 /* ~~~~~ NEWS PAGES ~~~~~ */
 #tweetTweet{
-	padding:0 0 25px 55px;
-	background:url(../_images/icons/twitter-bird.png) no-repeat top left;
+	padding:0 0 25px 80px;
+	background:url(../_images/icons/twitter-bird-2.png) no-repeat top left;
 	border-bottom:1px solid #a0a0a0;
 	margin-bottom:25px;
 	width:545px;
 	float:right;
 }
-#tweetTweet a#followLink{text-transform:uppercase;color:#17a2dc;display:block;margin:0 0 10px 14px;}
+#tweetTweet a#followLink{text-transform:uppercase;color:#17a2dc;display:block;margin:0 0 10px -13px;}
 
 #tweetTweet p{
-	padding-left:14px;
-	background:url(../_images/speech-bubble-left.png) no-repeat top left #e2e2e2;
-	width:533px;
+	padding:5px 0 5px 10px;
+	/*background:url(../_images/speech-bubble-left.png) no-repeat top left #e2e2e2;*/
+	background:#e2e2e2;
+	width:528px;
 	color:#787878;
+	margin-top:5px;
 	font-size:1.4em;
-	height:30px;
-	line-height:30px;
+	line-height:20px;
 }
 #tweetTweet p a{color:#787878;}
 #tweetTweet span{text-transform:uppercase;padding-left:15px;color:#17a2dc;}
@@ -410,7 +411,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 }
 .comment{overflow:hidden;padding-bottom:15px;margin-bottom:15px;border-bottom:1px solid #787878;}
 .comment p{
-	width:420px;
+	width:400px;
 	display:block;
 	font-size:1.1em;
 	line-height:1.4em;
@@ -418,14 +419,14 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 }
 .comment  .authorMeta{
 	float:right;
-	width:157px;
+	width:175px;
 	display:block;
 	color:#787878;
 	font-size:1.1em;
 }
 
-.comment .authorMeta .author{text-align:right;width:110px;float:left;}
-.comment .authorMeta .timeOfComment{text-align:right;width:110px;float:left;}
+.comment .authorMeta .author{text-align:right;width:110px;float:left;font-size:1.2em;font-weight:bold;}
+.comment .authorMeta .timeOfComment{text-align:right;width:110px;float:left;font-size:.9em;}
 .comment .authorMeta .author a{font-weight:bold;color:#787878;}
 .comment  .authorMeta img{margin-left:5px;}
 
@@ -441,7 +442,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 	color:#fff;
 	float:right;
 	font-size:1.8em;
-	font-family:"proxima-nova-extra-condensed-1";
+	font-family:"proxima-nova-extra-condensed-1", Helvetica, Arial, sans-serif;
 }
 #artistCredit{
 	clear:both;

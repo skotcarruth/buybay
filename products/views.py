@@ -8,7 +8,7 @@ from products.models import Product, Tag, product_filter, product_sort
 def index(request):
     """An index of the entire product collection."""
     sort = request.GET.get('sort', None)
-    sort_dir = request.GET.get('sort_dir', None)
+    sort_dir = request.GET.get('dir', None)
     status = request.GET.get('filter', None)
 
     # Query for the products, tags

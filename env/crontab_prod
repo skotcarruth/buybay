@@ -1,0 +1,7 @@
+# Set BUYBAY_ROOT and PYTHONPATH to the root of the git repo on the server
+BUYBAY_ROOT=/path/to/buybay
+PYTHONPATH=/path/to/buybay
+DJANGO_SETTINGS_MODULE=settings
+
+# m h dom mon dow  command
+* * * * * flock /var/run/buybay_send_email.pid -c "python $BUYBAY_ROOT/scripts/send_email.py" >> /var/log/buybay_send_email.log 2>&1

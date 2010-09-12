@@ -15,6 +15,11 @@ DATABASES = {
     }
 }
 
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+DEFAULT_FROM_EMAIL = 'noreply@dev.buythebay.org'
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
 PAYPAL_SERVER = 'https://api-3t.sandbox.paypal.com/nvp'
 PAYPAL_CHECKOUT_URL = 'https://www.sandbox.paypal.com/webscr'
 PAYPAL_USER = 'merch_1281066320_biz_api1.gmail.com'

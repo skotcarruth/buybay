@@ -2,6 +2,7 @@ from datetime import datetime
 from decimal import Decimal
 import json
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
@@ -9,9 +10,11 @@ from django.forms.models import modelformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
+from django.template.loader import render_to_string
 
 from orders.models import Order, ProductInOrder
 from orders.paypal import paypal, PayPalUnavailable, PayPalErrorResponse
+from mail.models import Message
 from products.models import Product
 
 
@@ -101,8 +104,10 @@ def purchase(request):
     except PayPalUnavailable:
         messages.error(request, 'Sorry, we were unable to reach PayPal at the moment. Please try again later.')
     except PayPalErrorResponse as e:
-        messages.error(request, 'Sorry, there was an error with PayPal. Please contact us for more info.')
-        print e
+        if settings.DEBUG:
+            raise
+        else:
+            messages.error(request, 'Sorry, there was an error with PayPal. Please contact us for more info.')
 
     # Redirect to the Paypal checkout (or back to the cart if errors)
     return HttpResponseRedirect(next_url)
@@ -120,7 +125,15 @@ def confirmation(request):
     details = paypal.get_express_checkout_details(token)
 
     # Confirm the transaction with PayPal, and update the order
-    payment = paypal.do_express_checkout_payment(token, payer_id, order.get_as_cart())
+    print order.get_as_cart()
+    try:
+        payment = paypal.do_express_checkout_payment(token, payer_id, order.get_as_cart())
+    except PayPalErrorResponse:
+        if settings.DEBUG:
+            raise
+        else:
+            messages.error(request, 'Sorry, there was an error with PayPal. Please contact us for more info.')
+            return HttpResponseRedirect(reverse('orders.views.cart'))
 
     # Finalize the order with payment details
     order.user_email = details.get('EMAIL', '')
@@ -153,6 +166,16 @@ def confirmation(request):
     order.paypal_payment_dump = json.dumps(payment)
 
     order.save()
+
+    # Create a confirmation email to be sent
+    context = {'order': order}
+    message = Message()
+    message.to_email = order.user_email
+    message.from_email = settings.DEFAULT_FROM_EMAIL
+    message.subject = render_to_string('mail/order_confirmation_subject.txt', context)
+    message.body_text = render_to_string('mail/order_confirmation.txt', context)
+    message.body_html = render_to_string('mail/order_confirmation.html', context)
+    message.save()
 
     # Clear the user's shopping cart
     request.session['order_id'] = None

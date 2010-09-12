@@ -1,0 +1,44 @@
+{% load humanize %}
+<p>Dear {{ order.user_shiptoname }},</p>
+
+<p>
+  Thank you for your order! This email is to confirm that we have received 
+  your payment and will ship your order as soon as it's ready. Please allow 
+  4-8 weeks for delivery. 
+</p>
+
+<p><strong>Your order:</strong></p>
+{% with order.get_as_cart as cart %}
+<ul>
+  {% for product_in_cart in cart.products %}
+    <li>
+      {{ product_in_cart.quantity }} x {{ product_in_cart.product.name }} = ${{ product_in_cart.total_price|floatformat:2|intcomma }}
+    </li>
+  {% endfor %}
+</ul>
+<p>
+  Subtotal: ${{ cart.subtotal|floatformat:2|intcomma }}<br/>
+  Tax: ${{ cart.tax|floatformat:2|intcomma }}<br/>
+  Shipping: ${{ cart.shipping|floatformat:2|intcomma }}<br/>
+  Total: ${{ cart.total|floatformat:2|intcomma }}<br/>
+</p>
+{% endwith %}
+
+<p><strong>Shipping to: </strong></p>
+<p>
+  {{ order.user_shiptoname }}<br/>
+  {{ order.user_shiptostreet }}<br/>
+  {% if order.order.user_shiptostreet2 %}{{ order.user_shiptostreet2 }}<br/>{% endif%}
+  {{ order.user_shiptocity }}, {{ order.user_shiptostate }} {{ order.user_shiptozip }}<br/>
+</p>
+
+<p>
+  If you have any questions or concerns about your order, please email us at 
+  <a href="mailto:orders@buythebay.org">orders@buythebay.org</a> and include 
+  your order reference number (#{{ order.id }}). 
+</p>
+
+<p>
+  Thanks for your support!<br/>
+  Buy the Bay
+</p>

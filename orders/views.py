@@ -164,6 +164,8 @@ def confirmation(request):
     order.paypal_details_dump = json.dumps(details)
     order.paypal_payment_dump = json.dumps(payment)
 
+    # Mark the order as paid
+    order.status = Order.PAYMENT_CONFIRMED
     order.save()
 
     # Create a confirmation email to be sent

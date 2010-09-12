@@ -7,7 +7,8 @@ Your order:{% with order.get_as_cart as cart %}{% for product_in_cart in cart.pr
 --------
 Subtotal: ${{ cart.subtotal|floatformat:2|intcomma }}
 Tax: ${{ cart.tax|floatformat:2|intcomma }}
-Shipping: ${{ cart.shipping|floatformat:2|intcomma }}
+Shipping: ${{ cart.shipping|floatformat:2|intcomma }}{% if cart.donation %}
+Donation: ${{ cart.donation|floatformat:2|intcomma }}{% endif %}
 Total: ${{ cart.total|floatformat:2|intcomma }}{% endwith %}
 
 Shipping to: 

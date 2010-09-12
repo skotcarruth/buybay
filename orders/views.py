@@ -12,42 +12,41 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
 
+from orders.forms import DonationForm
 from orders.models import Order, ProductInOrder
 from orders.paypal import paypal, PayPalUnavailable, PayPalErrorResponse
 from mail.models import Message
 from products.models import Product
+from buybay.views import json_response
 
 
 def cart(request):
     """View and edit the user's shopping cart."""
-    ProductInOrderFormSet = modelformset_factory(
-        ProductInOrder,
-        fields=('quantity',),
-        max_num=0,
-        extra=0,
-    )
     order = Order.get_or_create(request)
+    donation_form = DonationForm(instance=order)
 
     if request.method == 'POST':
-        # Update the cart quantities
-        formset = ProductInOrderFormSet(request.POST, queryset=order.productinorder_set.all())
-        if formset.is_valid():
-            formset.save()
-            messages.success(request, 'Updated your shopping cart quantities.')
-        else:
-            messages.error(request, 'Could not update your cart quantities. Please try again.')
-    else:
-        formset = ProductInOrderFormSet(queryset=order.productinorder_set.all())
+        donation_form = DonationForm(request.REQUEST, instance=order)
+        if donation_form.is_valid():
+            donation_form.save()
+            return HttpResponseRedirect(reverse('orders.views.purchase'))
 
-    # Add the forms into the cart data structure
     cart = order.get_as_cart()
-    for i, form in enumerate(formset.forms):
-        cart['products'][i]['quantity_form'] = form
-    cart['management_form'] = formset.management_form
 
     return render_to_response('orders/cart.html', {
         'cart': cart,
+        'donation_form': donation_form,
     }, context_instance=RequestContext(request))
+
+@json_response
+def update_cart(request):
+    """Updates the user's shopping cart."""
+    order = Order.get_or_create(request)
+    donation_form = DonationForm(request.REQUEST, instance=order)
+    if donation_form.is_valid():
+        donation_form.save()
+        return order.get_as_cart()
+    return False
 
 def add(request, product_slug=None):
     """Add a product to the cart."""

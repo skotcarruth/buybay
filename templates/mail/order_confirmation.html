@@ -20,6 +20,7 @@
   Subtotal: ${{ cart.subtotal|floatformat:2|intcomma }}<br/>
   Tax: ${{ cart.tax|floatformat:2|intcomma }}<br/>
   Shipping: ${{ cart.shipping|floatformat:2|intcomma }}<br/>
+  {% if cart.donation %}Donation: ${{ cart.donation|floatformat:2|intcomma }}<br/>{% endif %}
   Total: ${{ cart.total|floatformat:2|intcomma }}<br/>
 </p>
 {% endwith %}

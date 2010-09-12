@@ -16,6 +16,7 @@ class Order(models.Model):
 
     session_id = models.CharField(max_length=40, blank=True, null=True)
     products = models.ManyToManyField('products.Product', through='ProductInOrder')
+    donation = models.PositiveIntegerField(default=0)
     status = models.IntegerField(choices=STATUS_CHOICES, default=SHOPPING_CART)
 
     created_ts = models.DateTimeField('Created', auto_now_add=True)
@@ -72,7 +73,8 @@ class Order(models.Model):
             cart['subtotal'] += product_in_cart['total_price']
         cart['tax'] = self.get_tax_amount(cart['subtotal'])
         cart['shipping'] = self.get_shipping_amount(self.get_total_items())
-        cart['total'] = cart['subtotal'] + cart['tax'] + cart['shipping']
+        cart['donation'] = self.donation
+        cart['total'] = cart['subtotal'] + cart['tax'] + cart['shipping'] + cart['donation']
         return cart
 
     def get_tax_amount(self, subtotal):

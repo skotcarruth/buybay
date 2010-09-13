@@ -490,7 +490,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 	z-index:1;
 	margin:0;
 }
-#addToCart a{
+#addToCart .button{
 	line-height:33px;
 	background-color:#f15831;
 	height:33px;

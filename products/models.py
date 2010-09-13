@@ -115,6 +115,12 @@ class Product(models.Model):
     def get_absolute_url(self):
         return ('products.views.product', (), {'product_slug': self.slug})
 
+    def can_be_purchased(self):
+        """Returns whether the product is currently available for purchase."""
+        for_sale = self.status == self.FOR_SALE
+        available = self.current_quantity < self.max_quantity
+        return for_sale and available
+
     def active_artists(self):
         return self.artists.filter(is_active=True)
 

@@ -52,21 +52,23 @@ def add(request, product_slug=None):
     """Add a product to the cart."""
     product = get_object_or_404(Product.objects.active(), slug=product_slug)
     order = Order.get_or_create(request)
-
-    # Check if the product is already in the order
-    product_in_order = order.productinorder_set.filter(product=product).all()
-    if len(product_in_order):
-        # Disallow adding more than one of any product
-        messages.warning(request, 'You can only add one of each product to your cart.')
-        # # Add 1 to the quantity of that product
-        # product_in_order = product_in_order[0]
-        # product_in_order.quantity += 1
-        # messages.success(request, 'Added another "%s" to your cart.' % product.name)
+    if product.can_be_purchased():
+        # Check if the product is already in the order
+        product_in_order = order.productinorder_set.filter(product=product).all()
+        if len(product_in_order):
+            # Disallow adding more than one of any product
+            messages.warning(request, 'You can only add one of each product to your cart.')
+            # # Add 1 to the quantity of that product
+            # product_in_order = product_in_order[0]
+            # product_in_order.quantity += 1
+            # messages.success(request, 'Added another "%s" to your cart.' % product.name)
+        else:
+            # Add the product to the order
+            product_in_order = ProductInOrder(order=order, product=product)
+            messages.success(request, 'Added "%s" to your cart.' % product.name)
+            product_in_order.save()
     else:
-        # Add the product to the order
-        product_in_order = ProductInOrder(order=order, product=product)
-        messages.success(request, 'Added "%s" to your cart.' % product.name)
-        product_in_order.save()
+        messages.error(request, 'This product is not currently available for purchase.')
 
     # Redirect to the shopping cart
     return HttpResponseRedirect(reverse('orders.views.cart'))

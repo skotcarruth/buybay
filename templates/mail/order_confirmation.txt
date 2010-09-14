@@ -1,0 +1,23 @@
+{% load humanize %}Dear {{ order.user_shiptoname }},
+
+Thank you for your order! This email is to confirm that we have received your payment and will ship your order as soon as it's ready. Please allow 4-8 weeks for delivery. 
+
+Your order:{% with order.get_as_cart as cart %}{% for product_in_cart in cart.products %}
+{{ product_in_cart.quantity }} x {{ product_in_cart.product.name }} = ${{ product_in_cart.total_price|floatformat:2|intcomma }}{% endfor %}
+--------
+Subtotal: ${{ cart.subtotal|floatformat:2|intcomma }}
+Tax: ${{ cart.tax|floatformat:2|intcomma }}
+Shipping: ${{ cart.shipping|floatformat:2|intcomma }}{% if cart.donation %}
+Donation: ${{ cart.donation|floatformat:2|intcomma }}{% endif %}
+Total: ${{ cart.total|floatformat:2|intcomma }}{% endwith %}
+
+Shipping to: 
+{{ order.user_shiptoname }}
+{{ order.user_shiptostreet }}{% if order.order.user_shiptostreet2 %}
+{{ order.user_shiptostreet2 }}{% endif%}
+{{ order.user_shiptocity }}, {{ order.user_shiptostate }} {{ order.user_shiptozip }}
+
+If you have any questions or concerns about your order, please email us at orders@buythebay.org and include your order reference number (#{{ order.id }}). 
+
+Thanks for your support!
+Buy the Bay

@@ -53,7 +53,7 @@ class PayPalService(object):
             'ALLOWNOTE': 0,
             'PAYMENTREQUEST_0_AMT': '%.2f' % cart['total'],
             'PAYMENTREQUEST_0_CURRENCYCODE': 'USD',
-            'PAYMENTREQUEST_0_ITEMAMT': '%.2f' % cart['subtotal'],
+            'PAYMENTREQUEST_0_ITEMAMT': '%.2f' % (cart['subtotal'] + cart['donation']),
             'PAYMENTREQUEST_0_SHIPPINGAMT': '%.2f' % cart['shipping'],
             'PAYMENTREQUEST_0_TAXAMT': '%.2f' % cart['tax'],
             'PAYMENTREQUEST_0_PAYMENTACTION': 'Sale',
@@ -69,6 +69,15 @@ class PayPalService(object):
                     Site.objects.get_current().domain,
                     product_in_cart['product'].get_absolute_url()),
             })
+        # Add the optional donation to the params
+        if cart['donation']:
+            i = len(cart['products'])
+            params.update({
+                'L_PAYMENTREQUEST_0_NAME%d' % i: 'Donation',
+                'L_PAYMENTREQUEST_0_AMT%d' % i: '%.2f' % cart['donation'],
+                'L_PAYMENTREQUEST_0_QTY%d' % i: 1,
+            })
+        # Hit the PayPal API
         url = '%s?%s' % (settings.PAYPAL_SERVER, urllib.urlencode(params))
         response = self._query_url(url)
         token = response['TOKEN']

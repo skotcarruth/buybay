@@ -4,11 +4,56 @@
 {% block title %}Shopping Cart | {{ block.super }}{% endblock %}
 {% block pageClass %}cart{% endblock %}
 
+{% block extrahead %}
+  {{ block.super }}
+  <script type="text/javascript">
+    // Set up extra donation field interactions
+    $(function() {
+      function currency(amount) {
+        // Takes an int or float and converts it to a string in the form '1.23'
+        var dollars = '' + Math.floor(amount);
+        var cents = Math.round(amount * 100) % 100;
+        cents = (cents < 10) ? '0' + cents : '' + cents;
+        return dollars + '.' + cents;
+      }
+
+      // Handle changes to the donation amount
+      $('#id_donation').change(function() {
+        // Update the cart on the server
+        var serialized_form = $('#purchaseForm').serialize();
+        $.getJSON('{% url orders.views.update_cart %}?' + serialized_form, function(data, textStatus) {
+          // Update the totals on the page
+          if (data) {
+            $('#cartSubtotal span.amount').text(currency(data.subtotal));
+            $('#cartTax span.amount').text(currency(data.tax));
+            $('#cartShipping span.amount').text(currency(data.shipping));
+            if (data.donation) {
+              $('#cartDonation').show();
+              $('#cartDonation span.amount').text(currency(data.donation));
+            }
+            else {
+              $('#cartDonation').hide();
+              $('#cartDonation span.amount').text(currency(0));
+            }
+            $('#cartTotal span.amount').text(currency(data.total));
+          }
+        });
+      });
+
+      // Reset to 0 when clicking to remove
+      $('#removeDonation').click(function() {
+        $('#id_donation').val('0').change();
+        return false;
+      });
+    });
+  </script>
+{% endblock %}
+
 {% block body %}
   <h1 id="yourcart">Shopping Cart</h1>
 
+<form id="purchaseForm" method="POST" action="{% url orders.views.cart %}">
 <section id="cartInfo">
-<form method="POST" action="{% url orders.views.cart %}">
     {% csrf_token %}
     {{ cart.management_form }}
     <table id="cartTable">
@@ -32,24 +77,46 @@
           <td class="itemPrice" valign="middle">${{ product_in_cart.total_price|floatformat:2|intcomma }}</td>
           <td class="itemRemove" valign="middle"><a href="{% url orders.views.remove product_slug=product_in_cart.product.slug %}">X</a></td>
         </tr>
-      {% empty %}
-        <tr>
-          <td colspan="5">No products in cart</td>
-        </tr>
       {% endfor %}
+      <tr class="row">
+        <td class="itemDetails" valign="middle"><h3>Donation to Buy the Bay</h3></td>
+        <td class="itemQty" valign="middle">&nbsp;</td>
+        <td class="itemPrice" valign="middle">{{ donation_form.donation }}</td>
+        <td class="itemRemove" valign="middle"><a href="#" id="removeDonation">X</a></td>
+      </tr>
 	</tbody>
     </table>
     <p><!--<input type="submit" value="Update Cart" />--></p>
-  </form>
 </section>
 
 <section id="priceDetails">
 <ul>
-  <li><span>Subtotal:</span> ${{ cart.subtotal|floatformat:2|intcomma }}</li>
-  <li><span>Tax:</span> ${{ cart.tax|floatformat:2|intcomma }}</li>
-  <li><span>Shipping:</span> ${{ cart.shipping|floatformat:2|intcomma }}</li>
-  <li><span id="total">Total:</span> ${{ cart.total|floatformat:2|intcomma }}</li>
-	<li id="checkoutPaypal"><a href="{% url orders.views.purchase %}"><img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" /></a></li>
+  <li id="cartSubtotal">
+    <span class="label">Subtotal:</span>
+    $<span class="amount">{{ cart.subtotal|floatformat:2|intcomma }}</span>
+  </li>
+  <li id="cartTax">
+    <span class="label">Tax:</span>
+    $<span class="amount">{{ cart.tax|floatformat:2|intcomma }}</span>
+  </li>
+  <li id="cartShipping">
+    <span class="label">Shipping:</span>
+    $<span class="amount">{{ cart.shipping|floatformat:2|intcomma }}</span>
+  </li>
+  <li id="cartDonation" class="{% if not cart.donation %}hidden{% endif %}">
+    <span class="label">Donation:</span>
+    $<span class="amount">{{ cart.donation|floatformat:2|intcomma }}</span>
+  </li>
+  <li id="cartTotal">
+    <span id="total" class="label">Total:</span>
+    $<span class="amount">{{ cart.total|floatformat:2|intcomma }}</span>
+  </li>
+  <li id="checkoutPaypal">
+    <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" />
+  </li>
 </ul>
 </section>
+
+</form>
+
 {% endblock %}

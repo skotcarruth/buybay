@@ -25,7 +25,10 @@ class OrderAdmin(admin.ModelAdmin):
             'fields': ('paypal_transactionid', 'paypal_ordertime',
                 'paypal_paymentstatus', 'paypal_paymenttype', 'paypal_amt',
                 'paypal_feeamt',),
-        })
+        }),
+        ('Donation Options', {
+            'fields': ('donation',),
+        }),
     )
     readonly_fields = ('id', 'status', 'created_ts', 'user_email',
         'user_salutation', 'user_firstname', 'user_middlename',
@@ -34,7 +37,7 @@ class OrderAdmin(admin.ModelAdmin):
         'user_shiptostate', 'user_shiptozip', 'user_shiptocountrycode',
         'user_shiptophonenum', 'paypal_transactionid', 'paypal_ordertime',
         'paypal_paymentstatus', 'paypal_paymenttype', 'paypal_amt',
-        'paypal_feeamt',)
+        'paypal_feeamt', 'donation',)
     inlines = [ProductInOrderInline]
     list_display = ('id', 'status', 'get_total_items', 'get_total_price_display', 'created_ts',)
     list_filter = ('status', 'created_ts',)

@@ -2,6 +2,7 @@ from datetime import datetime
 from decimal import Decimal
 import json
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
@@ -9,62 +10,65 @@ from django.forms.models import modelformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
+from django.template.loader import render_to_string
 
+from orders.forms import DonationForm
 from orders.models import Order, ProductInOrder
 from orders.paypal import paypal, PayPalUnavailable, PayPalErrorResponse
+from mail.models import Message
 from products.models import Product
+from buybay.views import json_response
 
 
 def cart(request):
     """View and edit the user's shopping cart."""
-    ProductInOrderFormSet = modelformset_factory(
-        ProductInOrder,
-        fields=('quantity',),
-        max_num=0,
-        extra=0,
-    )
     order = Order.get_or_create(request)
+    donation_form = DonationForm(instance=order)
 
     if request.method == 'POST':
-        # Update the cart quantities
-        formset = ProductInOrderFormSet(request.POST, queryset=order.productinorder_set.all())
-        if formset.is_valid():
-            formset.save()
-            messages.success(request, 'Updated your shopping cart quantities.')
-        else:
-            messages.error(request, 'Could not update your cart quantities. Please try again.')
-    else:
-        formset = ProductInOrderFormSet(queryset=order.productinorder_set.all())
+        donation_form = DonationForm(request.REQUEST, instance=order)
+        if donation_form.is_valid():
+            donation_form.save()
+            return HttpResponseRedirect(reverse('orders.views.purchase'))
 
-    # Add the forms into the cart data structure
     cart = order.get_as_cart()
-    for i, form in enumerate(formset.forms):
-        cart['products'][i]['quantity_form'] = form
-    cart['management_form'] = formset.management_form
 
     return render_to_response('orders/cart.html', {
         'cart': cart,
+        'donation_form': donation_form,
     }, context_instance=RequestContext(request))
+
+@json_response
+def update_cart(request):
+    """Updates the user's shopping cart."""
+    order = Order.get_or_create(request)
+    donation_form = DonationForm(request.REQUEST, instance=order)
+    if donation_form.is_valid():
+        donation_form.save()
+        return order.get_as_cart()
+    return False
 
 def add(request, product_slug=None):
     """Add a product to the cart."""
     product = get_object_or_404(Product.objects.active(), slug=product_slug)
     order = Order.get_or_create(request)
-
-    # Check if the product is already in the order
-    product_in_order = order.productinorder_set.filter(product=product).all()
-    if len(product_in_order):
-        # Disallow adding more than one of any product
-        messages.warning(request, 'You can only add one of each product to your cart.')
-        # # Add 1 to the quantity of that product
-        # product_in_order = product_in_order[0]
-        # product_in_order.quantity += 1
-        # messages.success(request, 'Added another "%s" to your cart.' % product.name)
+    if product.can_be_purchased():
+        # Check if the product is already in the order
+        product_in_order = order.productinorder_set.filter(product=product).all()
+        if len(product_in_order):
+            # Disallow adding more than one of any product
+            messages.warning(request, 'You can only add one of each product to your cart.')
+            # # Add 1 to the quantity of that product
+            # product_in_order = product_in_order[0]
+            # product_in_order.quantity += 1
+            # messages.success(request, 'Added another "%s" to your cart.' % product.name)
+        else:
+            # Add the product to the order
+            product_in_order = ProductInOrder(order=order, product=product)
+            messages.success(request, 'Added "%s" to your cart.' % product.name)
+            product_in_order.save()
     else:
-        # Add the product to the order
-        product_in_order = ProductInOrder(order=order, product=product)
-        messages.success(request, 'Added "%s" to your cart.' % product.name)
-        product_in_order.save()
+        messages.error(request, 'This product is not currently available for purchase.')
 
     # Redirect to the shopping cart
     return HttpResponseRedirect(reverse('orders.views.cart'))
@@ -101,8 +105,10 @@ def purchase(request):
     except PayPalUnavailable:
         messages.error(request, 'Sorry, we were unable to reach PayPal at the moment. Please try again later.')
     except PayPalErrorResponse as e:
-        messages.error(request, 'Sorry, there was an error with PayPal. Please contact us for more info.')
-        print e
+        if settings.DEBUG:
+            raise
+        else:
+            messages.error(request, 'Sorry, there was an error with PayPal. Please contact us for more info.')
 
     # Redirect to the Paypal checkout (or back to the cart if errors)
     return HttpResponseRedirect(next_url)
@@ -120,7 +126,15 @@ def confirmation(request):
     details = paypal.get_express_checkout_details(token)
 
     # Confirm the transaction with PayPal, and update the order
-    payment = paypal.do_express_checkout_payment(token, payer_id, order.get_as_cart())
+    print order.get_as_cart()
+    try:
+        payment = paypal.do_express_checkout_payment(token, payer_id, order.get_as_cart())
+    except PayPalErrorResponse:
+        if settings.DEBUG:
+            raise
+        else:
+            messages.error(request, 'Sorry, there was an error with PayPal. Please contact us for more info.')
+            return HttpResponseRedirect(reverse('orders.views.cart'))
 
     # Finalize the order with payment details
     order.user_email = details.get('EMAIL', '')
@@ -152,7 +166,19 @@ def confirmation(request):
     order.paypal_details_dump = json.dumps(details)
     order.paypal_payment_dump = json.dumps(payment)
 
+    # Mark the order as paid
+    order.status = Order.PAYMENT_CONFIRMED
     order.save()
+
+    # Create a confirmation email to be sent
+    context = {'order': order}
+    message = Message()
+    message.to_email = order.user_email
+    message.from_email = settings.DEFAULT_FROM_EMAIL
+    message.subject = render_to_string('mail/order_confirmation_subject.txt', context)
+    message.body_text = render_to_string('mail/order_confirmation.txt', context)
+    message.body_html = render_to_string('mail/order_confirmation.html', context)
+    message.save()
 
     # Clear the user's shopping cart
     request.session['order_id'] = None

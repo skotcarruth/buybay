@@ -572,7 +572,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 #priceDetails ul li{display:block;padding:10px 0;text-align:right;}
 #priceDetails ul li.hidden{display:none;}
 #priceDetails ul li span.label{font-size:.8em;color:#f15831;text-align:left;text-transform:uppercase;display:block;width:160px;padding-right:20px;float:left;}
-
+#cartDonation span.label{color:#72cadd;}
 
 /* ~~~~~ THANK YOU PAGE ~~~~~ */
 .thankyouPg h2{font-size:2.1em;color:#595959;margin-bottom:60px;}

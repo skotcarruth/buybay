@@ -22,7 +22,7 @@
  	{% if artist.image %}<figure id="artistPhoto"><img src="{% thumbnail artist.image 600x600 %}" alt="{{ artist.name }} Photo" /></figure>{% endif %}
      <h2>{{ artist.name }}</h2>
      <p>{{ artist.description }}</p>
-		<p>See {{ artist.name }}&rsquo;s products: {% for product in artist.active_products.all %}<a href="{{ product.get_absolute_url }}">{{ product.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>	
+	{% if artist.active_products.all %}<p>See {{ artist.name }}&rsquo;s products: {% for product in artist.active_products.all %}<a href="{{ product.get_absolute_url }}">{{ product.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>{% endif %}	
  </article>
  <aside id="aboutFooter">
  	

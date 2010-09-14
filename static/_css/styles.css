@@ -684,4 +684,10 @@ a[href$=".doc"]:after {content: " (DOC)";}
 .addthis_default_style .at300b, .addthis_default_style .at300m{padding:0 5px;}
 #spreadWord .addthis_toolbox.addthis_default_style span{margin-top:8px;}
 #spreadWord .addthis_default_style .at300b, #spreadWord .addthis_default_style .at300m{padding:0 4px;}
-	
+
+/* Facebook STYLES */
+#commentForm h2{margin-bottom:10px;}
+#commentUser{margin:10px 0;}
+#commentUser img{float:left;margin-right:5px;}
+#loggedIn form{clear:both;padding-top:10px;}
+#loggedIn form label{display:block;width:100%;margin:10px 0 1px 0;}	

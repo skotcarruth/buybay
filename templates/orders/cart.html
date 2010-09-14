@@ -78,12 +78,7 @@
           <td class="itemRemove" valign="middle"><a href="{% url orders.views.remove product_slug=product_in_cart.product.slug %}">X</a></td>
         </tr>
       {% endfor %}
-      <tr class="row">
-        <td class="itemDetails" valign="middle"><h3>Donation to Buy the Bay</h3></td>
-        <td class="itemQty" valign="middle">&nbsp;</td>
-        <td class="itemPrice" valign="middle">{{ donation_form.donation }}</td>
-        <td class="itemRemove" valign="middle"><a href="#" id="removeDonation">X</a></td>
-      </tr>
+      
 	</tbody>
     </table>
     <p><!--<input type="submit" value="Update Cart" />--></p>
@@ -103,9 +98,9 @@
     <span class="label">Shipping:</span>
     $<span class="amount">{{ cart.shipping|floatformat:2|intcomma }}</span>
   </li>
-  <li id="cartDonation" class="{% if not cart.donation %}hidden{% endif %}">
-    <span class="label">Donation:</span>
-    $<span class="amount">{{ cart.donation|floatformat:2|intcomma }}</span>
+  <li id="cartDonation">
+    <span class="label">Donation to Buy the Bay:</span>
+    $<span class="amount">{{ donation_form.donation }}</span>
   </li>
   <li id="cartTotal">
     <span id="total" class="label">Total:</span>

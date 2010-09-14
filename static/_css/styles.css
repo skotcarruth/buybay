@@ -409,6 +409,11 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 	color:#787878;
 	text-transform:uppercase;
 }
+
+#commentUser{margin-top:15px;}
+#commentUser img{vertical-align:middle;margin-right:5px;}
+#commentUser span{}
+
 .comment{overflow:hidden;padding-bottom:15px;margin-bottom:15px;border-bottom:1px solid #787878;}
 .comment p{
 	width:400px;

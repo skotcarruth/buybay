@@ -113,13 +113,13 @@
 
 </div><!--End Container-->
 <script type="text/javascript">
-	var addthis_share = 
-	{ 
-	// ...
-	    templates: {
-		                   twitter: 'check out {{url}} (from @buythebay)',
-		               }
-	}
+var addthis_share = 
+{ 
+    templates: {
+	     twitter: 'check out {{ request.get_host|iriencode }}{{ request.path_info|iriencode }} (via @buythebay)',
+	 }
+}
+	
 </script>
 </body>
 </html>

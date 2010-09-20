@@ -80,13 +80,14 @@ body{
 #closeBtn{float:right;padding:4px 6px;background-color:#ccc;color:#fff;cursor:pointer;display:none;}
 #firstTime{margin-top:30px;clear:both;overflow:hidden;margin-bottom:15px;}
 #firstTime p{
-	font-size:2.4em;
+	font-size:2.1em;
 	color:#595959;
 	line-height:1.59em;
 	display:none;
 	clear:both;
+	margin-bottom:10px;
 }
-#firstTime p a{color:#299cc1;}
+#firstTime p a{color:#299cc1;background:url(../_images/icons/blue-triangle.png) no-repeat top right;padding-right:15px;}
 #firstCarat{
     display:none;
     float:right;
@@ -347,7 +348,7 @@ p.disclaimer{font-size:1em;padding-top:20px;font-style:italic;}
 
 #collectionContent .product{
 	width:299px;
-	margin:0 20px 50px 0;
+	margin:0 20px 25px 0;
 	float:left;
 	position:relative;
 }
@@ -357,7 +358,7 @@ p.disclaimer{font-size:1em;padding-top:20px;font-style:italic;}
 	height:199px;
 	overflow:hidden;
 }
-#collectionContent .product .productPhoto img{
+#collectionContent .product .productPhoto img, #collectionContent .product .productComingSoon, #collectionContent .product .productSoldOut img {
 	margin-bottom:15px;
 }
 #collectionContent .product .productPhoto img.overPhoto{
@@ -365,6 +366,7 @@ p.disclaimer{font-size:1em;padding-top:20px;font-style:italic;}
     top:0;left:0;
     display:none;
 }
+
 
 h2.productTitle{font-size:2.1em;color:#252525;text-transform:uppercase;margin-bottom:0px;font-weight:normal;font-family:"proxima-nova-extra-condensed-1", helvetica, arial, sans-serif;}
 p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
@@ -545,6 +547,10 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 #aboutProjectBlurb p a{color:#fff;text-decoration:underline;}
 
 /* ~~~~~ CART PAGE ~~~~~ */
+#purchaseForm{
+    overflow:hidden;
+    clear:both;
+}
 #cartInfo{
     width:700px;
     margin-left:80px;
@@ -572,8 +578,8 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 #priceDetails ul li{display:block;padding:10px 0;text-align:right;}
 #priceDetails ul li.hidden{display:none;}
 #priceDetails ul li span.label{font-size:.8em;color:#f15831;text-align:left;text-transform:uppercase;display:block;width:160px;padding-right:20px;float:left;}
-#cartDonation span.label{color:#72cadd;}
-
+#priceDetails ul li#cartDonation span.label, #priceDetails ul li#cartDonation{color:#72cadd;}
+#priceDetails ul li#cartDonation span.label{padding-bottom:10px;}
 /* ~~~~~ THANK YOU PAGE ~~~~~ */
 .thankyouPg h2{font-size:2.1em;color:#595959;margin-bottom:60px;}
 
@@ -598,9 +604,9 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 a {text-decoration:none; color:#101010;}
 a:hover {color: #004A80;}
 a.selected{color:;}
-h1 {font-size: ; color:  ; margin-bottom: ; font-weight:bold;}
-h2 {font-size: ; color:  ; margin-bottom: ; font-weight:normal;}
-h3 {font-size: ; font-weight: bold; color:  ; margin: ;font-weight:normal;}
+h1 {font-weight:bold;}
+h2 {font-weight:normal;}
+h3 {font-weight: bold; font-weight:normal;}
 p {font-size: 1.1em;line-height:1.5em;margin-bottom:20px;}
 
 #spreadWord h3{color:#fff;text-transform:uppercase;font-size:1em;float:left;}
@@ -650,6 +656,10 @@ h2#sortingByTag span{color:#f15831;}
 .clear {clear: both;}
 em{font-style:italic;}
 strong{font-weight:bold;}
+
+ul#messages li{font-size:1.4em;margin-bottom:10px;}
+ul#messages li.success{color:#40b92c;}
+ul#messages li.error{color:#b61111;}
 
 .transparent{  
     filter:alpha(opacity=90);  

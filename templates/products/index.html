@@ -34,8 +34,21 @@
     <section id="collectionContent">
     	{% for product in products %}
         <article class="product {% cycle '' 'two' %}">
-        	<a href="{{ product.get_absolute_url }}" class="productPhoto"><img src="{% thumbnail product.main_image_1 299x199 crop %}" class="startPhoto" alt="{{ product.name }}"><img src="{% thumbnail product.main_image_2 299x199 crop %}" class="overPhoto" alt="{{ product.name }}"></a>
+        	{% if product.status == 2 %}
+			<a href="{{ product.get_absolute_url }}" class="productPhoto"><img src="{% thumbnail product.main_image_1 299x199 crop %}" class="startPhoto" alt="{{ product.name }}"><img src="{% thumbnail product.main_image_2 299x199 crop %}" class="overPhoto" alt="{{ product.name }}"></a>
             <h2 class="productTitle"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h2>
+			{% else %}
+			{% if product.status == 1 %}
+				<img src="{{ MEDIA_URL }}_images/coming_soon.png" class="productComingSoon" alt="Product is Coming Soon">
+	            <h2 class="productTitle">{{ product.name }}</h2>
+			{% else %}
+			{% if product.status == 3 %}
+				<a href="{{ product.get_absolute_url }}" class="productSoldOut">
+					<img src="{{ MEDIA_URL }}_images/sold_out.png" alt="Product is Sold Out">
+				</a>
+	            <h2 class="productTitle"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h2>
+	
+			{% endif %}{% endif %}{% endif %}
             <p class="productArtist">design by {% for artist in product.active_artists.all %}<a href="{{ artist.get_absolute_url }}">{{ artist.name }}</a>{% endfor %}</p>
 			<figure class="likeItem"><fb:like href="{{ request.get_host|iriencode }}{{ product.get_absolute_url }}" layout="button_count" show_faces="false" width="30" action="like"></fb:like></figure>
         </article>

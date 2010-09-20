@@ -106,17 +106,7 @@
           	<h2>Comments ({{ comments|length }})</h2>
 			<a href="#commentForm" id="addComment">Add a Comment</a>
           </header>
-          {% for comment in comments %}
-            <article class="comment">
-            	<p>{{ comment.comment }}</p>
-              <address class="authorMeta">
-                <img src="{{ comment.thumb_url }}" alt="Mugshot" class="fr" />
-                <span class="author">{{ comment.name }}</span>
-                <span class="timeOfComment">{{ comment.created_ts|timesince }} ago</span>
-              </address>
-            </article>
-          {% endfor %}
-          <div id="commentForm">
+		<section id="commentForm">
             <h2>Add a Comment</h2>
             <div id="loggedOut">
               <p>Before you can comment, we need to get your name from Facebook.</p>
@@ -133,7 +123,18 @@
                 <p><input type="submit" value="Submit Comment" /></p>
               </form>
             </div>
-          </div>
+          </section>
+          {% for comment in comments %}
+            <article class="comment">
+            	<p>{{ comment.comment }}</p>
+              <address class="authorMeta">
+                <img src="{{ comment.thumb_url }}" alt="Mugshot" class="fr" />
+                <span class="author">{{ comment.name }}</span>
+                <span class="timeOfComment">{{ comment.created_ts|timesince }} ago</span>
+              </address>
+            </article>
+          {% endfor %}
+          
         </section>
     </section>
 
@@ -187,13 +188,20 @@
          <figure id="spreadWord">
         	<h3>Share this!</h3>
             	<!-- AddThis Button BEGIN -->
-				<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+				
 		        <ul class="socialLinks addthis_toolbox addthis_default_style">
 		        	<li><a class="addthis_button_facebook">Facebook</a></li>
 		            <li><a class="addthis_button_twitter">Twitter</a></li>
 		            <li><a class="addthis_button_email">Email</a></li>
 					<!--<li><a href="http://www.addthis.com/bookmark.php?v=250&amp;username=philosophie" class="addthis_button_compact"></a></li>-->
 		        </ul>
+				<script type="text/javascript">
+
+				   var addthis_config = {
+					  data_track_clickback:true,
+				      data_ga_tracker: pageTracker
+				   };
+				</script>
 				<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=philosophie"></script>
 				<!-- AddThis Button END -->
         </figure>
@@ -243,7 +251,11 @@
 				        });
 				    }
 			    });
-
+				$("#commentForm").hide();
+				$("#addComment").click(
+					 function() {
+							$("#commentForm").slideToggle()
+						});
 			});
 
 		-->

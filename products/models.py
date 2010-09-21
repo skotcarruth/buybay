@@ -88,6 +88,7 @@ class Product(models.Model):
 
     # Deal and pricing info
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    tax_deductible = models.DecimalField(max_digits=10, decimal_places=2)
     min_quantity = models.PositiveIntegerField()
     max_quantity = models.PositiveIntegerField()
     current_quantity = models.PositiveIntegerField(default=0)

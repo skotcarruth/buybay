@@ -32,8 +32,8 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': ('name_image', 'main_image_1', 'main_image_2',),
         }),
         ('Payment Info', {
-            'fields': ('status', 'price', 'min_quantity', 'max_quantity',
-                'current_quantity',),
+            'fields': ('status', 'price', 'tax_deductible', 'min_quantity',
+                'max_quantity', 'current_quantity',),
         }),
         ('Metadata', {
             'fields': ('created_ts', 'updated_ts',),

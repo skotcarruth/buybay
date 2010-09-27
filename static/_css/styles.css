@@ -459,13 +459,14 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 }
 #artistCredit a{color:#787878;text-decoration:underline;}
 
+#productDetails{margin-bottom:20px;}
 #descTypeLinks{border-bottom:1px solid #787878;display:block;width:100%;padding-bottom:5px;margin-bottom:15px;}
 #descTypeLinks a{color:#717171;text-transform:uppercase;padding:5px 0;}
 #descTypeLinks a.selected{color:#101010;}
 #descTypeLinks #description{padding-right:10px;margin-right:10px;border-right:1px solid #787878;}
 .likeProduct{float:right;margin:-8px 0 0 50px;}
 
-#descCont p, #designCont p{color:#101010;font-size:1em;}
+#descCont p, #designCont p{color:#101010;font-size:1em;margin-bottom:10px;}
 #designCont{display:none;}
 
 #qtyRemaining{

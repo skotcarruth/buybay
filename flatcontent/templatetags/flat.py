@@ -1,7 +1,9 @@
+from __future__ import absolute_import
+
 from django import template
 from django.contrib.markup.templatetags import markup
 
-from buybay.flatcontent.models import Blurb
+from ..models import Blurb
 
 
 register = template.Library()

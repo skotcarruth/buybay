@@ -94,7 +94,7 @@ MIDDLEWARE_CLASSES = (
     'flatcontent.middleware.NewUserMiddleware',
 )
 
-ROOT_URLCONF = 'buybay.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_PATH, 'templates'),

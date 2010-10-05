@@ -1,6 +1,6 @@
 # Set BUYBAY_ROOT and PYTHONPATH to the root of the git repo on the server
 BUYBAY_ROOT=/var/www/buybay
-PYTHONPATH=/home/www/.virtualenvs/buybay/lib/python2.6/site-packages
+PYTHONPATH=/home/www/.virtualenvs/buybay/lib/python2.6/site-packages:/var/www/buybay
 DJANGO_SETTINGS_MODULE=settings
 
 # m h dom mon dow  command

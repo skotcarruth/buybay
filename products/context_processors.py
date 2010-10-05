@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.urlresolvers import resolve
+from django.core.urlresolvers import resolve, Resolver404
 
 from products.models import Tag
 
@@ -7,7 +7,10 @@ from products.models import Tag
 def tags(request):
     """Adds a list of product tags to the context."""
     # Don't waste the DB hits if it's not a products page
-    view, args, kwargs = resolve(request.path)
+    try:
+        view, args, kwargs = resolve(request.path)
+    except Resolver404:
+        return {}
     if view.__module__ != 'products.views':
         return {}
 

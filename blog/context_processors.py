@@ -1,12 +1,15 @@
 from datetime import timedelta
-from django.core.urlresolvers import resolve
+from django.core.urlresolvers import resolve, Resolver404
 from blog.models import Post, Tag
 
 
 def archive(request):
     """Adds a list of months in the blog archive."""
     # Don't waste the DB hits if it's not a blog page
-    view, args, kwargs = resolve(request.path)
+    try:
+        view, args, kwargs = resolve(request.path)
+    except Resolver404:
+        return {}
     if view.__module__ != 'blog.views':
         return {}
 
@@ -28,7 +31,10 @@ def archive(request):
 def tags(request):
     """Adds a list of product tags to the context."""
     # Don't waste the DB hits if it's not a products page
-    view, args, kwargs = resolve(request.path)
+    try:
+        view, args, kwargs = resolve(request.path)
+    except Resolver404:
+        return {}
     if view.__module__ != 'blog.views':
         return {}
 

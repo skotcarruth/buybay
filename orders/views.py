@@ -155,7 +155,6 @@ def confirmation(request):
     details = paypal.get_express_checkout_details(token)
 
     # Confirm the transaction with PayPal, and update the order
-    print order.get_as_cart()
     try:
         payment = paypal.do_express_checkout_payment(token, payer_id, order.get_as_cart())
     except PayPalErrorResponse:

@@ -46,7 +46,7 @@
 					<tr>
 						<td colspan="2"></td>
 						<td><strong style="font-weight: bold;">Total:</strong></td>
-						<td>{% if cart.donation %}Donation: ${{ cart.donation|floatformat:2|intcomma }}</td>
+						<td>{% if cart.donation %}Donation: ${{ cart.donation|floatformat:2|intcomma }}{% endif %}</td>
 					</tr>
 					{% endwith %}
 				</table>

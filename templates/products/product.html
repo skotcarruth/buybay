@@ -5,7 +5,7 @@
 {% block title %}{{ product.name }} | Collection | {{ block.super }}{% endblock %}
 {% block fbtitle %}{{ product.name }} on {{ block.super }}{% endblock %}
 {% block metadesc %}{{ product.description|slice:":155"  }}{% endblock %}
-{% block fbdesc %}{{ product.description|slice:":155"  }}{% endblock %}
+{% block fbdesc %}{{ product.description  }}{% endblock %}
 
 {% block pageClass %}detail{% endblock %}
 

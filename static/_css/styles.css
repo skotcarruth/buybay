@@ -582,17 +582,19 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 #priceDetails ul li#cartDonation span.label, #priceDetails ul li#cartDonation{color:#72cadd;}
 #priceDetails ul li#cartDonation span.label{padding-bottom:10px;}
 /* ~~~~~ THANK YOU PAGE ~~~~~ */
-.thankyouPg h2{font-size:2.1em;color:#595959;margin-bottom:60px;}
-
-#howtohelp li{font-size:2.1em;display:block;margin-bottom:10px;color:#595959;}
+.thankyou h2{font-size:1.8em;color:#595959;margin-bottom:20px;line-height:1.3em;}
+#howtohelp{margin:40px 0 200px;}
+#howtohelp li{font-size:2.1em;display:block;margin-bottom:20px;color:#595959;}
 #howtohelp li a{text-decoration:underline;color:#595959;font-weight:normal;}
 
 #howtohelp li a.colorLink{
     text-decoration:none;
     text-transform:uppercase;
     color:#fff;
-    padding:4px 8px;
+    padding:6px 8px;
     font-size:.52em;
+    margin-left:10px;
+    vertical-align:center;
 }
 #howtohelp li a.colorLink#fbShare{background-color:#bed630;}
 #howtohelp li a.colorLink#followUs{background-color:#f15831;}

@@ -39,6 +39,7 @@
   })();
 
 </script>
+
 {% block extrahead %}{% endblock %}
 </head>
 
@@ -112,6 +113,18 @@
 </footer>
 
 </div><!--End Container-->
+<script type="text/javascript">
+   var pageTracker;
+
+   _gaq.push(function() {
+      pageTracker = _gat._getTracker('UA-16643544-1');
+   });
+
+   var addthis_config = {
+      data_ga_tracker: pageTracker,
+      data_track_clickback: true
+   };
+</script>
 <script type="text/javascript" src="{{ MEDIA_URL }}_js/at-twitter-temp.js"></script>
 </body>
 </html>

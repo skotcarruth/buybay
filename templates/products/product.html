@@ -114,8 +114,8 @@
             <fb:login-button autologoutlink="true"></fb:login-button>
             <div id="loggedIn">
               <div id="commentUser">
-                <img src="" />
-                <span></span>
+                <!--<img src="" />
+                <span></span>-->
               </div>
               <form method="POST" action="{% url products.views.product product_slug=product.slug %}">
                 {% csrf_token %}
@@ -195,13 +195,7 @@
 		            <li><a class="addthis_button_email">Email</a></li>
 					<!--<li><a href="http://www.addthis.com/bookmark.php?v=250&amp;username=philosophie" class="addthis_button_compact"></a></li>-->
 		        </ul>
-				<script type="text/javascript">
-
-				   var addthis_config = {
-					  data_track_clickback:true,
-				      data_ga_tracker: pageTracker
-				   };
-				</script>
+				
 				<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=philosophie"></script>
 				<!-- AddThis Button END -->
         </figure>

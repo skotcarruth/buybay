@@ -198,6 +198,12 @@ def confirmation(request):
     order.status = Order.PAYMENT_CONFIRMED
     order.save()
 
+    # Increment the number of products sold
+    for product_in_order in order.productinorder_set.all():
+        product = product_in_order.product
+        product.current_quantity += product_in_order.quantity
+        product.save()
+
     # Create a confirmation email to be sent
     context = {'order': order}
     message = Message()

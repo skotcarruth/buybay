@@ -27,23 +27,9 @@
             $('#cartSubtotal span.amount').text(currency(data.subtotal));
             $('#cartTax span.amount').text(currency(data.tax));
             $('#cartShipping span.amount').text(currency(data.shipping));
-            if (data.donation) {
-              $('#cartDonation').show();
-              $('#cartDonation span.amount').text(currency(data.donation));
-            }
-            else {
-              $('#cartDonation').hide();
-              $('#cartDonation span.amount').text(currency(0));
-            }
             $('#cartTotal span.amount').text(currency(data.total));
           }
         });
-      });
-
-      // Reset to 0 when clicking to remove
-      $('#removeDonation').click(function() {
-        $('#id_donation').val('0').change();
-        return false;
       });
     });
   </script>

@@ -5,7 +5,7 @@
 {% block title %}{{ product.name }} | Collection | {{ block.super }}{% endblock %}
 {% block fbtitle %}{{ product.name }} on {{ block.super }}{% endblock %}
 {% block metadesc %}{{ product.description|slice:":155"  }}{% endblock %}
-{% block fbdesc %}{{ product.description|slice:":155"  }}{% endblock %}
+{% block fbdesc %}{{ product.description  }}{% endblock %}
 
 {% block pageClass %}detail{% endblock %}
 
@@ -114,8 +114,8 @@
             <fb:login-button autologoutlink="true"></fb:login-button>
             <div id="loggedIn">
               <div id="commentUser">
-                <img src="" />
-                <span></span>
+                <!--<img src="" />
+                <span></span>-->
               </div>
               <form method="POST" action="{% url products.views.product product_slug=product.slug %}">
                 {% csrf_token %}
@@ -195,20 +195,14 @@
 		            <li><a class="addthis_button_email">Email</a></li>
 					<!--<li><a href="http://www.addthis.com/bookmark.php?v=250&amp;username=philosophie" class="addthis_button_compact"></a></li>-->
 		        </ul>
-				<script type="text/javascript">
-
-				   var addthis_config = {
-					  data_track_clickback:true,
-				      data_ga_tracker: pageTracker
-				   };
-				</script>
+				
 				<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=philosophie"></script>
 				<!-- AddThis Button END -->
         </figure>
         
         <aside id="weRecommend">
 			{% if product.related_info_1 %}
-        	<h2>Customers who bought this also:</h2>
+        	<h2>Customers who considered this also:</h2>
             <ul>
             	{% if product.related_info_1 %}<li>{{ product.related_info_1 }}</li>{% endif %}
 				{% if product.related_info_2 %}<li>{{ product.related_info_2 }}</li>{% endif %}

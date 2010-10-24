@@ -26,7 +26,7 @@ class ProductAdmin(admin.ModelAdmin):
         ('Product Info', {
             'fields': ('name', 'slug', 'description', 'design',
                 'related_info_1', 'related_info_2', 'related_info_3',
-                'artists', 'tags',),
+                'artists', 'tags', 'order',),
         }),
         ('Main Images', {
             'fields': ('name_image', 'main_image_1', 'main_image_2',),

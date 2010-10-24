@@ -100,6 +100,7 @@ class Product(models.Model):
     gallery_media = generic.GenericRelation(GalleryMedia)
 
     # Metadata and settings
+    order = models.PositiveIntegerField(default=0)
     status = models.IntegerField(choices=STATUS_CHOICES, default=0)
     created_ts = models.DateTimeField(auto_now_add=True)
     updated_ts = models.DateTimeField(auto_now=True)
@@ -107,7 +108,7 @@ class Product(models.Model):
     objects = ProductManager()
 
     class Meta:
-        ordering = ['-created_ts']
+        ordering = ['order', '-created_ts']
 
     def __unicode__(self):
         return u'%s ($%.2f, %s)' % (self.name, self.price, self.get_status_display())

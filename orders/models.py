@@ -15,7 +15,7 @@ class Order(models.Model):
     )
 
     session_id = models.CharField(max_length=40, blank=True, null=True)
-    products = models.ManyToManyField('products.Product', through='ProductInOrder')
+    products = models.ManyToManyField('products.Product', through='ProductInOrder', related_name='order_products')
     donation = models.PositiveIntegerField(default=0)
     status = models.IntegerField(choices=STATUS_CHOICES, default=SHOPPING_CART)
 

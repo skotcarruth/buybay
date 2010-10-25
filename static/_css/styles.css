@@ -170,6 +170,10 @@ body{
     -khtml-opacity: 0.7;  
     opacity: 0.7;
 }
+@-moz-document url-prefix()
+{
+#featControls li a { padding:5px 6px; }
+}
 #featControls li.current a{
     background-color:#5DC9E1;
     color:#fff;
@@ -217,7 +221,7 @@ opacity: 0.9;bottom:0;left:0;padding:10px 8px;width:206px;z-index:2;margin-botto
 
 
 /* ~~~~~ ABOUT PAGES ~~~~~ */
-#content{overflow:hidden;margin-bottom:30px;}
+#content{margin-bottom:30px;}
 .about#content, .artists#content, .news#content, .collection#content, .cart#content, .thankyou#content{width:780px;}
 .about h1, .artists h1, .news h1, .collection h1, .thankyou h1, .cart h1{float:right;margin-bottom:25px;}
 .about #sidebar, .artists #sidebar, .news #sidebar{
@@ -518,8 +522,12 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 #weRecommend{margin:0px 0 25px;clear:both;}
 #weRecommend h2{
 	margin-bottom:15px;
-	background-image:url(../_images/headers/subhead/customers-also-bought.png);
-	width:215px;height:15px;
+	color:#101010;
+	text-transform:uppercase;
+	font-size:1.8em;
+	font-family:"proxima-nova-extra-condensed-1", helvetica, arial, sans-serif;
+/*	background-image:url(../_images/headers/subhead/customers-also-bought.png);
+	width:215px;height:15px;*/
 }
 
 #weRecommend ul li{
@@ -616,7 +624,7 @@ p {font-size: 1.1em;line-height:1.5em;margin-bottom:20px;}
 
 h1#artistsHeader, h1#collectionHeader, h1#about-project, h1#whatsNewHeader, h1#faq, h1#heal-the-bay, h1#get-involved, h1#thankyou, h1#yourcart,
 h1#contact-us, h1#site-info,
-#spreadWordHome h3, #aboutProjectBlurb h2, #weRecommend h2,
+#spreadWordHome h3, #aboutProjectBlurb h2,
 .learnMoreItem h2 a
 {
 	text-indent:-9999px;

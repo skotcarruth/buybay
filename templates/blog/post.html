@@ -3,7 +3,6 @@
 
 {% block title %}{{ post.title }} | {{ block.super }}{% endblock %}
 {% block metadesc %}{{ post.body|slice:":155" }}{% endblock %}
-{% block fbdesc %}{{ post.body|slice:":155" }}{% endblock %}
 {% block pageClass %}news{% endblock %}
 
 {% block blog_body %}

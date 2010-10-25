@@ -19,11 +19,11 @@ EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = 'noreply@buythebay.com'
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
-PAYPAL_SERVER = 'https://api-3t.sandbox.paypal.com/nvp'
-PAYPAL_CHECKOUT_URL = 'https://www.sandbox.paypal.com/webscr'
-PAYPAL_USER = 'merch_1281066320_biz_api1.gmail.com'
-PAYPAL_PASS = '1281066328'
-PAYPAL_SIGNATURE = 'AP5ErZnuVaoE-u3JZQnMRJXRlcHnA-KyqL7eaN1CbAp5nWvcGzwLwPWT'
+PAYPAL_SERVER = 'https://api-3t.paypal.com/nvp'
+PAYPAL_CHECKOUT_URL = 'https://www.paypal.com/cgi-bin/webscr.'
+PAYPAL_USER = 'nburdick_api1.healthebay.org'
+PAYPAL_PASS = 'BPFL5JQREGCNZ4KL'
+PAYPAL_SIGNATURE = 'AkrturaUrjwo1xbii9WwCzlYDWEDA2iWs3FpjP-5TZ0vH3VWMB6nlgwM'
 
 FACEBOOK_APP_ID = '159956577356734'
 FACEBOOK_API_KEY = '7e7dfc67cce994c31942d05030e9b8ae'

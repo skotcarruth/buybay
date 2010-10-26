@@ -35,7 +35,7 @@ body{
 /* ~~~~~ HEADER ~~~~~ */
 
 #mainHeader{
-	overflow:hidden;
+	overflow:hidden;zoom:1;
 	margin-top:15px;
 }
 #cartLinks {display:block;text-align:right;}
@@ -78,7 +78,7 @@ body{
 #mainNav ul li #htbNav:hover, #mainNav ul li #htbNav.selected{background-color:#fff;}
 
 #closeBtn{float:right;padding:4px 6px;background-color:#ccc;color:#fff;cursor:pointer;display:none;}
-#firstTime{margin-top:30px;clear:both;overflow:hidden;margin-bottom:15px;}
+#firstTime{margin-top:30px;clear:both;overflow:hidden;zoom:1;margin-bottom:15px;}
 #firstTime p{
 	font-size:2.1em;
 	color:#595959;
@@ -130,7 +130,7 @@ body{
 	width:940px;
 	height:395px;
 	display:block;
-	overflow:hidden;
+	overflow:hidden;zoom:1;
 	margin-bottom:20px;
 	position:relative;
 }
@@ -143,7 +143,7 @@ body{
 #featContainer li{ 
 	width:940px;
 	height:395px;
-	overflow:hidden; 
+	overflow:hidden;zoom:1; 
 }
 #featContainer li img.featOver{
     position:absolute;
@@ -202,7 +202,7 @@ body{
 #spreadWordHome .socialLinks li a{color:#fff;}
 #spreadWordHome .socialLinks li a:hover{color:#004A80;}
 
-#learnMore{overflow:hidden;margin-bottom:30px;}
+#learnMore{overflow:hidden;zoom:1;margin-bottom:30px;}
 .learnMoreItem{
 	float:left;
 	margin-right:15px;
@@ -307,13 +307,13 @@ p.disclaimer{font-size:1em;padding-top:20px;font-style:italic;}
 #tweetTweet span{text-transform:uppercase;padding-left:15px;color:#17a2dc;}
 
 #newsContent .post{
-	overflow:hidden;
+	overflow:hidden;zoom:1;
 	margin-bottom:30px;
 	padding-bottom:25px;
 	border-bottom:1px solid #a0a0a0;
 }
 #newsContent.single .post{border:none;}
-#newsContent .post .postHeader{overflow:hidden;margin-bottom:25px;}
+#newsContent .post .postHeader{overflow:hidden;zoom:1;margin-bottom:25px;}
 #newsContent .post .postHeader h2{font-size:2.2em;float:left;display:block;width:450px;font-weight:normal;}
 #newsContent .post .postHeader a{color:#787878;}
 #newsContent .post .postHeader a:hover{color:#101010;}
@@ -360,7 +360,7 @@ p.disclaimer{font-size:1em;padding-top:20px;font-style:italic;}
 #collectionContent .product .productPhoto{
 	width:299px;
 	height:199px;
-	overflow:hidden;
+	overflow:hidden;zoom:1;
 }
 #collectionContent .product .productPhoto img, #collectionContent .product .productComingSoon, #collectionContent .product .productSoldOut img {
 	margin-bottom:15px;
@@ -388,7 +388,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 	float:right;
 	padding-left:10px;
 }
-#switchProducts ul{display:block;width:100%;margin-bottom:12px;overflow:hidden;}
+#switchProducts ul{display:block;width:100%;margin-bottom:12px;overflow:hidden;zoom:1;}
 #switchProducts ul li a{color:#787878;text-transform:uppercase;}
 #switchProducts ul li.prevNavItem{float:left;padding-left:10px;background:url(../_images/icons/small-triangle-left.png) no-repeat left center;}
 #switchProducts ul li.nextNavItem{float:right;padding-right:10px;background:url(../_images/icons/small-list-triangle.png) no-repeat right center;}
@@ -407,7 +407,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
     height:440px;
 }
 
-#commentHeader {margin-bottom:25px;overflow:hidden;}
+#commentHeader {margin-bottom:25px;overflow:hidden;zoom:1;}
 #commentHeader h2{
 	color:#101010;
 	text-transform:uppercase;
@@ -426,7 +426,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 #commentUser img{vertical-align:middle;margin-right:5px;}
 #commentUser span{}
 
-.comment{overflow:hidden;padding-bottom:15px;margin-bottom:15px;border-bottom:1px solid #787878;}
+.comment{overflow:hidden;zoom:1;padding-bottom:15px;margin-bottom:15px;border-bottom:1px solid #787878;}
 .comment p{
 	width:400px;
 	display:block;
@@ -564,13 +564,13 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 
 /* ~~~~~ CART PAGE ~~~~~ */
 #purchaseForm{
-    overflow:hidden;
+    overflow:hidden;zoom:1;
     clear:both;
 }
 #cartInfo{
     width:700px;
     margin-left:80px;
-    overflow:hidden;
+    overflow:hidden;zoom:1;
 }
 
 #cartTable{width:100%;}

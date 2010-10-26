@@ -1,7 +1,46 @@
 {% extends "base.html" %}
 {% block title %}Order Confirmation | {{ block.super }}{% endblock %}
 {% block pageClass %}thankyou{% endblock %}
+{% block extrahead %}
+<script type="text/javascript">
 
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16643544-1']);
+  _gaq.push(['_trackPageview']);
+  _gaq.push(['_addTrans',
+    '{{ order.paypal_transactionid }}',           // order ID - required
+    'Buy the Bay',  // affiliation or store name
+    '{{ order.paypal_amt }}',          // total - required
+    '{{ order.paypal_taxamt }}',           // tax
+    '0',              // shipping
+    '{{ order.user_shiptocity }}',       // city
+    '{{ order.user_shiptostate }}',     // state or province
+    'USA'             // country
+  ]);
+
+   // add item might be called for every item in the shopping cart
+   // where your ecommerce engine loops through each item in the cart and
+   // prints out _addItem for each
+{% for product_in_order in order.get_as_cart.products %}
+  _gaq.push(['_addItem',
+    '{{ order.paypal_transactionid }}',           // order ID - required
+    '{{ product_in_order.product.id }}',           // SKU/code - required
+    '{{ product_in_order.product.name }}',        // product name
+    '',   // category or variation
+    '{{ product_in_order.product.price }}',          // unit price - required
+    'product_in_order.quantity'               // quantity - required
+  ]);
+{% endfor %}
+  _gaq.push(['_trackTrans']); //submits transaction to the Analytics servers
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+{% endblock %}
 {% block body %}
   <h1 id="thankyou">Thank you for buying the bay</h1>
 <section id="cartInfo">

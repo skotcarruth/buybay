@@ -489,7 +489,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
     z-index:10;
     text-transform:uppercase;
     color:#101010;}
-#qtyRemaining span.lessThan{left:15px;color:#fff;}
+#qtyRemaining span.greaterThan{left:15px;color:#fff;}
 #qtyRemaining p{
 	line-height:33px;
 	background-color:#f15831;

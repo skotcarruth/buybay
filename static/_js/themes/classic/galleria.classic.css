@@ -1,10 +1,10 @@
-.galleria-container{position:relative;overflow:hidden;height:440px;}
+.galleria-container{position:relative;overflow:hidden;height:440px !important;}
 .galleria-container img{-moz-user-select:none;-webkit-user-select:none;-o-user-select:none;}
 .galleria-stage{position:absolute;top:10px;left:10px;right:10px;overflow:hidden;height:330px;}
-.galleria-thumbnails-container{height:50px;bottom:0;position:absolute;left:10px;right:10px;z-index:2;margin-bottom:10px;}
+.galleria-thumbnails-container{height:75px;bottom:0;position:absolute;left:10px;right:10px;z-index:2;margin-bottom:10px;}
 .galleria-carousel .galleria-thumbnails-list{margin-left:30px;margin-right:30px;}
-.galleria-thumbnails .galleria-image{height:40px;width:60px;background:#fff;margin:0 5px 0 0;border:1px solid #ccc;padding:2px;float:left;cursor:pointer;}
-.galleria-counter{position:absolute;bottom:10px;left:10px;text-align:right;color:#fff;font:normal 11px/1 arial,sans-serif;z-index:2;}
+.galleria-thumbnails .galleria-image{height:70px;width:70px;background:#fff;margin:0 5px 0 0;border:1px solid #ccc;float:left;cursor:pointer;}
+.galleria-counter{position:absolute;bottom:10px;left:10px;text-align:right;color:#fff;font:normal 11px/1 arial,sans-serif;z-index:2;display:none;}
 .galleria-loader{background:#fff;width:20px;height:20px;position:absolute;top:10px;right:10px;z-index:2;display:none;background:url(classic-loader.gif) no-repeat 2px 2px;}
 .galleria-info{width:50%;top:15px;left:15px;z-index:2;position:absolute;}
 .galleria-info-text{background-color:#fff;background-color:rgba(0,0,0,.9);padding: 12px;display:none;}

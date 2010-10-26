@@ -406,6 +406,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
     width:576px;
     height:440px;
 }
+#mediaCarousel img{display:none;}
 
 #commentHeader {margin-bottom:25px;overflow:hidden;zoom:1;}
 #commentHeader h2{

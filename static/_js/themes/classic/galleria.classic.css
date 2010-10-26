@@ -1,4 +1,4 @@
-.galleria-container{position:relative;overflow:hidden;}
+.galleria-container{position:relative;overflow:hidden;height:440px;}
 .galleria-container img{-moz-user-select:none;-webkit-user-select:none;-o-user-select:none;}
 .galleria-stage{position:absolute;top:10px;left:10px;right:10px;overflow:hidden;height:330px;}
 .galleria-thumbnails-container{height:50px;bottom:0;position:absolute;left:10px;right:10px;z-index:2;margin-bottom:10px;}

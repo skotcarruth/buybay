@@ -34,6 +34,7 @@ class Tag(models.Model):
     num_products.short_description = 'Products'
 
 SORT_OPTIONS = {
+    'order': {'attr': 'order', 'up': '', 'down': '-'},
     'name': {'attr': 'name', 'up': '', 'down': '-'},
     'price': {'attr': 'price', 'up': '', 'down': '-'},
     'date': {'attr': 'created_ts', 'up': '-', 'down': ''},
@@ -52,7 +53,7 @@ def product_filter(qs, status):
 
 def product_sort(qs, sort, sort_dir):
     if sort not in SORT_OPTIONS:
-        sort = 'name'
+        sort = 'order'
     if sort_dir not in ('up', 'down'):
         sort_dir = 'up'
     ordering = '%s%s' % (SORT_OPTIONS[sort][sort_dir], SORT_OPTIONS[sort]['attr'])

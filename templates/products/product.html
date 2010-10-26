@@ -158,10 +158,10 @@
 				<figure class="likeProduct"><fb:like href="{{ request.get_host|iriencode }}{{ request.path_info|iriencode }}" layout="button_count" show_faces="false" width="30" action="like"></fb:like></figure>
             </div>
             <div id="descCont">
-            	<p>{{ product.description|textile }}</p>
+            	{{ product.description|textile }}
             </div>
 			<div id="designCont">
-            	<p>{{ product.design|textile }}</p>
+            	{{ product.design|textile }}
             </div>
         </article>
         

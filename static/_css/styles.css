@@ -64,7 +64,7 @@ body{
 	padding:10px 15px;
 	background-color:#fff;
 	margin-right:15px;
-	line-height:48px;
+	/*line-height:48px;*/
 }
 
 #mainNav ul li a:hover, #mainNav ul li a.selected{background-color:#f0db29;}

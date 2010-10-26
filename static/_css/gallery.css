@@ -1,7 +1,7 @@
 
 .pika-wrap {width: 575px; margin: 0 auto;}
 
-.pika-image {position: relative; height: 330px; width: 575px; /*background: #fafafa; border: 1px solid #e5e5e5; padding: 10px;*/}
+.pika-image {position: relative; height: 430px; width: 575px; /*background: #fafafa; border: 1px solid #e5e5e5; padding: 10px;*/}
 	/*position image holders */
 	.pika-image .animation, .pika-image .main-image {position: absolute; top: 0px; left: 0px;/*top: 10px; left: 10px;*/}
 	.pika-image .animation {display: none;z-index:2;}

@@ -8,7 +8,10 @@
 {% block fbdesc %}{{ product.description  }}{% endblock %}
 
 {% block pageClass %}detail{% endblock %}
-
+{% block extrahead %}
+<script type="text/javascript" src="{{ MEDIA_URL }}_js/galleria.js"></script>
+<script>Galleria.loadTheme('{{ MEDIA_URL }}_js/themes/classic/galleria.classic.js');</script>
+{% endblock %}
 {% block body %}
   <div id="fb-root"></div>
   <script>
@@ -88,16 +91,16 @@
             </div>
             <span>Other views</span>-->
 			{% if product.gallery_media.active.all.0.get_media %}
-            <ul id="mediaCarousel">
+            <div id="mediaCarousel">
 				{% for media in product.gallery_media.active.all %}
 				{% if media.image %}
-			      <li><img src="{% thumbnail media.image 576x430 %}" alt="{{ product.name}}" /></li>
+			      <img src="{% thumbnail media.image 576x430 %}" alt="{{ product.name}}" />
 				{% endif %}
 				{% if media.video %}
 				
 				{% endif %}
 			    {% endfor %}
-            </ul>
+            </div>
 			{% endif %}
         </article>
 
@@ -225,13 +228,19 @@
 			$("a#description").click(
 				 function() {$("#descCont").show();$("#designCont").hide(); $("#design").removeClass('selected'); $("#description").addClass('selected');}
 			);
+			$('#mediaCarousel').galleria();
+			$("#commentForm").hide();
+			$("#addComment").click(
+				 function() {
+						$("#commentForm").slideToggle()
+					});
 		});
 
 	</script>
-	<script type="text/javascript" src="{{ MEDIA_URL }}_js/jquery.pikachoose.js"></script>
+	<!--<script type="text/javascript" src="{{ MEDIA_URL }}_js/jquery.pikachoose.js"></script>
 	<script type="text/javascript" src="{{ MEDIA_URL }}_js/jquery.jcarousel.min.js"></script>
 	<script language="javascript">
-		<!--
+		
 		$(document).ready(
 			function (){
 				$("#mediaCarousel").PikaChoose({showCaptions:false});
@@ -245,14 +254,10 @@
 				        });
 				    }
 			    });
-				$("#commentForm").hide();
-				$("#addComment").click(
-					 function() {
-							$("#commentForm").slideToggle()
-						});
+				
 			});
 
-		-->
-	</script>
+	
+	</script>-->
 
 {% endblock %}

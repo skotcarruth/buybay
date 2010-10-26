@@ -393,12 +393,17 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 #switchProducts ul li.prevNavItem{float:left;padding-left:10px;background:url(../_images/icons/small-triangle-left.png) no-repeat left center;}
 #switchProducts ul li.nextNavItem{float:right;padding-right:10px;background:url(../_images/icons/small-list-triangle.png) no-repeat right center;}
 #mainImage{margin-bottom:12px;}
-#mediaViewer span{color:#959595;text-transform:uppercase;display:block;margin-bottom:3px;}
-#mediaViewer ul li{display:inline;}
+/*#mediaViewer span{color:#959595;text-transform:uppercase;display:block;margin-bottom:3px;}
+#mediaViewer ul li{display:inline;}*/
 #mediaViewer{
 	padding-bottom:15px;
 	margin-bottom:20px;
 	border-bottom:1px solid #787878;
+}
+
+#mediaCarousel{
+    width:576px;
+    height:430px;
 }
 
 #commentHeader {margin-bottom:25px;overflow:hidden;}

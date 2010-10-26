@@ -44,7 +44,7 @@ class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ('created_ts', 'updated_ts', 'current_quantity',)
     filter_horizontal = ('artists', 'tags',)
     inlines = [GalleryMediaInline]
-    list_display = ('name', 'price', 'current_quantity', 'status', 'created_ts',)
+    list_display = ('name', 'order', 'price', 'current_quantity', 'status', 'created_ts',)
     list_filter = ('tags', 'status',)
     search_fields = ('name', 'description', 'design',)
 

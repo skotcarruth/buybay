@@ -95,6 +95,16 @@
   </section><!--End Main Content section-->
 
 <footer id="footer">
+    <aside id="htbFootInfo">
+    	
+	
+    		<a href="http://www.healthebay.org" target="_blank" rel="external"><img src="{{ MEDIA_URL }}_images/icons/htb.png" alt="Heal the Bay logo" /></a>
+		
+		
+		<p>Heal the Bay is a 501(c)3 non-profit organization. All gifts are tax-deductible up to the fullest extent of the law.</p>
+			<article id="htbLike"><fb:like href="http://www.healthebay.org" layout="button_count" show_faces="false" width="60" action="like"></fb:like></article>
+    </aside>
+
 	<nav>
     	<ul>
         	<li><a href="{% url orders.views.cart %}">View Cart</a></li>
@@ -105,14 +115,6 @@
             <li class="last"><a href="{% url flatcontent.views.page page_slug="contact-us" %}">Contact Us</a></li>
         </ul>
     </nav>
-
-    <aside id="htbFootInfo">
-    	<p>Heal the Bay is a 501(c)3 non-profit organization. All gifts are tax-deductible up to the fullest extent of the law.</p>
-		<article id="htbLike">
-    		<a href="http://www.healthebay.org" target="_blank" rel="external"><img src="{{ MEDIA_URL }}_images/icons/htb.png" alt="Heal the Bay logo" /></a>
-			<fb:like href="http://www.healthebay.org" layout="button_count" show_faces="false" width="60" action="like"></fb:like>
-		</article>
-    </aside>
 </footer>
 
 </div><!--End Container-->

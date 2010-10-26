@@ -91,7 +91,7 @@
             <ul id="mediaCarousel">
 				{% for media in product.gallery_media.active.all %}
 				{% if media.image %}
-			      <li><img src="{% thumbnail media.image 576x327 %}" alt="{{ product.name}}" /></li>
+			      <li><img src="{% thumbnail media.image 576x430 %}" alt="{{ product.name}}" /></li>
 				{% endif %}
 				{% if media.video %}
 				

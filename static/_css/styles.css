@@ -103,7 +103,7 @@ body{
 	border-top:1px solid #a0a0a0;
 	padding-top:12px;
 }
-#footer ul{float:left;}
+#footer ul{float:right;}
 #footer ul li{
 	display:inline;
 	color:#a0a0a0;
@@ -111,17 +111,17 @@ body{
 	padding:0 10px;
 	font-size:1.1em;
 }
-#footer ul li.last{border:none;}
+#footer ul li.last{border:none;padding-right:0;}
 #footer ul li a{color:#a0a0a0;}
 #footer ul li a:hover{color:#787878;}
 
 #htbFootInfo{
-	float:right;
-	width:215px;
+	float:left;
+	width:450px;
 }
-#htbFootInfo img{margin-bottom:3px;}
-#htbFootInfo #htbLike{float:right;margin-left:10px;width:60px;}
-#htbFootInfo p{color:#787878;font-size:1.1em;float:left;width:140px;text-align:right;}
+#htbFootInfo img{margin-bottom:3px;float:left;}
+#htbFootInfo #htbLike{float:left;margin-left:15px;width:60px;}
+#htbFootInfo p{color:#787878;font-size:1.1em;float:left;width:200px;text-align:right;}
 
 
 
@@ -487,8 +487,9 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
     position:absolute;
     top:0;right:15px;
     z-index:10;
-    text-transform:uppercase;}
-#qtyRemaining span.greaterThan{left:15px;}
+    text-transform:uppercase;
+    color:#101010;}
+#qtyRemaining span.lessThan{left:15px;color:#fff;}
 #qtyRemaining p{
 	line-height:33px;
 	background-color:#f15831;

@@ -221,7 +221,7 @@ opacity: 0.9;bottom:0;left:0;padding:10px 8px;width:206px;z-index:2;margin-botto
 
 
 /* ~~~~~ ABOUT PAGES ~~~~~ */
-#content{margin-bottom:30px;}
+#content{margin-bottom:30px;clear:both;}
 .about#content, .artists#content, .news#content, .collection#content, .cart#content, .thankyou#content{width:780px;}
 .about h1, .artists h1, .news h1, .collection h1, .thankyou h1, .cart h1{float:right;margin-bottom:25px;}
 .about #sidebar, .artists #sidebar, .news #sidebar{

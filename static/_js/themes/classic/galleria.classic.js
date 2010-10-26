@@ -16,7 +16,7 @@ Galleria.addTheme({
     defaults: {
         transition: 'fade',
         show_caption: false,
-        image_position: 'center',
+        image_position: 'top center',
         thumb_crop: 'height'
     },
     init: function(options) {

@@ -399,11 +399,12 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 	padding-bottom:15px;
 	margin-bottom:20px;
 	border-bottom:1px solid #787878;
+	
 }
 
 #mediaCarousel{
     width:576px;
-    height:430px;
+    height:440px;
 }
 
 #commentHeader {margin-bottom:25px;overflow:hidden;}

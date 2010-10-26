@@ -133,14 +133,14 @@ class Product(models.Model):
 
     def get_previous(self):
         """Returns the previous active Product, by created date, or None."""
-        previous = Product.objects.filter(status=Product.FOR_SALE, created_ts__lt=self.created_ts).order_by('-created_ts')
+        previous = Product.objects.filter(status=Product.FOR_SALE, order__lt=self.order).order_by('-order')
         if previous.exists():
             return previous[0]
         return None
 
     def get_next(self):
         """Returns the next active Product, by created date, or None."""
-        next = Product.objects.filter(status=Product.FOR_SALE, created_ts__gt=self.created_ts).order_by('created_ts')
+        next = Product.objects.filter(status=Product.FOR_SALE, order__gt=self.order).order_by('order')
         if next.exists():
             return next[0]
         return None

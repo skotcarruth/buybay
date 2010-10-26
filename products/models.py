@@ -118,6 +118,10 @@ class Product(models.Model):
     def get_absolute_url(self):
         return ('products.views.product', (), {'product_slug': self.slug})
 
+    @property
+    def remaining_quantity(self):
+        return self.max_quantity - self.current_quantity
+
     def can_be_purchased(self):
         """Returns whether the product is currently available for purchase."""
         for_sale = self.status == self.FOR_SALE

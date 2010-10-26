@@ -163,8 +163,8 @@
         </article>
         
         <figure id="qtyRemaining" class="">
-			<span class="{% if ratio > 0.5 %}greaterThan{% else %}lessThan{% endif %}">{{ product.current_quantity }}/{{ product.max_quantity }} remaining</span>
-        	<p style="width:{% widthratio product.current_quantity product.max_quantity 100 %}%;"></p>
+			<span class="{% if ratio < 0.5 %}greaterThan{% else %}lessThan{% endif %}">{{ product.remaining_quantity }}/{{ product.max_quantity }} remaining</span>
+        	<p style="width:{% widthratio product.remaining_quantity product.max_quantity 100 %}%;"></p>
         </figure>
 
         <span id="addToCart">

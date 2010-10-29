@@ -55,7 +55,12 @@
 				{% else %}
 				<p class="productArtist">&nbsp;</p>
 			{% endif %}
+			
+			{% if product.status == 2 or product.status == 3 %}
 			<figure class="likeItem"><fb:like href="{{ request.get_host|iriencode }}{{ product.get_absolute_url }}" layout="button_count" show_faces="false" width="30" action="like"></fb:like></figure>
+			
+			{% endif %}
+			
         </article>
 
 {% empty %}

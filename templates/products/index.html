@@ -17,7 +17,7 @@
         <ul id="sortBy">
         	<li>Sort:</li>
         	<li><a href="{% params sort="name" dir="up","down" %}" class="{% if request.GET.sort == "name" %}{% if request.GET.dir == "up" %}up{% endif %}{% if request.GET.dir == "down" %}down{% endif %}{% endif %}">By Name</a></li>
-        	<li><a href="{% params sort="price" dir="up","down" %}" class="{% if request.GET.sort == "price" %}{% if request.GET.dir == "up" %}up{% endif %}{% if request.GET.dir == "down" %}down{% endif %}{% endif %}">By Price</a></li>
+        	<!--<li><a href="{% params sort="price" dir="up","down" %}" class="{% if request.GET.sort == "price" %}{% if request.GET.dir == "up" %}up{% endif %}{% if request.GET.dir == "down" %}down{% endif %}{% endif %}">By Price</a></li>-->
             <li><a href="{% params sort="date" dir="up","down" %}" class="{% if request.GET.sort == "date" %}{% if request.GET.dir == "up" %}up{% endif %}{% if request.GET.dir == "down" %}down{% endif %}{% endif %}">By Date Posted</a></li>
         </ul>
         

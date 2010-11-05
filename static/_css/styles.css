@@ -378,6 +378,8 @@ p.disclaimer{font-size:1em;padding-top:20px;font-style:italic;}
     display:none;
 }
 
+.likeItem{z-index:99;}
+
 
 h2.productTitle{font-size:2.1em;color:#252525;text-transform:uppercase;margin-bottom:0px;font-weight:normal;font-family:"proxima-nova-extra-condensed-1", helvetica, arial, sans-serif;}
 p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}

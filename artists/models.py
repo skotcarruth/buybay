@@ -9,12 +9,13 @@ class Artist(models.Model):
     website = models.URLField(verify_exists=False)
     image = models.ImageField(upload_to='uploads/artist_images/')
 
+    order = models.PositiveIntegerField(default=0)
     created_ts = models.DateTimeField(auto_now_add=True)
     updated_ts = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['-created_ts']
+        ordering = ['order', 'name']
 
     def __unicode__(self):
         return self.name

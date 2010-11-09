@@ -50,13 +50,13 @@ class PayPalService(object):
             'METHOD': 'SetExpressCheckout',
             'RETURNURL': return_url,
             'CANCELURL': cancel_url,
-            'ALLOWNOTE': 0,
             'PAYMENTREQUEST_0_AMT': '%.2f' % cart['total'],
             'PAYMENTREQUEST_0_CURRENCYCODE': 'USD',
             'PAYMENTREQUEST_0_ITEMAMT': '%.2f' % (cart['subtotal'] + cart['donation']),
             'PAYMENTREQUEST_0_SHIPPINGAMT': '%.2f' % cart['shipping'],
             'PAYMENTREQUEST_0_TAXAMT': '%.2f' % cart['tax'],
             'PAYMENTREQUEST_0_PAYMENTACTION': 'Sale',
+            'PAYMENTREQUEST_0_NOTETEXT': 1,
         }
         params.update(self.base_params)
         # Add the cart items to the params

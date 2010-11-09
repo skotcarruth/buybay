@@ -46,6 +46,7 @@ class Order(models.Model):
     paypal_settleamt = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     paypal_taxamt = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     paypal_paymentstatus = models.CharField('status', max_length=25, blank=True)
+    paypal_notetext = models.TextField('note text', blank=True)
 
     # Dump of the return values of these paypal calls
     paypal_details_dump = models.TextField(blank=True)

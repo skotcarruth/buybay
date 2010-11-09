@@ -179,6 +179,7 @@ def confirmation(request):
     order.user_shiptozip = details.get('PAYMENTREQUEST_0_SHIPTOZIP', '')
     order.user_shiptocountrycode = details.get('PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE', '')
     order.user_shiptophonenum = details.get('PAYMENTREQUEST_0_SHIPTOPHONENUM', '')
+    order.paypal_notetext = details.get('PAYMENTREQUEST_0_NOTETEXT', '')
 
     # Some of the payment info returned
     order.paypal_transactionid = payment.get('PAYMENTINFO_0_TRANSACTIONID', '')

@@ -18,6 +18,7 @@ class Order(models.Model):
     products = models.ManyToManyField('products.Product', through='ProductInOrder', related_name='order_products')
     donation = models.PositiveIntegerField(default=0)
     status = models.IntegerField(choices=STATUS_CHOICES, default=SHOPPING_CART)
+    notes = models.TextField('notes (cart)', blank=True)
 
     created_ts = models.DateTimeField('Created', auto_now_add=True)
 
@@ -46,7 +47,7 @@ class Order(models.Model):
     paypal_settleamt = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     paypal_taxamt = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     paypal_paymentstatus = models.CharField('status', max_length=25, blank=True)
-    paypal_notetext = models.TextField('note text', blank=True)
+    paypal_notetext = models.TextField('notes (paypal)', blank=True)
 
     # Dump of the return values of these paypal calls
     paypal_details_dump = models.TextField(blank=True)

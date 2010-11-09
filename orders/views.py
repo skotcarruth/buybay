@@ -14,7 +14,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
 
-from orders.forms import DonationForm
+from orders.forms import OrderForm
 from orders.models import Order, ProductInOrder
 from orders.paypal import paypal, PayPalUnavailable, PayPalErrorResponse
 from mail.models import Message
@@ -52,19 +52,19 @@ def json_response(view):
 def cart(request):
     """View and edit the user's shopping cart."""
     order = Order.get_or_create(request)
-    donation_form = DonationForm(instance=order)
+    order_form = OrderForm(instance=order)
 
     if request.method == 'POST':
-        donation_form = DonationForm(request.REQUEST, instance=order)
-        if donation_form.is_valid():
-            donation_form.save()
+        order_form = OrderForm(request.REQUEST, instance=order)
+        if order_form.is_valid():
+            order_form.save()
             return HttpResponseRedirect(reverse('orders.views.purchase'))
 
     cart = order.get_as_cart()
 
     return render_to_response('orders/cart.html', {
         'cart': cart,
-        'donation_form': donation_form,
+        'order_form': order_form,
     }, context_instance=RequestContext(request))
 
 @json_response

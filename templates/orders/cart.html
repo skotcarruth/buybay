@@ -41,7 +41,6 @@
 <form id="purchaseForm" method="POST" action="{% url orders.views.cart %}">
 <section id="cartInfo">
     {% csrf_token %}
-    {{ cart.management_form }}
     <table id="cartTable">
 	<thead>
       <tr>
@@ -70,6 +69,11 @@
     <p><!--<input type="submit" value="Update Cart" />--></p>
 </section>
 
+<section id="orderNotes">
+  <label for="id_notes">Notes:</label>
+  {{ order_form.notes }}
+</section>
+
 <section id="priceDetails">
 <ul>
   <li id="cartSubtotal">
@@ -86,7 +90,7 @@
   </li>
   <li id="cartDonation">
     <span class="label">Make an additional donation to Heal the Bay:</span>
-    $<span class="amount">{{ donation_form.donation }}</span>
+    $<span class="amount">{{ order_form.donation }}</span>
   </li>
   <li id="cartTotal">
     <span id="total" class="label">Total:</span>

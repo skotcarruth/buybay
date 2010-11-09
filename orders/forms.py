@@ -3,8 +3,8 @@ from django import forms
 from orders.models import Order
 
 
-class DonationForm(forms.ModelForm):
-    """Form for entering an extra donation amount."""
+class OrderForm(forms.ModelForm):
+    """Form for entering an extra donation amount and order notes."""
     DONATION_AMOUNTS = (
         ('0', '$0'),
         ('10', '$10'),
@@ -16,4 +16,4 @@ class DonationForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ('donation',)
+        fields = ('donation', 'notes',)

@@ -603,9 +603,12 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 #priceDetails ul{font-size:1.6em;}
 #priceDetails ul li{display:block;padding:10px 0;text-align:right;}
 #priceDetails ul li.hidden{display:none;}
-#priceDetails ul li span.label{font-size:.8em;color:#f15831;text-align:left;text-transform:uppercase;display:block;width:160px;padding-right:20px;float:left;}
+#priceDetails ul li span.label, #orderNotes label{font-size:13px;color:#f15831;text-align:left;text-transform:uppercase;display:block;width:160px;padding-right:20px;float:left;}
 #priceDetails ul li#cartDonation span.label, #priceDetails ul li#cartDonation{color:#72cadd;}
 #priceDetails ul li#cartDonation span.label{padding-bottom:10px;}
+#orderNotes{float:left;margin-left:80px;}
+#orderNotes label{width:50px;padding-top:6px;}
+#orderNotes textarea{width:250px;height:80px;padding:5px;font-family:helvetica,arial,sans-serif;font-size: 13px;}
 /* ~~~~~ THANK YOU PAGE ~~~~~ */
 .thankyou h2{font-size:1.8em;color:#595959;margin-bottom:20px;line-height:1.3em;}
 #howtohelp{margin:40px 0 200px;}

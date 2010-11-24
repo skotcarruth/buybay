@@ -71,7 +71,7 @@ def cart(request):
 def update_cart(request):
     """Updates the user's shopping cart."""
     order = Order.get_or_create(request)
-    donation_form = DonationForm(request.REQUEST, instance=order)
+    donation_form = OrderForm(request.REQUEST, instance=order)
     if donation_form.is_valid():
         donation_form.save()
         return order.get_as_cart()

@@ -21,13 +21,19 @@
       $('#id_donation').change(function() {
         // Update the cart on the server
         var serialized_form = $('#purchaseForm').serialize();
-        $.getJSON('{% url orders.views.update_cart %}?' + serialized_form, function(data, textStatus) {
-          // Update the totals on the page
-          if (data) {
-            $('#cartSubtotal span.amount').text(currency(data.subtotal));
-            $('#cartTax span.amount').text(currency(data.tax));
-            $('#cartShipping span.amount').text(currency(data.shipping));
-            $('#cartTotal span.amount').text(currency(data.total));
+        $.ajax({
+          url: '{% url orders.views.update_cart %}',
+          type: 'POST',
+          dataType: 'json',
+          data: serialized_form,
+          success: function(data, textStatus) {
+            // Update the totals on the page
+            if (data) {
+              $('#cartSubtotal span.amount').text(currency(data.subtotal));
+              $('#cartTax span.amount').text(currency(data.tax));
+              $('#cartShipping span.amount').text(currency(data.shipping));
+              $('#cartTotal span.amount').text(currency(data.total));
+            }
           }
         });
       });

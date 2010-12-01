@@ -19,11 +19,17 @@ EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = 'noreply@buythebay.com'
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
+# Paypal Express Checkout (lame)
 PAYPAL_SERVER = 'https://api-3t.paypal.com/nvp'
 PAYPAL_CHECKOUT_URL = 'https://www.paypal.com/cgi-bin/webscr.'
 PAYPAL_USER = 'nburdick_api1.healthebay.org'
 PAYPAL_PASS = 'BPFL5JQREGCNZ4KL'
 PAYPAL_SIGNATURE = 'AkrturaUrjwo1xbii9WwCzlYDWEDA2iWs3FpjP-5TZ0vH3VWMB6nlgwM'
+
+# Paypal Web Standard Payments (less lame)
+PAYPAL_CURRENCY_CODE = 'USD'
+PAYPAL_POST_URL = 'https://www.paypal.com/cgi-bin/webscr'
+# PAYPAL_BUSINESS = 'buythebaydev@gmail.com'
 
 FACEBOOK_APP_ID = '159956577356734'
 FACEBOOK_API_KEY = '7e7dfc67cce994c31942d05030e9b8ae'

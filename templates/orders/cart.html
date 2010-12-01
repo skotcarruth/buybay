@@ -44,9 +44,29 @@
 {% block body %}
   <h1 id="yourcart">Shopping Cart</h1>
 
-<form id="purchaseForm" method="POST" action="{% url orders.views.cart %}">
+<form id="purchaseForm" method="POST" action="{{ paypal_post_url }}">
+
+  {# PAYPAL PAYMENT BUTTON INPUTS #}
+  <input type="hidden" name="business" value="{{ paypal_business }}" />
+  <input type="hidden" name="currency_code" value="{{ paypal_currency_code }}" />
+  <input type="hidden" name="return" value="http://{{ request.get_host }}{{ paypal_return_url }}" />
+  <input type="hidden" name="cmd" value="_cart" />
+  <input type="hidden" name="upload" value="1" />
+  <input type="hidden" name="no_shipping" value="1" />
+  {# <input type="hidden" name="invoice" value="{{ paypal_invoice_id }}" /> #}
+  {% for product_in_cart in cart.products %}
+    <input type="hidden" name="item_name_{{ forloop.counter }}" value="{{ product_in_cart.product.name }}" />
+    <input type="hidden" name="amount_{{ forloop.counter }}" value="{{ product_in_cart.total_price|floatformat:2 }}" />
+    <input type="hidden" name="quantity_{{ forloop.counter }}" value="{{ product_in_cart.quantity }}" />
+  {% endfor %}
+  {# LEAVE THE HANDLING CHARGE ALONE!  PAYPAL SHIPPING WILL INEVITABLY BE MESSED UP IF YOU USE THEIR SHIPPING METHODS #}
+  {# To work around their bizarre system, we are telling Paypal "no shipping" and adding all shipping charges as handling #}
+  <input type="hidden" name="handling_cart" value="{{ cart.shipping|floatformat:2 }}" />
+  <input type="hidden" name="tax_cart" value="{{ cart.tax|floatformat:2 }}" />
+  <input type="hidden" name="notify_url" value="http://{{ request.get_host }}{% url orders.views.standard_notify %}" />
+  <input type="submit" value="Pay" />
+
 <section id="cartInfo">
-    {% csrf_token %}
     <table id="cartTable">
 	<thead>
       <tr>

@@ -8,4 +8,6 @@ urlpatterns = patterns('orders.views',
     (r'^remove/(?P<product_slug>[A-Za-z0-9_-]+)/$', 'remove'),
     (r'^purchase/$', 'purchase'),
     (r'^confirmation/$', 'confirmation'),
+    (r'^standard_confirmation/$', 'standard_confirmation'),
+    (r'^standard_notify/$', 'standard_notify'),
 )

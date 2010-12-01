@@ -65,6 +65,11 @@ def cart(request):
     return render_to_response('orders/cart.html', {
         'cart': cart,
         'order_form': order_form,
+        'paypal_post_url': settings.PAYPAL_POST_URL,
+        'paypal_business': settings.PAYPAL_BUSINESS,
+        'paypal_currency_code': settings.PAYPAL_CURRENCY_CODE,
+        'paypal_invoice_id': order.id,
+        'paypal_return_url': reverse('orders.views.standard_confirmation'),
     }, context_instance=RequestContext(request))
 
 @json_response
@@ -141,6 +146,14 @@ def purchase(request):
 
     # Redirect to the Paypal checkout (or back to the cart if errors)
     return HttpResponseRedirect(next_url)
+
+def standard_confirmation(request):
+    """Confirms a web payments standard order."""
+    raise ValueError('hooray!')
+
+def standard_notify(request):
+    """Receives notification from paypal that a purchase was completed."""
+    raise ValueError('notify!')
 
 def confirmation(request):
     """Confirms a successful payment for the order."""

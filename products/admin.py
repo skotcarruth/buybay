@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.db import models
 
 from galleries.admin import GalleryMediaInline
 from products.models import Product, Tag, ProductComment
@@ -41,7 +40,7 @@ class ProductAdmin(admin.ModelAdmin):
         }),
     )
     prepopulated_fields = {'slug': ('name',)}
-    readonly_fields = ('created_ts', 'updated_ts', 'current_quantity',)
+    readonly_fields = ('created_ts', 'updated_ts',)
     filter_horizontal = ('artists', 'tags',)
     inlines = [GalleryMediaInline]
     list_display = ('name', 'order', 'price', 'current_quantity', 'status', 'created_ts',)

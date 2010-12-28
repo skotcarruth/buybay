@@ -152,7 +152,7 @@ def standard_confirmation(request):
 
 def standard_notify(request):
     """Receives notification from paypal that a purchase was completed."""
-    raise ValueError('notify!')
+    raise ValueError(request.REQUEST.items())
 
 def confirmation(request):
     """Confirms a successful payment for the order."""

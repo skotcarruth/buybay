@@ -25,7 +25,7 @@ LOGGING = {
     'handlers': {
         'standard': {
             'class': 'logging.RotatingFileHandler',
-            'filename': 'btb_django.log',
+            'filename': '/home/philosophie/logs/user/btb_django.log',
             'maxBytes': 8192,
             'backupCount': 5,
         },
@@ -34,7 +34,7 @@ LOGGING = {
         'django': {
             'handlers': ['standard'],
             'propagate': True,
-            'level':'DEBUG',
+            'level': 'DEBUG',
         },
     },
 }

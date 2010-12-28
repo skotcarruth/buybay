@@ -12,6 +12,33 @@ DATABASES = {
     }
 }
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '%(levelname)s %(asctime)s %(message)s'
+        },
+    },
+    'filters': {
+    },
+    'handlers': {
+        'standard': {
+            'class': 'logging.RotatingFileHandler',
+            'filename': 'btb_django.log',
+            'maxBytes': 8192,
+            'backupCount': 5,
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['standard'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+    },
+}
+
 EMAIL_HOST = 'smtp.webfaction.com'
 EMAIL_HOST_USER = 'nweave_buybay'
 EMAIL_HOST_PASSWORD = '0e341dd7'

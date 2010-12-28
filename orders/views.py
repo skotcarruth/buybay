@@ -2,6 +2,7 @@ from datetime import datetime, date, time
 from decimal import Decimal
 from functools import wraps
 import json
+import urllib
 
 from django.conf import settings
 from django.contrib import messages
@@ -123,7 +124,14 @@ def standard_confirmation(request):
     order = get_object_or_404(Order, invoice_id=request.GET.get('invoice', None))
     assert request.GET.get('receiver_email', '') == settings.PAYPAL_BUSINESS
 
-    # TODO: verify the post!!!
+    # Verify that it's really paypal chatting with us
+    # post = {
+    #     'cmd': '_notify-synch',
+    #     'tx': request.GET.get('txn_id', ''),
+    #     'at': settings.PAYPAL_PDT_TOKEN,
+    # }
+    # response = urllib.urlopen(settings.PAYPAL_POST_URL, data=urllib.urlencode(post))
+    # print response.read()
 
     # Finalize the order with payment details
     order.user_email = request.GET.get('payer_email', '')

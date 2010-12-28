@@ -1,4 +1,5 @@
 from decimal import Decimal
+import uuid
 
 from django.db import models
 
@@ -15,6 +16,7 @@ class Order(models.Model):
     )
 
     session_id = models.CharField(max_length=40, blank=True, null=True)
+    invoice_id = models.CharField(max_length=32, unique=True, default=lambda: uuid.uuid4().get_hex())
     products = models.ManyToManyField('products.Product', through='ProductInOrder', related_name='order_products')
     donation = models.PositiveIntegerField(default=0)
     status = models.IntegerField(choices=STATUS_CHOICES, default=SHOPPING_CART)

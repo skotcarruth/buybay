@@ -67,7 +67,7 @@ def cart(request):
         'paypal_post_url': settings.PAYPAL_POST_URL,
         'paypal_business': settings.PAYPAL_BUSINESS,
         'paypal_currency_code': settings.PAYPAL_CURRENCY_CODE,
-        'paypal_invoice_id': order.id,
+        'paypal_invoice_id': order.invoice_id,
         'paypal_return_url': reverse('orders.views.standard_confirmation'),
     }, context_instance=RequestContext(request))
 

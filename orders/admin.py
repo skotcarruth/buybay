@@ -17,7 +17,7 @@ class ProductInOrderInline(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Order Details', {
-            'fields': ('id', 'status', 'created_ts',),
+            'fields': ('id', 'invoice_id', 'status', 'created_ts',),
         }),
         ('PayPal Buyer Details', {
             'fields': ('user_email', 'user_salutation', 'user_firstname',
@@ -35,7 +35,7 @@ class OrderAdmin(admin.ModelAdmin):
             'fields': ('donation',),
         }),
     )
-    readonly_fields = ('id', 'status', 'created_ts', 'user_email',
+    readonly_fields = ('id', 'invoice_id', 'status', 'created_ts', 'user_email',
         'user_salutation', 'user_firstname', 'user_middlename',
         'user_lastname', 'user_suffix', 'user_shiptoname',
         'user_shiptostreet', 'user_shiptostreet2', 'user_shiptocity',

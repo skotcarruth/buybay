@@ -13,6 +13,7 @@ class OrderForm(forms.ModelForm):
         ('500', '$500'),
     )
     donation = forms.TypedChoiceField(choices=DONATION_AMOUNTS, coerce=int, initial=0)
+    notes = forms.CharField(required=False, label='Notes:', widget=forms.Textarea)
 
     class Meta:
         model = Order

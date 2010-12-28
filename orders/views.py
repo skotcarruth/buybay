@@ -8,7 +8,6 @@ from django.contrib import messages
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.forms.models import modelformset_factory
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
@@ -52,10 +51,10 @@ def json_response(view):
 def cart(request):
     """View and edit the user's shopping cart."""
     order = Order.get_or_create(request)
-    order_form = OrderForm(instance=order)
+    order_form = OrderForm(prefix='btb', instance=order)
 
     if request.method == 'POST':
-        order_form = OrderForm(request.REQUEST, instance=order)
+        order_form = OrderForm(request.REQUEST, prefix='btb', instance=order)
         if order_form.is_valid():
             order_form.save()
             return HttpResponseRedirect(reverse('orders.views.purchase'))
@@ -76,9 +75,9 @@ def cart(request):
 def update_cart(request):
     """Updates the user's shopping cart."""
     order = Order.get_or_create(request)
-    donation_form = OrderForm(request.REQUEST, instance=order)
-    if donation_form.is_valid():
-        donation_form.save()
+    order_form = OrderForm(request.REQUEST, prefix='btb', instance=order)
+    if order_form.is_valid():
+        order = order_form.save()
         return order.get_as_cart()
     return False
 

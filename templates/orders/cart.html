@@ -17,15 +17,13 @@
         return dollars + '.' + cents;
       }
 
-      // Handle changes to the donation amount
-      $('#id_donation').change(function() {
+      function update_order() {
         // Update the cart on the server
-        var serialized_form = $('#purchaseForm').serialize();
         $.ajax({
           url: '{% url orders.views.update_cart %}',
           type: 'POST',
           dataType: 'json',
-          data: serialized_form,
+          data: $('#purchaseForm').serialize(),
           success: function(data, textStatus) {
             if (data) {
               // Update the totals on the page
@@ -67,7 +65,11 @@
             }
           }
         });
-      });
+      }
+
+      // Handle changes to the donation amount and notes
+      $('#id_btb-donation').change(update_order);
+      $('#id_btb-notes').blur(update_order);
     });
   </script>
 {% endblock %}
@@ -133,8 +135,8 @@
   <input type="hidden" name="tax_cart" value="{{ cart.tax|floatformat:2 }}" />
   <input type="hidden" name="notify_url" value="http://{{ request.get_host }}{% url orders.views.standard_notify %}" />
  <section id="orderNotes">
-  <label for="id_notes" name="on0">Notes:</label>
-  <textarea id="id_notes" name="os0" rows="5" cols="40"></textarea>
+  {{ order_form.notes.label_tag }}
+  {{ order_form.notes }}
 </section>
 <section id="priceDetails">
 <ul>

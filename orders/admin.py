@@ -46,6 +46,7 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [ProductInOrderInline]
     list_display = ('id', 'status', 'get_total_items', 'get_total_price_display', 'created_ts',)
     list_filter = ('status', 'created_ts',)
+    search_fields = ('invoice_id',)
     actions = ['export_orders_to_csv']
 
     def export_orders_to_csv(self, request, queryset):

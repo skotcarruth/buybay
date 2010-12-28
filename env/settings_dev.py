@@ -32,6 +32,7 @@ PAYPAL_CURRENCY_CODE = 'USD'
 # PAYPAL_POST_URL = 'https://www.paypal.com/cgi-bin/webscr'
 PAYPAL_POST_URL = 'https://www.sandbox.paypal.com/cgi-bin/webscr'
 PAYPAL_BUSINESS = 'buythebaydev@gmail.com'
+PAYPAL_PDT_TOKEN = 'dLh1OCP0evCJRzRaFRoRqdJLpTNtSfMYdjA3G5m3rubSEQwLplwo_StKea0'
 
 FACEBOOK_APP_ID = '132846116761716'
 FACEBOOK_API_KEY = '6c600d30e9f6b4d4d6dea40f9ff04819'

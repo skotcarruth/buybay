@@ -71,7 +71,7 @@
 			<li id="cartIcon">{{ current_order.get_total_items }}</li>
         	<li><a href="{% url orders.views.cart %}">View Cart</a></li>
             <li>|</li>
-            <li><a href="{% url orders.views.purchase %}">Checkout</a></li>
+            <li><a href="{% url orders.views.cart %}">Checkout</a></li>
         </ul>
     </div>
 	<h1><a href="{% url views.index %}" id="logo">Buy the Bay</a></h1>

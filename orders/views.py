@@ -5,17 +5,15 @@ import json
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
 
 from orders.forms import OrderForm
 from orders.models import Order, ProductInOrder
-from orders.paypal import paypal, PayPalUnavailable, PayPalErrorResponse
 from mail.models import Message
 from products.models import Product
 
@@ -53,11 +51,11 @@ def cart(request):
     order = Order.get_or_create(request)
     order_form = OrderForm(prefix='btb', instance=order)
 
-    if request.method == 'POST':
-        order_form = OrderForm(request.REQUEST, prefix='btb', instance=order)
-        if order_form.is_valid():
-            order_form.save()
-            return HttpResponseRedirect(reverse('orders.views.purchase'))
+    # if request.method == 'POST':
+    #     order_form = OrderForm(request.REQUEST, prefix='btb', instance=order)
+    #     if order_form.is_valid():
+    #         order_form.save()
+    #         return HttpResponseRedirect(reverse('orders.views.purchase'))
 
     cart = order.get_as_cart()
 
@@ -120,94 +118,23 @@ def remove(request, product_slug=None):
     # Redirect to the shopping cart
     return HttpResponseRedirect(reverse('orders.views.cart'))
 
-def purchase(request):
-    """Sets up a PayPal express checkout transaction to purchase their cart."""
-    order = Order.get_or_create(request)
-    cart = order.get_as_cart()
-    if cart['total'] <= 0:
-        messages.error(request, 'You have to add something to your cart before you check out.')
-        return HttpResponseRedirect(reverse('orders.views.cart'))
-
-    # Handle the PayPal interaction
-    domain = Site.objects.get_current().domain
-    return_url = 'http://%s%s' % (domain, reverse('orders.views.confirmation'))
-    cancel_url = 'http://%s%s' % (domain, reverse('orders.views.cart'))
-    next_url = cancel_url
-    try:
-        next_url = paypal.set_express_checkout(cart, return_url, cancel_url)
-    except PayPalUnavailable:
-        messages.error(request, 'Sorry, we were unable to reach PayPal at the moment. Please try again later.')
-    except PayPalErrorResponse as e:
-        if settings.DEBUG:
-            raise
-        else:
-            messages.error(request, 'Sorry, there was an error with PayPal. Please contact us for more info.')
-
-    # Redirect to the Paypal checkout (or back to the cart if errors)
-    return HttpResponseRedirect(next_url)
-
 def standard_confirmation(request):
     """Confirms a web payments standard order."""
-    raise ValueError('hooray!')
+    order = get_object_or_404(Order, invoice_id=request.GET.get('invoice', None))
+    assert request.GET.get('receiver_email', '') == settings.PAYPAL_BUSINESS
 
-def standard_notify(request):
-    """Receives notification from paypal that a purchase was completed."""
-    raise ValueError(request.REQUEST.items())
-
-def confirmation(request):
-    """Confirms a successful payment for the order."""
-    order = Order.get_or_create(request)
-    token = request.GET.get('token', None)
-    payer_id = request.GET.get('PayerID', None)
-    if not token or not payer_id:
-        messages.error(request, 'Sorry, we were unable to process your PayPal payment. Please try again later.')
-        return HttpResponseRedirect(reverse('orders.views.cart'))
-
-    # Get the transaction details from PayPal
-    details = paypal.get_express_checkout_details(token)
-
-    # Confirm the transaction with PayPal, and update the order
-    try:
-        payment = paypal.do_express_checkout_payment(token, payer_id, order.get_as_cart())
-    except PayPalErrorResponse:
-        if settings.DEBUG:
-            raise
-        else:
-            messages.error(request, 'Sorry, there was an error with PayPal. Please contact us for more info.')
-            return HttpResponseRedirect(reverse('orders.views.cart'))
+    # TODO: verify the post!!!
 
     # Finalize the order with payment details
-    order.user_email = details.get('EMAIL', '')
-    order.user_salutation = details.get('SALUTATION', '')
-    order.user_firstname = details.get('FIRSTNAME', '')
-    order.user_middlename = details.get('MIDDLENAME', '')
-    order.user_lastname = details.get('LASTNAME', '')
-    order.user_suffix = details.get('SUFFIX', '')
-    order.user_shiptoname = details.get('PAYMENTREQUEST_0_SHIPTONAME', '')
-    order.user_shiptostreet = details.get('PAYMENTREQUEST_0_SHIPTOSTREET', '')
-    order.user_shiptostreet2 = details.get('PAYMENTREQUEST_0_SHIPTOSTREET2', '')
-    order.user_shiptocity = details.get('PAYMENTREQUEST_0_SHIPTOCITY', '')
-    order.user_shiptostate = details.get('PAYMENTREQUEST_0_SHIPTOSTATE', '')
-    order.user_shiptozip = details.get('PAYMENTREQUEST_0_SHIPTOZIP', '')
-    order.user_shiptocountrycode = details.get('PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE', '')
-    order.user_shiptophonenum = details.get('PAYMENTREQUEST_0_SHIPTOPHONENUM', '')
-    order.paypal_notetext = details.get('PAYMENTREQUEST_0_NOTETEXT', '')
+    order.user_email = request.GET.get('payer_email', '')
+    order.user_firstname = request.GET.get('first_name', '')
+    order.user_lastname = request.GET.get('last_name', '')
+    order.paypal_transactionid = request.GET.get('txn_id', '')
+    order.paypal_paymenttype = request.GET.get('txn_type', '')
+    order.paypal_ordertime = datetime.strptime(request.GET['payment_date'], '%H:%M:%S %b %d, %Y %Z') if 'payment_date' in request.GET else None
+    order.paypal_paymentstatus = request.GET.get('payment_status', '')
+    order.paypal_details_dump = repr(request.GET.items())
 
-    # Some of the payment info returned
-    order.paypal_transactionid = payment.get('PAYMENTINFO_0_TRANSACTIONID', '')
-    order.paypal_paymenttype = payment.get('PAYMENTINFO_0_PAYMENTTYPE', '')
-    order.paypal_ordertime = datetime.strptime(payment['PAYMENTINFO_0_ORDERTIME'], '%Y-%m-%dT%H:%M:%SZ') if 'PAYMENTINFO_0_ORDERTIME' in payment else None
-    order.paypal_amt = Decimal(payment.get('PAYMENTINFO_0_AMT', '0.00'))
-    order.paypal_feeamt = Decimal(payment.get('PAYMENTINFO_0_FEEAMT', '0.00'))
-    order.paypal_settleamt = Decimal(payment.get('PAYMENTINFO_0_SETTLEAMT', '0.00'))
-    order.paypal_taxamt = Decimal(payment.get('PAYMENTINFO_0_TAXAMT', '0.00'))
-    order.paypal_paymentstatus = payment.get('PAYMENTINFO_0_PAYMENTSTATUS', '')
-
-    # Dump of the return values of these paypal calls
-    order.paypal_details_dump = json.dumps(details)
-    order.paypal_payment_dump = json.dumps(payment)
-
-    # Mark the order as paid
     order.status = Order.PAYMENT_CONFIRMED
     order.save()
 
@@ -233,3 +160,8 @@ def confirmation(request):
     return render_to_response('orders/confirmation.html', {
         'order': order,
     }, context_instance=RequestContext(request))
+
+def standard_notify(request):
+    """Receives notification from paypal that a purchase was completed."""
+    # TODO?
+    raise Http404

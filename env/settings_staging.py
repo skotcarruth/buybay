@@ -27,7 +27,8 @@ PAYPAL_SIGNATURE = 'AkrturaUrjwo1xbii9WwCzlYDWEDA2iWs3FpjP-5TZ0vH3VWMB6nlgwM'
 
 # Paypal Web Standard Payments (less lame)
 PAYPAL_CURRENCY_CODE = 'USD'
-PAYPAL_POST_URL = 'https://www.paypal.com/cgi-bin/webscr'
+# PAYPAL_POST_URL = 'https://www.paypal.com/cgi-bin/webscr'
+PAYPAL_POST_URL = 'https://www.sandbox.paypal.com/cgi-bin/webscr'
 PAYPAL_BUSINESS = 'nburdick@healthebay.org'
 
 FACEBOOK_APP_ID = '158099770871210'

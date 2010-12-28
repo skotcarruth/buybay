@@ -609,6 +609,13 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
 #orderNotes{float:left;margin-left:80px;}
 #orderNotes label{width:50px;padding-top:6px;}
 #orderNotes textarea{width:250px;height:80px;padding:5px;font-family:helvetica,arial,sans-serif;font-size: 13px;}
+
+#checkoutBtn{
+    text-indent:-9999px;
+    display:block;
+    background:url(https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif) no-repeat top left;
+    width:145px;height:42px;
+}
 /* ~~~~~ THANK YOU PAGE ~~~~~ */
 .thankyou h2{font-size:1.8em;color:#595959;margin-bottom:20px;line-height:1.3em;}
 #howtohelp{margin:40px 0 200px;}

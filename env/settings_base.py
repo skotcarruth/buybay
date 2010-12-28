@@ -6,7 +6,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Jeff Schenck', 'jmschenck@gmail.com'),
+    ('Jeff Schenck', 'jmschenck+btb@gmail.com'),
     ('Skot Carruth', 'skot@gophilosophie.com'),
     ('Emerson Taymor', 'emerson@gophilosophie.com'),
 )

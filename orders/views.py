@@ -2,7 +2,6 @@ from datetime import datetime, date, time
 from decimal import Decimal
 from functools import wraps
 import json
-import logging
 
 from django.conf import settings
 from django.contrib import messages
@@ -20,8 +19,6 @@ from orders.paypal import paypal, PayPalUnavailable, PayPalErrorResponse
 from mail.models import Message
 from products.models import Product
 
-
-logger = logging.getLogger(__name__)
 
 def _json_prep(data):
     """Recursively converts values to JSON-serializable alternatives."""
@@ -53,7 +50,6 @@ def json_response(view):
 
 def cart(request):
     """View and edit the user's shopping cart."""
-    logger.info('Cart loading!')
     order = Order.get_or_create(request)
     order_form = OrderForm(prefix='btb', instance=order)
 
@@ -156,7 +152,6 @@ def standard_confirmation(request):
 
 def standard_notify(request):
     """Receives notification from paypal that a purchase was completed."""
-    logger.info(repr(request.REQUEST.items()))
     raise ValueError(request.REQUEST.items())
 
 def confirmation(request):

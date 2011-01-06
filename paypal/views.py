@@ -72,7 +72,8 @@ def ipn(request):
     order_total = Decimal(str(order.get_as_cart()['total'])).quantize(Decimal('0.01'))
     paypal_total = Decimal(str(params['mc_gross'])).quantize(Decimal('0.01'))
     if order_total != paypal_total:
-        logging.warning('PayPal payment amount did not match order amount!')
+        logging.warning('PayPal payment amount (%.2f) did not match order '
+            'amount (%.2f)!' % (paypal_total, order_total))
         order.status = Order.PROCESSING_ERROR
         order.save()
         return HttpResponse('Ok (wrong amount)')

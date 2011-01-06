@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'flatcontent',
     'scripts',
     'mail',
+    'paypal',
 )
 
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 14 # 2 weeks

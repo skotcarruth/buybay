@@ -9,10 +9,12 @@ class Order(models.Model):
     SHOPPING_CART = 0
     ORDER_COMPLETED = 1
     PAYMENT_CONFIRMED = 2
+    PROCESSING_ERROR = 3
     STATUS_CHOICES = (
         (SHOPPING_CART, 'Shopping Cart'),
         (ORDER_COMPLETED, 'Order Completed'),
         (PAYMENT_CONFIRMED, 'Payment Confirmed'),
+        (PROCESSING_ERROR, 'Payment Processing Error'),
     )
 
     session_id = models.CharField(max_length=40, blank=True, null=True)

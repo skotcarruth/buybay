@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     (r'^news/', include('blog.urls')),
     (r'^cart/', include('orders.urls')),
     (r'^about/', include('flatcontent.urls')),
+    (r'^paypal/', include('paypal.urls')),
 
     (r'^p/(\d+)/(\d+)/', 'django.contrib.contenttypes.views.shortcut'),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),

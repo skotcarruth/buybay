@@ -1,13 +1,19 @@
-from fabric.api import cd, env, run
+from fabric.api import env
+from fabric.context_managers import cd
+from fabric.decorators import hosts
+from fabric.operations import prompt, run
 
 
 env.hosts = [
     'philosophie@174.123.227.198',
 ]
+env.password = 'abbyd000'
 
-def deploy_staging():
+@hosts('philosophie@174.123.227.198')
+def deploy_staging(branch=None):
     """Deploys a branch (defaults to staging branch) to the staging server."""
-    branch = 'paypal-ipn'
+    if not branch:
+        branch = prompt('Deploy what branch?', default='staging')
 
     # Check out and update the branch to deploy
     with cd('~/webapps/buythebay/buybay/'):

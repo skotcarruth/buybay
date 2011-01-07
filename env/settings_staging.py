@@ -1,5 +1,5 @@
 # Settings overrides for the staging environment
-DEBUG = True
+DEBUG = False
 
 DATABASES = {
     'default': {

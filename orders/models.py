@@ -65,6 +65,7 @@ class Order(models.Model):
 
     def get_as_cart(self):
         """Returns all the info for displaying a shopping-cart-style representation."""
+        cents = lambda amt: Decimal(str(amt)).quantize(Decimal('0.01'))
         cart = {
             'products': [],
             'subtotal': Decimal('0.00'),
@@ -73,21 +74,22 @@ class Order(models.Model):
             product_in_cart = {
                 'product': product_in_order.product,
                 'quantity': product_in_order.quantity,
-                'total_price': product_in_order.product.price * product_in_order.quantity,
+                'unit_price': cents(product_in_order.product.price),
+                'total_price': cents(product_in_order.product.price * product_in_order.quantity),
             }
             cart['products'].append(product_in_cart)
             cart['subtotal'] += product_in_cart['total_price']
-        cart['tax'] = self.get_tax_amount(cart['subtotal'])
-        cart['shipping'] = self.get_shipping_amount(self.get_total_items())
-        cart['donation'] = self.donation
-        cart['total'] = cart['subtotal'] + cart['tax'] + cart['shipping'] + cart['donation']
+        cart['tax'] = cents(self.get_tax_amount(cart['subtotal']))
+        cart['shipping'] = cents(self.get_shipping_amount(self.get_total_items()))
+        cart['donation'] = cents(self.donation)
+        cart['total'] = cents(cart['subtotal'] + cart['tax'] + cart['shipping'] + cart['donation'])
         return cart
 
     def get_tax_amount(self, subtotal):
         """Returns the amount of tax for the items in the cart."""
         # TODO: make this for rillz
         TAX_RATE = Decimal('0.0925')
-        return subtotal * TAX_RATE
+        return (subtotal * TAX_RATE).quantize(Decimal('0.01'))
 
     def get_shipping_amount(self, total_items):
         """Returns the amount of shipping charges for the items in the cart."""

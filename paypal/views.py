@@ -78,8 +78,28 @@ def ipn(request):
         order.save()
         return HttpResponse('Ok (wrong amount)')
 
-    # Take action!
+    # Take action! Save the details of the order
     order.status = Order.PAYMENT_CONFIRMED
+
+    order.user_email = params.get('payer_email')
+    order.user_firstname = params.get('first_name')
+    order.user_lastname = params.get('last_name')
+    order.user_shiptoname = params.get('address_name')
+    order.user_shiptostreet = params.get('address_street')
+    order.user_shiptocity = params.get('address_city')
+    order.user_shiptostate = params.get('address_state')
+    order.user_shiptozip = params.get('address_zip')
+    order.user_shiptocountrycode = params.get('address_country_code')
+    order.user_shiptophonenum = params.get('contact_phone')
+
+    order.paypal_transactionid = params.get('txn_id')
+    order.paypal_paymenttype = params.get('payment_type')
+    order.paypal_ordertime = params.get('payment_date')
+    order.paypal_amt = params.get('mc_gross')
+    order.paypal_feeamt = params.get('mc_fee')
+    order.paypal_paymentstatus = params.get('payment_status')
+
+    order.paypal_details_dump = params.urlencode()
     order.save()
     logging.info('PayPal payment recorded successfully.')
     return HttpResponse('Ok')

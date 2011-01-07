@@ -28,11 +28,8 @@ class Order(models.Model):
 
     # Contact and shipping info from the payment
     user_email = models.CharField('email', max_length=200, blank=True)
-    user_salutation = models.CharField('salutation', max_length=20, blank=True)
     user_firstname = models.CharField('first name', max_length=25, blank=True)
-    user_middlename = models.CharField('last name', max_length=25, blank=True)
     user_lastname = models.CharField('middle name', max_length=25, blank=True)
-    user_suffix = models.CharField('suffix', max_length=12, blank=True)
     user_shiptoname = models.CharField('shipping name', max_length=32, blank=True)
     user_shiptostreet = models.CharField('street', max_length=100, blank=True)
     user_shiptostreet2 = models.CharField('street 2', max_length=100, blank=True)
@@ -48,8 +45,6 @@ class Order(models.Model):
     paypal_ordertime = models.DateTimeField('date (UTC)', blank=True, null=True)
     paypal_amt = models.DecimalField('amount', max_digits=10, decimal_places=2, blank=True, null=True)
     paypal_feeamt = models.DecimalField('PayPal fee', max_digits=10, decimal_places=2, blank=True, null=True)
-    paypal_settleamt = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    paypal_taxamt = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     paypal_paymentstatus = models.CharField('status', max_length=25, blank=True)
     paypal_notetext = models.TextField('notes (paypal)', blank=True)
 

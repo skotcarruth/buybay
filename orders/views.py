@@ -2,20 +2,17 @@ from datetime import datetime, date, time
 from decimal import Decimal
 from functools import wraps
 import json
-import urllib
 
 from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
-from django.template.loader import render_to_string
 
 from orders.forms import OrderForm
 from orders.models import Order, ProductInOrder
-from mail.models import Message
 from products.models import Product
 
 
@@ -67,7 +64,8 @@ def cart(request):
         'paypal_business': settings.PAYPAL_BUSINESS,
         'paypal_currency_code': settings.PAYPAL_CURRENCY_CODE,
         'paypal_invoice_id': order.invoice_id,
-        'paypal_return_url': reverse('orders.views.standard_confirmation'),
+        'paypal_return_url': reverse('paypal.views.paypal_return'),
+        'paypal_cancel_return_url': reverse('paypal.views.paypal_cancel_return'),
     }, context_instance=RequestContext(request))
 
 @json_response
@@ -118,58 +116,3 @@ def remove(request, product_slug=None):
 
     # Redirect to the shopping cart
     return HttpResponseRedirect(reverse('orders.views.cart'))
-
-def standard_confirmation(request):
-    """Confirms a web payments standard order."""
-    order = get_object_or_404(Order, invoice_id=request.GET.get('invoice', None))
-    assert request.GET.get('receiver_email', '') == settings.PAYPAL_BUSINESS
-
-    # Verify that it's really paypal chatting with us
-    # post = {
-    #     'cmd': '_notify-synch',
-    #     'tx': request.GET.get('txn_id', ''),
-    #     'at': settings.PAYPAL_PDT_TOKEN,
-    # }
-    # response = urllib.urlopen(settings.PAYPAL_POST_URL, data=urllib.urlencode(post))
-    # print response.read()
-
-    # Finalize the order with payment details
-    order.user_email = request.GET.get('payer_email', '')
-    order.user_firstname = request.GET.get('first_name', '')
-    order.user_lastname = request.GET.get('last_name', '')
-    order.paypal_transactionid = request.GET.get('txn_id', '')
-    order.paypal_paymenttype = request.GET.get('txn_type', '')
-    order.paypal_ordertime = datetime.strptime(request.GET['payment_date'], '%H:%M:%S %b %d, %Y %Z') if 'payment_date' in request.GET else None
-    order.paypal_paymentstatus = request.GET.get('payment_status', '')
-    order.paypal_details_dump = repr(request.GET.items())
-
-    order.status = Order.PAYMENT_CONFIRMED
-    order.save()
-
-    # Increment the number of products sold
-    for product_in_order in order.productinorder_set.all():
-        product = product_in_order.product
-        product.current_quantity += product_in_order.quantity
-        product.save()
-
-    # Create a confirmation email to be sent
-    context = {'order': order}
-    message = Message()
-    message.to_email = order.user_email
-    message.from_email = settings.DEFAULT_FROM_EMAIL
-    message.subject = render_to_string('mail/order_confirmation_subject.txt', context)
-    message.body_text = render_to_string('mail/order_confirmation.txt', context)
-    message.body_html = render_to_string('mail/order_confirmation.html', context)
-    message.save()
-
-    # Clear the user's shopping cart
-    request.session['order_id'] = None
-
-    return render_to_response('orders/confirmation.html', {
-        'order': order,
-    }, context_instance=RequestContext(request))
-
-def standard_notify(request):
-    """Receives notification from paypal that a purchase was completed."""
-    # TODO?
-    raise Http404

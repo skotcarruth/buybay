@@ -2,18 +2,74 @@ from decimal import Decimal
 import logging
 import urllib
 import urllib2
+import urlparse
 
 from django.conf import settings
 from django.db import IntegrityError
 from django.http import Http404, HttpResponse
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 
+from mail.models import Message
 from paypal.models import IPNRecord
 from orders.models import Order
 
 
+def paypal_return(request):
+    """Displays a payment confirmation page."""
+    # Retrieve order data from PayPal via PDT
+    pdt_data = {}
+    transaction_id = request.GET.get('tx')
+    paypal_url = settings.PAYPAL_POST_URL
+    params = {
+        'cmd': '_notify-synch',
+        'tx': transaction_id,
+        'at': settings.PAYPAL_PDT_TOKEN,
+    }
+    print 'params', params
+    req = urllib2.Request(paypal_url, urllib.urlencode(params))
+    req.add_header('Content-type', 'application/x-www-form-urlencoded')
+    try:
+        response = urllib2.urlopen(req)
+    except urllib2.URLError:
+        logging.warning('Unable to contact PayPal to retrieve PDT data.')
+    else:
+        pdt_status = response.readline().strip()
+        if response.code != 200 or pdt_status != 'SUCCESS':
+            logging.warning('Unable to retrieve order data via PDT. Received '
+                'response: \n%s\n%s' % (pdt_status, response.read()))
+        else:
+            # Parse the PDT response
+            pdt_data = dict(urlparse.parse_qsl(
+                '&'.join(map(lambda s: s.strip(), response))
+            ))
+
+    # Get the order referenced by the PDT data
+    try:
+        order = Order.objects.get(invoice_id=pdt_data.get('invoice'))
+    except Order.DoesNotExist:
+        order = None
+
+    # Clear the user's shopping cart
+    request.session['order_id'] = None
+
+    return render_to_response('paypal/paypal_return.html', {
+        'pdt_data': pdt_data,
+        'order': order,
+    }, context_instance=RequestContext(request))
+
+def paypal_cancel_return(request):
+    """Displays a canceled payment page."""
+    # Clear the user's shopping cart
+    request.session['order_id'] = None
+
+    return render_to_response('paypal/paypal_cancel_return.html', {
+    }, context_instance=RequestContext(request))
+
 @csrf_exempt
-def ipn(request):
+def paypal_ipn(request):
     """Handles PayPal IPN notifications."""
     if not request.method == 'POST':
         logging.warning('IPN view hit but not POSTed to. Attackers?')
@@ -89,7 +145,7 @@ def ipn(request):
     order.user_shiptocity = params.get('address_city')
     order.user_shiptostate = params.get('address_state')
     order.user_shiptozip = params.get('address_zip')
-    order.user_shiptocountrycode = params.get('address_country_code')
+    order.user_shiptocountry = params.get('address_country')
     order.user_shiptophonenum = params.get('contact_phone')
 
     order.paypal_transactionid = params.get('txn_id')
@@ -101,6 +157,22 @@ def ipn(request):
 
     order.paypal_details_dump = params.urlencode()
     order.save()
+
+    # Increment the number of products sold
+    for product_in_order in order.productinorder_set.all():
+        product = product_in_order.product
+        product.current_quantity += product_in_order.quantity
+        product.save()
+
+    # Create a confirmation email to be sent
+    context = {'order': order}
+    message = Message()
+    message.to_email = order.user_email
+    message.from_email = settings.DEFAULT_FROM_EMAIL
+    message.subject = render_to_string('mail/order_confirmation_subject.txt', context)
+    message.body_text = render_to_string('mail/order_confirmation.txt', context)
+    message.body_html = render_to_string('mail/order_confirmation.html', context)
+    message.save()
+
     logging.info('PayPal payment recorded successfully.')
     return HttpResponse('Ok')
-

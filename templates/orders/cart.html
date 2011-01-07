@@ -115,6 +115,7 @@
   <input type="hidden" name="business" value="{{ paypal_business }}" />
   <input type="hidden" name="currency_code" value="{{ paypal_currency_code }}" />
   <input type="hidden" name="return" value="http://{{ request.get_host }}{{ paypal_return_url }}" />
+  <input type="hidden" name="cancel_return" value="http://{{ request.get_host }}{{ paypal_cancel_return_url }}" />
   <input type="hidden" name="cmd" value="_cart" />
   <input type="hidden" name="upload" value="1" />
   <input type="hidden" name="no_shipping" value="2" />
@@ -133,7 +134,7 @@
   {# To work around their bizarre system, we are telling Paypal "no shipping" and adding all shipping charges as handling #}
   <input type="hidden" name="handling_cart" value="{{ cart.shipping|floatformat:2 }}" />
   <input type="hidden" name="tax_cart" value="{{ cart.tax|floatformat:2 }}" />
-  <input type="hidden" name="notify_url" value="http://{{ request.get_host }}{% url orders.views.standard_notify %}" />
+  <input type="hidden" name="notify_url" value="http://{{ request.get_host }}{% url paypal.views.paypal_ipn %}" />
  <section id="orderNotes">
   {{ order_form.notes.label_tag }}
   {{ order_form.notes }}

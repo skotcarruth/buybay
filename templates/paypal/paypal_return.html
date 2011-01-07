@@ -43,24 +43,22 @@
 {% endblock %}
 {% block body %}
   <h1 id="thankyou">Thank you for buying the bay</h1>
-<section id="cartInfo">
- <!-- <ul>
-	<li>Order ID number: {{ order.paypal_transactionid }}</li>
-    {% for product_in_order in order.get_as_cart.products %}
-      <li>{{ product_in_order.quantity }} x {{ product_in_order.product.name }}</li>
-    {% endfor %}
-  </ul>
 
-  <p>Your order will be shipped in 4-6 weeks to:</p>
+  <section id="cartInfo">
 
-  <p>
-    {{ order.user_shiptoname }}<br />
-    {{ order.user_shiptostreet }}<br />
-    {% if order.user_shiptostreet2 %}{{ order.user_shiptostreet2 }}<br />{% endif %}
-    {{ order.user_shiptocity }}, {{ order.user_shiptostate }} {{ order.user_shiptozip }}<br />
-  </p>-->
-	<h2>Thank you so much for your contribution. It will go a long way toward helping us preserve our most cherished beach experiences. Still, there is a lot of work to do, and you can continue to help in ways that cost nothing.</h2> 
-	
+  	<h2>Thank you so much for your contribution. It will go a long way toward helping us preserve our most cherished beach experiences. Still, there is a lot of work to do, and you can continue to help in ways that cost nothing.</h2> 
+
+    <p>Order ID: {{ pdt_data.invoice }}</p>
+    <p>Total: ${{ pdt_data.mc_gross }}</p>
+
+    <p>You will receive an email confirmation once your payment is confirmed. Your order will be shipped in 4-6 weeks to:</p>
+
+    <p>
+      {{ pdt_data.address_name }}<br />
+      {{ pdt_data.address_street }}<br />
+      {{ pdt_data.address_city }}, {{ pdt_data.address_state }} {{ pdt_data.address_zip }}<br />
+    </p>
+
 	<ul id="howtohelp">
 		<li>You can <a href="#" id="fbShare" class="colorLink">Share</a> this project with friends on <a href="http://www.facebook.com/healthebayfans" target="_blank" rel="external" title="Like Heal the Bay on Facebook">Facebook</a></li>
 		<li>You can <a href="http://twitter.com/buythebay" target="_blank" rel="external" title="Follow Buy the Bay on Twitter" id="followUs" class="colorLink">Follow us</a> on Twitter for updates on all new products and artists.</li>

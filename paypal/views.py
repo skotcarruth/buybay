@@ -1,3 +1,4 @@
+from datetime import datetime
 from decimal import Decimal
 import logging
 import urllib
@@ -28,7 +29,6 @@ def paypal_return(request):
         'tx': transaction_id,
         'at': settings.PAYPAL_PDT_TOKEN,
     }
-    print 'params', params
     req = urllib2.Request(paypal_url, urllib.urlencode(params))
     req.add_header('Content-type', 'application/x-www-form-urlencoded')
     try:
@@ -137,23 +137,28 @@ def paypal_ipn(request):
     # Take action! Save the details of the order
     order.status = Order.PAYMENT_CONFIRMED
 
-    order.user_email = params.get('payer_email')
-    order.user_firstname = params.get('first_name')
-    order.user_lastname = params.get('last_name')
-    order.user_shiptoname = params.get('address_name')
-    order.user_shiptostreet = params.get('address_street')
-    order.user_shiptocity = params.get('address_city')
-    order.user_shiptostate = params.get('address_state')
-    order.user_shiptozip = params.get('address_zip')
-    order.user_shiptocountry = params.get('address_country')
-    order.user_shiptophonenum = params.get('contact_phone')
+    order.user_email = params.get('payer_email', '')
+    order.user_firstname = params.get('first_name', '')
+    order.user_lastname = params.get('last_name', '')
+    order.user_shiptoname = params.get('address_name', '')
+    order.user_shiptostreet = params.get('address_street', '')
+    order.user_shiptostreet2 = ''
+    order.user_shiptocity = params.get('address_city', '')
+    order.user_shiptostate = params.get('address_state', '')
+    order.user_shiptozip = params.get('address_zip', '')
+    order.user_shiptocountrycode = params.get('address_country_code', '')
+    order.user_shiptophonenum = params.get('contact_phone', '')
 
-    order.paypal_transactionid = params.get('txn_id')
-    order.paypal_paymenttype = params.get('payment_type')
-    order.paypal_ordertime = params.get('payment_date')
+    order.paypal_transactionid = params.get('txn_id', '')
+    order.paypal_paymenttype = params.get('payment_type', '')
+    try:
+        order.paypal_ordertime = datetime.strptime(params.get('payment_date'), '%H:%M:%S %b %d, %Y %Z')
+    except ValueError:
+        order.paypal_ordertime = None
     order.paypal_amt = params.get('mc_gross')
     order.paypal_feeamt = params.get('mc_fee')
-    order.paypal_paymentstatus = params.get('payment_status')
+    order.paypal_paymentstatus = params.get('payment_status', '')
+    order.paypal_notetext = ''
 
     order.paypal_details_dump = params.urlencode()
     order.save()

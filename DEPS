@@ -5,4 +5,4 @@ south==0.7.1
 docutils==0.7
 sorl-thumbnail==3.2.5
 textile==2.1.4
-ribbons
+fabric==0.9.3

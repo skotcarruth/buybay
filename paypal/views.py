@@ -18,6 +18,7 @@ from paypal.models import IPNRecord
 from orders.models import Order
 
 
+@csrf_exempt
 def paypal_return(request):
     """Displays a payment confirmation page."""
     # Retrieve order data from PayPal via PDT
@@ -60,6 +61,7 @@ def paypal_return(request):
         'order': order,
     }, context_instance=RequestContext(request))
 
+@csrf_exempt
 def paypal_cancel_return(request):
     """Displays a canceled payment page."""
     # Clear the user's shopping cart

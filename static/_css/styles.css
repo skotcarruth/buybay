@@ -237,6 +237,8 @@ opacity: 0.9;bottom:0;left:0;padding:10px 8px;width:206px;z-index:2;margin-botto
 	text-align:right;
 }
 
+.cancel h1, .error h1{margin-bottom:25px;}
+
 #sidebar{font-size:1.2em;clear:both;}
 #sidebar a.selected, #sidebar a:hover{text-decoration:underline;}
 #sidebar ul li{
@@ -581,6 +583,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
     width:700px;
     margin-left:80px;
     overflow:hidden;zoom:1;
+	clear:both;
 }
 
 #cartTable{width:100%;}
@@ -615,6 +618,8 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
     display:block;
     background:url(https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif) no-repeat top left;
     width:145px;height:42px;
+	border:none;
+	outline:none;
 }
 /* ~~~~~ THANK YOU PAGE ~~~~~ */
 .thankyou h2{font-size:1.8em;color:#595959;margin-bottom:20px;line-height:1.3em;}
@@ -698,6 +703,9 @@ strong{font-weight:bold;}
 ul#messages li{font-size:1.4em;margin-bottom:10px;}
 ul#messages li.success{color:#40b92c;}
 ul#messages li.error{color:#b61111;}
+
+ul#errorList{list-style:inside disc;margin-left:10px;}
+ul#errorList li{font-size:1.4em;margin-bottom:10px;}
 
 .transparent{  
     filter:alpha(opacity=90);  

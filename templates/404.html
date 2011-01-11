@@ -1,1 +1,19 @@
-404
+{% extends "base.html" %}
+
+{% block title %}Page Not Found | {{ block.super }}{% endblock %}
+
+{% block pageClass %}error{% endblock %}
+
+{% block body %}
+  <h1>Oh noes!</h1>
+
+  <h2>The page you were trying to look at doesn&rsquo;t exist.</h2>
+<p>Perhaps you were trying to:</p>
+<ul id="errorList">
+	<li><a href="{% url flatcontent.views.page page_slug="about-project" %}" title="What is Buy the Bay">Learn more about</a> the Buy the Bay project</li>
+	<li><a href="{% url artists.views.index %}">See the artists</a> behind the amazing products</li>
+	<li><a href="{% url products.views.index %}">Browse the products</a> available for sale</li>
+	<li>Get caught up with our <a href="{% url blog.views.index %}">latest news items</a></li>
+</ul>
+{% endblock %}
+

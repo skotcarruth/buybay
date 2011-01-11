@@ -619,6 +619,7 @@ p.productArtist{font-size:1.2em;color:#252525;margin-bottom:5px;}
     background:url(https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif) no-repeat top left;
     width:145px;height:42px;
 	border:none;
+	cursor:pointer;
 	outline:none;
 }
 /* ~~~~~ THANK YOU PAGE ~~~~~ */

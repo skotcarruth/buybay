@@ -7,8 +7,7 @@
 {% block body %}
   <h1>Oh noes!</h1>
 
-  <h2>There was an error loading the page.</h2>
-<p>Please try again or maybe one of these links will help:</p>
+  <h2>There was an error loading the page. Please try again or maybe one of these links will help:</h2>
 <ul id="errorList">
 	<li><a href="{% url flatcontent.views.page page_slug="about-project" %}" title="What is Buy the Bay">Learn more about</a> the Buy the Bay project</li>
 	<li><a href="{% url artists.views.index %}">See the artists</a> behind the amazing products</li>

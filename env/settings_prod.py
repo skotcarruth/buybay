@@ -29,7 +29,11 @@ PAYPAL_SIGNATURE = 'AkrturaUrjwo1xbii9WwCzlYDWEDA2iWs3FpjP-5TZ0vH3VWMB6nlgwM'
 # Paypal Web Standard Payments (less lame)
 PAYPAL_CURRENCY_CODE = 'USD'
 PAYPAL_POST_URL = 'https://www.paypal.com/cgi-bin/webscr'
-# PAYPAL_BUSINESS = 'buythebaydev@gmail.com'
+#PAYPAL_POST_URL = 'https://www.sandbox.paypal.com/cgi-bin/webscr'
+PAYPAL_BUSINESS = 'nburdick@healthebay.org'
+#PAYPAL_BUSINESS = 'seller_1294382044_biz@gmail.com'
+PAYPAL_PDT_TOKEN = '_6zNp1IS1r5AKdJ-EixNwt0KN1HGOrjHqgzMdsJN9sxpfSK_OiaVQ0HZj2q'
+
 
 FACEBOOK_APP_ID = '159956577356734'
 FACEBOOK_API_KEY = '7e7dfc67cce994c31942d05030e9b8ae'
